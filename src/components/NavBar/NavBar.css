@@ -1,0 +1,135 @@
+:root{
+    --bg-header-color: rgb(53, 53, 53);
+    --color-lista-header: rgb(60, 110, 113);
+    --color-link-header: rgb(255, 255, 255);
+    --bg1-footer: black;
+    --bg2-footer: rgb(99, 99, 99);
+    --color-footer: white;
+    --color-a: rgb(55, 163, 177);
+   
+  }
+  .accordion{    
+    --bs-accordion-border-color: var(--bg1-footer);
+    --bs-accordion-btn-focus-box-shadow: 0px 1px 5px 0.1rem var(--bg2-footer);
+  
+    --bs-accordion-active-color: var(--bg1-footer);
+    --bs-accordion-active-bg: var(--color-footer);
+  
+    --bs-accordion-btn-icon: url(data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23212529'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e);
+    --bs-accordion-btn-icon-width: 1.25rem;
+    --bs-accordion-btn-icon-transform: rotate(-180deg);
+    --bs-accordion-btn-icon-transition: transform 0.2s ease-in-out;
+    --bs-accordion-btn-active-icon: url(data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%230a58ca'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e);
+  }
+    
+  .a1a2{
+    padding: 0rem 0rem 0rem 0.3rem;
+  }
+  .a1a1{
+    padding: 0rem 0.5rem;
+  }
+  
+  .lista{
+    list-style-type: none;
+    text-decoration: none;
+    color: var(--color-lista-header);
+    padding: 0rem;
+    margin: 0rem;
+    background-color: var(--bg-header-color) !important;
+    padding: 0.5rem 0rem;
+  }
+  
+  .lista a{
+    color: var(--color-link-header);
+    text-decoration: none;
+  }
+  
+  .grupo-1{
+    background-color: var(--bg1-footer);
+    color: var(--color-footer);
+  }
+  .grupo-2{
+    background-color: var(--bg2-footer);
+  }
+  .info-1{
+    padding-bottom: 3rem;
+  }
+  
+  .accordion-item{
+    padding: 0.5rem 0rem;
+    border: 10px;
+  }
+  .accordion-body{
+    padding: 1rem 3rem;
+  }
+  
+  .texto1{
+    text-align: center;
+  }
+  
+  .texto2{
+    text-align: justify;
+  }
+  
+  .card_servicio a, .contacto a, .como_trabajamos a, .servicios a{
+    text-decoration: none;
+    color: var(--color-a);
+  }
+  
+  .nosotros .card-title1 {
+    color: rgb(0, 0, 0);
+    background-image: linear-gradient(currentColor, currentColor);
+    background-position: 0% 100%;
+    background-repeat: no-repeat;
+    background-size: 0% 6%;
+    transition: background-size .5s;
+  }
+  
+  .nosotros .card-title1:hover, .nosotros .card-title1:focus {
+      background-size: 100% 2px;
+  }
+  
+  @media screen and (max-width:992px){
+    main .contacto,.preguntas,.como_trabajamos, .nosotros, .porque_nosotros, .servicios {
+      padding: 0rem 7rem;
+    }
+  } 
+  
+  @media screen and (max-width:768px){
+    main .contacto,.preguntas,.como_trabajamos, .nosotros, .porque_nosotros, .servicios{
+      padding: 0rem 5rem;
+    }
+  }
+  
+  @media screen and (max-width:576px){
+    main .contacto,.preguntas,.como_trabajamos, .nosotros, .porque_nosotros, .servicios{
+      padding: 0rem 2rem;
+    }
+  }
+  
+  @media screen and (max-width: 472px){
+    main .contacto,.preguntas,.como_trabajamos, .nosotros, .porque_nosotros, .servicios{
+      padding: 0rem 0rem;
+    }
+  }
+  
+  @media screen and (min-width:993px){
+    main .contacto,.preguntas,.como_trabajamos, .nosotros, .porque_nosotros, .servicios {
+      padding: 3rem 10rem;
+    }
+    .nav1{
+      padding: 0rem 10rem;
+    }
+    .grupo-1 {
+      padding: 3rem 10rem;
+    }
+    form input, textarea{
+      padding: 0.2rem;
+      margin: 1rem;
+    }
+     .card_servicio{
+      width: 25%;
+      margin: 2rem;    
+    }  
+  }
+  

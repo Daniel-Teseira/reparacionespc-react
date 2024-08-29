@@ -13,13 +13,13 @@ function App() {
     <>
       <NavBar name='nav'/>
 
-      <Routes>
+      {/* <Routes>
         <Route index element={<Navigate to='/home' />} />
         <Route path='/home' element={ <Home /> } />
         <Route path='/error' element={ <Error /> } />
         <Route path='*' element={ <Error/>} />
         <Route path='/contact' element={ <Contact/> }/>  
-      </Routes>
+      </Routes> */}
 
       <Footer/>
     </>
