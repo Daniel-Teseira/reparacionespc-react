@@ -23,22 +23,23 @@ const Footer = () => {
               San Miguel de Tucumán
             </p>
             <strong>
-              (381)-5694570
+              (+54) 381 5694570
             </strong>
           </div>
 
           <div className='info-ubi d-flex flex-column col-6'>
             <strong>
-              Lunes a Viernes de 10 a 17hs
+              <p>Lunes a Viernes de 09 a 20 hs</p>
+              <p>Sabados de 09 a 13 hs</p>
             </strong>
             <p>
-              Suipacha 217
+              Pasaje Baltazar Aguirre 789
             </p>
             <>
-              Ciudad Autónoma de Buenos Aires
+            San Miguel de Tucumán, Tucumán
             </>
             <p>
-              CP1008
+              CP 4.000
             </p>
           </div>
         </div>

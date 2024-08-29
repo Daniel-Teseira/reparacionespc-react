@@ -51,7 +51,7 @@ const NavBar = () => {
         <nav className='navbar navbar-expand-lg bg-body-tertiary'>
           <div className='nav1 container-fluid'>
             <a className='navbar-brand' href='https://www.google.com.ar/'>
-              Reparaciones de Computadoras
+            NOMBRE DE LA EMPRESA
             </a>
 
             <button className='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#navbarNavDropdown'
