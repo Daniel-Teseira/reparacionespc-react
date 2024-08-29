@@ -12,7 +12,6 @@ function App() {
   return (
     <>
       <NavBar name='nav'/>
-  {/**/}
      <Routes>
         <Route index element={<Navigate to='/home' />} />
         <Route path='/home' element={ <Home /> } />
