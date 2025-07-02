@@ -88,6 +88,15 @@
   .nosotros .card-title1:hover, .nosotros .card-title1:focus {
       background-size: 100% 2px;
   }
+
+  @keyframes marquee {
+  0% { transform: translateX(100%) }
+  100% { transform: translateX(-100%) }
+}
+.animate-marquee {
+  display: inline-block;
+  animation: marquee 10s linear infinite;
+}
   
   @media screen and (max-width:992px){
     main .contacto,.preguntas,.como_trabajamos, .nosotros, .porque_nosotros, .servicios {

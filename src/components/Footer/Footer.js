@@ -1,5 +1,5 @@
-import React from 'react'
-import './footer.css';
+//import React from 'react'
+import './Footer.css';
 
 const Footer = () => {
   return (
@@ -112,7 +112,7 @@ const Footer = () => {
                   </li>
 
                   <li>
-                    <a className='text-decoration-none text-white' href=''>
+                    <a className='text-decoration-none text-white' href='https://www.supertek.com.ar/terminos-y-condiciones'>
                       Vendé tu equipo
                     </a>
                   </li>

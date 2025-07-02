@@ -16,7 +16,7 @@ const Home = () => {
         <div class='d-flex flex-wrap justify-content-evenly flex-column col-5 informacion'>
           <div class='d-flex direccion'>
             <div class='direccion-svg'>
-              <a href='https://goo.gl/maps/XehQcBdWdJor3SVv5' target='_blank'>
+              <a href='https://goo.gl/maps/XehQcBdWdJor3SVv5' target='_blank' rel='noopener noreferrer'>
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
                   width='16'
@@ -35,7 +35,7 @@ const Home = () => {
 
             <div class='direccion-titulo'>
               <h4 class='et_pb_module_header'>
-                <a href='https://goo.gl/maps/XehQcBdWdJor3SVv5' target='_blank'>
+                <a href='https://goo.gl/maps/XehQcBdWdJor3SVv5' target='_blank' rel='noopener noreferrer'>
                   Dirección
                 </a>
               </h4>
@@ -45,7 +45,7 @@ const Home = () => {
                   <a
                     href='https://goo.gl/maps/XehQcBdWdJor3SVv5'
                     target='_blank'
-                    rel='noopener'
+                    rel='noopener noreferrer'
                   >
                     Pasaje Baltazar Aguirre 789
                     <br />
@@ -425,6 +425,7 @@ const Home = () => {
               src='//www.youtube.com/embed/xlgcJqb12h4?wmode=opaque'
               width='100%'
               height='90%'
+               title='Video Ejemplo'
             ></iframe>
           </div>
 
@@ -456,13 +457,13 @@ const Home = () => {
                     Envíanos un{' '}
                     <strong>
                       {' '}
-                      <a href='https://wa.link/xwhmmv' target='_blank'>
+                      <a href='https://wa.link/xwhmmv' target='_blank' rel='noopener noreferrer'>
                         {' '}
                         WhatsApp
                       </a>
                     </strong>
                     <strong>,</strong> llámanos o consúltanos a través de
-                    nuestro <a href=''>formulario</a>
+                    nuestro <a href='https://www.google.com/'>formulario</a>
                     <strong>,</strong>para acordar el ingreso de su equipo.
                   </font>
                 </p>
@@ -552,6 +553,14 @@ const Home = () => {
 
         <div className='d-flex justify-content-center my-3'>
           Servicio tecnico de Lenovo, Dell, Asus, Acer, HP, etc.
+        </div>
+
+        <div className="overflow-hidden whitespace-nowrap">
+         <p className="animate-marquee">
+            servicio tecnico lenovo y exo, reparacion de laptops dell, servicio
+            tecnico notebook hp, reparaciones acer, reparar asus, soporte
+            técnico vaio reparar hp y toshiba satellite
+          </p>
         </div>
 
         <div className='my-3'>
@@ -688,7 +697,7 @@ const Home = () => {
                 <a
                   href='https://www.europapress.es/portaltic/internet/noticia-importancia-soporte-tecnico-mantenimiento-exito-pagina-web-20221003115908.html'
                   target='_blank'
-                  rel='noopener'
+                  rel='noopener noreferrer'
                 >
                   
                   socio tecnológico estratégico
@@ -927,7 +936,7 @@ const Home = () => {
 
           <div className='card_servicio'>
             <h2>
-              <a href='#'>
+              <a href='https://www.google.com/'>
                 Reparación General
                 <br />
               </a>
@@ -1022,7 +1031,7 @@ const Home = () => {
           <div className='card_servicio'>
             <h2>
               <font className='wsw-38'>
-                <a href='#'>Eliminación de Virus, Malware y Spyw</a>
+                <a href='https://www.google.com/'>Eliminación de Virus, Malware y Spyw</a>
                 <font className='wnd-font-size-110'>
                   <a href='/eliminacion-de-virus/'>are</a>
                 </font>
@@ -1041,7 +1050,7 @@ const Home = () => {
 
           <div className='card_servicio'>
             <h2>
-              <a href=''>Errores o Fallas del Equipo</a>
+              <a href='https://www.google.com/'>Errores o Fallas del Equipo</a>
             </h2>
             <p data-link='temp'>
               <br />
