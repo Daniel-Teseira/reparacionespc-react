@@ -164,7 +164,7 @@ const Home = () => {
           </div>
         </div>
       </section>*/}
-    
+    {/*
       <section className='preguntas'>
         <div className='accordion accordion-flush' id='accordionFlushExample'>
           <div className='accordion-item'>
@@ -465,8 +465,8 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </section>
-
+      </section>*/}
+{/*
       <section className='como_trabajamos '>
         <div>
           <h3 className='d-flex justify-content-center m-3'>
@@ -625,7 +625,7 @@ const Home = () => {
             técnico vaio reparar hp y toshiba satellite
           </marquee>
         </div>
-      </section>
+      </section>*/}
 {/*
       <section className='nosotros py-2'>
         <div>
@@ -907,13 +907,50 @@ const Home = () => {
         </div>
       </section>*/}
 
-      <section className='servicios'>
+      <section className='servicios my-5'>
         <div className='d-flex justify-content-center'>
           <h2 className='wnd-align-center'>
             Nuestro Servicio<strong>&nbsp;</strong>Técnico de PC
             <strong> </strong>y Notebook
           </h2>
         </div>
+
+        <div className="container">
+          <div className="row justify-content-center">
+            <div className="col-md-6">
+              <div className="card border-0 position-relative text-center flex-row">
+
+                {/* Imagen desplazada hacia arriba */}
+                <img
+                  src={img2}
+                  alt="Servicio"
+                  className="img-fluid"
+                  style={{
+                    transform: 'translateY(-25%)',
+                    zIndex: 1,
+                    borderRadius: '1rem',
+                    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+                  }}
+                />
+
+                {/* Texto desplazado hacia abajo */}
+                <div
+                  className="card-body"
+                  style={{
+                    transform: 'translatex(-25%)',
+                     zIndex: 10,
+                    backgroundColor: 'rgba(0, 81, 255, 0.53)',
+                  }}
+                >
+                  <p className="card-text fw-bold" style={{ fontSize: '1.5rem' }}>
+                    lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
 
         <div className='d-flex flex-wrap justify-content-evenly'>
           <div className='card_servicio'>
