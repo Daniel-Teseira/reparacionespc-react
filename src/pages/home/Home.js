@@ -5,7 +5,7 @@ import img1 from "../../images/carrusel/pc1.png";
 import img2 from "../../images/carrusel/pc2.png";
 import img3 from "../../images/carrusel/redes1.png";
 import img4 from "../../images/carrusel/redes2.png";
-import Servicios from '../../components/cards/Servicios';
+import Servicios from '../../components/cards/servicios';
 
 const Home = () => {
   return (
