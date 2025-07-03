@@ -1,64 +1,116 @@
-import React from 'react';
+import React from "react";
 //import ContactForm from '../../utils/formulario';
-import './Home.css';  
-import img1 from '../../images/carrusel/pc1.png';
-import img2 from '../../images/carrusel/pc2.png';
-import img3 from '../../images/carrusel/redes1.png';
-import img4 from '../../images/carrusel/redes2.png';
-
+import "./Home.css";
+import img1 from "../../images/carrusel/pc1.png";
+import img2 from "../../images/carrusel/pc2.png";
+import img3 from "../../images/carrusel/redes1.png";
+import img4 from "../../images/carrusel/redes2.png";
+import img5 from "../../images/cards/1/image.png";
 
 const Home = () => {
   return (
     <>
-      <section class='carrusel'>
-        <div id='carouselhome' class='carousel slide carousel-fade' data-bs-ride='carousel'>
-          <div class='carousel-indicators'>
-            <button type='button' data-bs-target='#carouselhome' data-bs-slide-to='0' class='active' aria-current='true' aria-label='Slide 1'></button>
-            <button type='button' data-bs-target='#carouselhome' data-bs-slide-to='1' aria-label='Slide 2'></button>
-            <button type='button' data-bs-target='#carouselhome' data-bs-slide-to='2' aria-label='Slide 3'></button>
-            <button type='button' data-bs-target='#carouselhome' data-bs-slide-to='3' aria-label='Slide 4'></button>
+      <section class="carrusel">
+        <div
+          id="carouselhome"
+          class="carousel slide carousel-fade"
+          data-bs-ride="carousel"
+        >
+          <div class="carousel-indicators">
+            <button
+              type="button"
+              data-bs-target="#carouselhome"
+              data-bs-slide-to="0"
+              class="active"
+              aria-current="true"
+              aria-label="Slide 1"
+            ></button>
+            <button
+              type="button"
+              data-bs-target="#carouselhome"
+              data-bs-slide-to="1"
+              aria-label="Slide 2"
+            ></button>
+            <button
+              type="button"
+              data-bs-target="#carouselhome"
+              data-bs-slide-to="2"
+              aria-label="Slide 3"
+            ></button>
+            <button
+              type="button"
+              data-bs-target="#carouselhome"
+              data-bs-slide-to="3"
+              aria-label="Slide 4"
+            ></button>
           </div>
-          <div class='carousel-inner'>
-            <div class='carousel-item active'>          
-              <img src={img1} class='d-block w-100' alt='Reparacion PC 1'></img>
-              <div class='carousel-caption d-none d-md-block'>
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src={img1} class="d-block w-100" alt="Reparacion PC 1"></img>
+              <div class="carousel-caption d-none d-md-block">
                 <h5>First slide label</h5>
-                <p>Some representative placeholder content for the first slide.</p>
+                <p>
+                  Some representative placeholder content for the first slide.
+                </p>
               </div>
             </div>
-            <div class='carousel-item'>
-              <img src={img2} class='d-block w-100' alt='Reparacion PC 2'></img>
-              <div class='carousel-caption d-none d-md-block'>
+            <div class="carousel-item">
+              <img src={img2} class="d-block w-100" alt="Reparacion PC 2"></img>
+              <div class="carousel-caption d-none d-md-block">
                 <h5>Second slide label</h5>
-                <p>Some representative placeholder content for the second slide.</p>
+                <p>
+                  Some representative placeholder content for the second slide.
+                </p>
               </div>
             </div>
-            <div class='carousel-item'>
-              <img src={img3} class='d-block w-100' alt='Instalacion Redes 1'></img>
-              <div class='carousel-caption d-none d-md-block'>
+            <div class="carousel-item">
+              <img
+                src={img3}
+                class="d-block w-100"
+                alt="Instalacion Redes 1"
+              ></img>
+              <div class="carousel-caption d-none d-md-block">
                 <h5>Third slide label</h5>
-                <p>Some representative placeholder content for the third slide.</p>
+                <p>
+                  Some representative placeholder content for the third slide.
+                </p>
               </div>
             </div>
-            <div class='carousel-item'>
-              <img src={img4} class='d-block w-100' alt='Instalacion Redes 2'></img>
-              <div class='carousel-caption d-none d-md-block'>
+            <div class="carousel-item">
+              <img
+                src={img4}
+                class="d-block w-100"
+                alt="Instalacion Redes 2"
+              ></img>
+              <div class="carousel-caption d-none d-md-block">
                 <h5>Fourth slide label</h5>
-                <p>Some representative placeholder content for the third slide.</p>
+                <p>
+                  Some representative placeholder content for the third slide.
+                </p>
               </div>
             </div>
           </div>
-          <button class='carousel-control-prev' type='button' data-bs-target='#carouselhome' data-bs-slide='prev'>
-            <span class='carousel-control-prev-icon' aria-hidden='true'></span>
-            <span class='visually-hidden'>Previous</span>
+          <button
+            class="carousel-control-prev"
+            type="button"
+            data-bs-target="#carouselhome"
+            data-bs-slide="prev"
+          >
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
           </button>
-          <button class='carousel-control-next' type='button' data-bs-target='#carouselhome' data-bs-slide='next'>
-            <span class='carousel-control-next-icon' aria-hidden='true'></span>
-            <span class='visually-hidden'>Next</span>
+          <button
+            class="carousel-control-next"
+            type="button"
+            data-bs-target="#carouselhome"
+            data-bs-slide="next"
+          >
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
           </button>
         </div>
       </section>
-   {/*
+      {/*
       <section class='contacto d-flex flex-wrap justify-content-evenly container my-5'>
         <div class='d-flex flex-column col-5 '>
           <h2 class='col-12'>¡Estamos para Ayudarte!</h2>
@@ -164,7 +216,7 @@ const Home = () => {
           </div>
         </div>
       </section>*/}
-    {/*
+      {/*
       <section className='preguntas'>
         <div className='accordion accordion-flush' id='accordionFlushExample'>
           <div className='accordion-item'>
@@ -466,7 +518,7 @@ const Home = () => {
           </div>
         </div>
       </section>*/}
-{/*
+      {/*
       <section className='como_trabajamos '>
         <div>
           <h3 className='d-flex justify-content-center m-3'>
@@ -626,7 +678,7 @@ const Home = () => {
           </marquee>
         </div>
       </section>*/}
-{/*
+      {/*
       <section className='nosotros py-2'>
         <div>
           <div>
@@ -906,30 +958,50 @@ const Home = () => {
           </div>
         </div>
       </section>*/}
+      {/*
+      <section className="speedtest">
+        <iframe
+          src="https://fast.com"
+          width="100%"
+          height="600"
+          frameborder="0"
+          >
+        </iframe>
 
-      <section className='servicios my-5'>
-        <div className='d-flex justify-content-center'>
-          <h2 className='wnd-align-center'>
+        <div style={{ width: '100%', height: '600px' }}>
+          <iframe
+            src="/speedtest/index.html"
+            title="Test de velocidad"
+            width="100%"
+            height="100%"
+            frameBorder="0"
+          />
+        </div>        
+      </section>*/}
+
+
+      <section className="servicios">
+        <div className="d-flex justify-content-center">
+          <h2 className="wnd-align-center">
             Nuestro Servicio<strong>&nbsp;</strong>Técnico de PC
             <strong> </strong>y Notebook
           </h2>
         </div>
 
-        <div className="container">
-          <div className="row justify-content-center">
-            <div className="col-md-6">
-              <div className="card border-0 position-relative text-center flex-row">
-
+        <div className="container my-5">
+          <div className="row justify-content-center gap-3">
+            <div className="">
+              <div className="card border-0 position-relative text-center flex-row h-100">
                 {/* Imagen desplazada hacia arriba */}
                 <img
-                  src={img2}
+                  src={img5}
                   alt="Servicio"
-                  className="img-fluid"
+                  className="img-fluid w-50 object-fit-cover"
                   style={{
-                    transform: 'translateY(-25%)',
+                    transform: "translateY(-5%)",
                     zIndex: 1,
-                    borderRadius: '1rem',
-                    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+                    borderRadius: "1rem",
+                    boxShadow: "0 4px 50px rgba(0, 0, 0, 0.36)",
                   }}
                 />
 
@@ -937,31 +1009,40 @@ const Home = () => {
                 <div
                   className="card-body"
                   style={{
-                    transform: 'translatex(-25%)',
-                     zIndex: 10,
-                    backgroundColor: 'rgba(0, 81, 255, 0.53)',
+                    transform: "translatex(-5%)",
+                    zIndex: 10,
+                    boxShadow: "0 4px 50px rgba(0, 0, 0, 0.2)",
                   }}
                 >
-                  <p className="card-text fw-bold" style={{ fontSize: '1.5rem' }}>
-                    lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  <p
+                    className="card-text fw-bold"
+                    style={{ fontSize: "1.5rem" }}
+                  >
+                    lorem* ipsum dolor sit amet, consectetur adipiscing elit.
+                    Sed do eiusmod tempor incididunt ut labore et dolore magna
+                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    lorem* ipsum dolor sit amet, consectetur adipiscing elit.
+                    Sed do eiusmod tempor incididunt ut labore et dolore magna
+                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
                   </p>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
-
-        <div className='d-flex flex-wrap justify-content-evenly'>
-          <div className='card_servicio'>
+{/* 
+        <div className="d-flex flex-wrap justify-content-evenly">
+          <div className="card_servicio">
             <h2>
-              <a href='/servicio-tecnico-de-pc-a-domicilio-en-capital-federal/'>
+              <a href="/servicio-tecnico-de-pc-a-domicilio-en-capital-federal/">
                 Reparaciones a Domicilio
               </a>
             </h2>
 
             <p>
-              <font className='wsw-03'>
+              <font className="wsw-03">
                 Se <strong>aíslan los problemas </strong>de tu computadora o
                 laptop y<strong>, </strong>a base de protocolo de búsqueda de
                 fallas propio, <strong>se resuelven en tu domicilio.</strong>
@@ -970,9 +1051,9 @@ const Home = () => {
             </p>
           </div>
 
-          <div className='card_servicio'>
+          <div className="card_servicio">
             <h2>
-              <a href='/mantenimiento-y-soporte-tecnico-de-pc-para-empresas/'>
+              <a href="/mantenimiento-y-soporte-tecnico-de-pc-para-empresas/">
                 Soporte Tecnico&nbsp; a Empresas/PyMEs
               </a>
             </h2>
@@ -986,16 +1067,16 @@ const Home = () => {
             </p>
           </div>
 
-          <div className='card_servicio'>
+          <div className="card_servicio">
             <h2>
-              <a href='/reparacion-de-pc/'>Limpieza y Mantenimiento General</a>
+              <a href="/reparacion-de-pc/">Limpieza y Mantenimiento General</a>
             </h2>
 
             <p>
-              <font className='wsw-03'>
+              <font className="wsw-03">
                 Se realiza una
                 <strong>
-                  {' '}
+                  {" "}
                   Limpieza y Mantenimiento de Hardware y Software
                 </strong>
                 para optimizar el funcionamiento de tú computo.&nbsp;
@@ -1005,9 +1086,9 @@ const Home = () => {
             </p>
           </div>
 
-          <div className='card_servicio'>
+          <div className="card_servicio">
             <h2>
-              <a href='/armado-de-pc/'>Armado de PC&nbsp;</a>&nbsp; &nbsp;
+              <a href="/armado-de-pc/">Armado de PC&nbsp;</a>&nbsp; &nbsp;
               &nbsp; &nbsp; &nbsp;&nbsp;
             </h2>
             <h2>
@@ -1016,8 +1097,8 @@ const Home = () => {
             </h2>
 
             <p>
-              <font className='wsw-03'>
-                <strong>Arma y diseña tu PC</strong> <strong>a medida</strong>{' '}
+              <font className="wsw-03">
+                <strong>Arma y diseña tu PC</strong> <strong>a medida</strong>{" "}
                 según tus necesidades (Oficina o Gamer). Con <strong>i</strong>
                 <strong>nstalación de Windows</strong>, Office y programas.
                 <br />
@@ -1026,21 +1107,21 @@ const Home = () => {
             </p>
           </div>
 
-          <div className='card_servicio'>
+          <div className="card_servicio">
             <h2>
-              <a href='https://www.google.com/'>
+              <a href="https://www.google.com/">
                 Reparación General
                 <br />
               </a>
             </h2>
-            <p href='/reparacion-de-pc/'>
-              <font className='wsw-03'>
+            <p href="/reparacion-de-pc/">
+              <font className="wsw-03">
                 <br />
               </font>
             </p>
 
             <p>
-              <font className='wsw-03'>
+              <font className="wsw-03">
                 Se <strong>aíslan los problemas </strong>de tu computadora o
                 laptop y<strong>, </strong>a base de protocolo de búsqueda de
                 fallas propio, <strong>se resuelven.</strong>&nbsp;
@@ -1048,13 +1129,13 @@ const Home = () => {
             </p>
           </div>
 
-          <div className='card_servicio'>
+          <div className="card_servicio">
             <h2>
-              <a href='/reparacion-de-pc/'>Reemplazo de componentes dañados</a>
+              <a href="/reparacion-de-pc/">Reemplazo de componentes dañados</a>
             </h2>
 
             <p>
-              <font className='wsw-02'>
+              <font className="wsw-02">
                 En caso de encontrar un <strong>componente dañado</strong> en su
                 computadora de ser posible
                 <strong> se repara o si no se cambia.</strong>&nbsp;
@@ -1063,16 +1144,16 @@ const Home = () => {
             </p>
           </div>
 
-          <div className='card_servicio'>
+          <div className="card_servicio">
             <h2>
-              <a href='/formateo-e-instalacion-de-windows/'>
+              <a href="/formateo-e-instalacion-de-windows/">
                 Formatéo e Instalación de Windows
               </a>
             </h2>
 
-            <p href='/formateo-e-instalacion-de-windows/'>
-              <font className='wsw-03'>
-                Formateo e instalación de Windows{' '}
+            <p href="/formateo-e-instalacion-de-windows/">
+              <font className="wsw-03">
+                Formateo e instalación de Windows{" "}
                 <strong>con o sin perdida de datos.</strong> Incluye instalación
                 de programas solicitados.
                 <br />
@@ -1081,18 +1162,18 @@ const Home = () => {
             </p>
           </div>
 
-          <div className='card_servicio'>
+          <div className="card_servicio">
             <h2>
-              <a href='/soporte-remoto/'>Soporte Remoto</a>
+              <a href="/soporte-remoto/">Soporte Remoto</a>
             </h2>
-            <p href='/soporte-remoto/'>
+            <p href="/soporte-remoto/">
               <br />
             </p>
 
             <p>
-              <font className='wsw-03'>
+              <font className="wsw-03">
                 <strong>Soporte </strong>técnico <strong>remoto</strong> para
-                obtener nuestro service de computadoras{' '}
+                obtener nuestro service de computadoras{" "}
                 <strong>sin la necesidad de</strong>
                 <strong> transportar equipos.</strong>&nbsp;
               </font>
@@ -1100,19 +1181,19 @@ const Home = () => {
             </p>
           </div>
 
-          <div className='card_servicio'>
+          <div className="card_servicio">
             <h2>
-              <font className='wsw-38'>
-                <a href='/armamos-tu-pc-gamer/'>Actualización de Hardware</a>
+              <font className="wsw-38">
+                <a href="/armamos-tu-pc-gamer/">Actualización de Hardware</a>
               </font>
             </h2>
             <h2>
-              <font className='wsw-38'>&nbsp;</font>
+              <font className="wsw-38">&nbsp;</font>
             </h2>
             <p>
-              <font className='wsw-03'>
+              <font className="wsw-03">
                 <strong>Cambiamos&nbsp;componentes</strong>
-                <strong>&nbsp;</strong>obsoletos{' '}
+                <strong>&nbsp;</strong>obsoletos{" "}
                 <strong>por otros que optimicen su rendimiento</strong>
                 <strong>.</strong>&nbsp;
               </font>
@@ -1120,17 +1201,19 @@ const Home = () => {
             </p>
           </div>
 
-          <div className='card_servicio'>
+          <div className="card_servicio">
             <h2>
-              <font className='wsw-38'>
-                <a href='https://www.google.com/'>Eliminación de Virus, Malware y Spyw</a>
-                <font className='wnd-font-size-110'>
-                  <a href='/eliminacion-de-virus/'>are</a>
+              <font className="wsw-38">
+                <a href="https://www.google.com/">
+                  Eliminación de Virus, Malware y Spyw
+                </a>
+                <font className="wnd-font-size-110">
+                  <a href="/eliminacion-de-virus/">are</a>
                 </font>
               </font>
             </h2>
             <p>
-              <font className='wsw-03'>
+              <font className="wsw-03">
                 Mediante la utilización de
                 <strong>última</strong>
                 <strong>
@@ -1140,34 +1223,34 @@ const Home = () => {
             </p>
           </div>
 
-          <div className='card_servicio'>
+          <div className="card_servicio">
             <h2>
-              <a href='https://www.google.com/'>Errores o Fallas del Equipo</a>
+              <a href="https://www.google.com/">Errores o Fallas del Equipo</a>
             </h2>
-            <p data-link='temp'>
+            <p data-link="temp">
               <br />
             </p>
             <p>
-              <font className='wsw-03'>
-                Contamos con conocimiento suficiente para{' '}
-                <strong>diagnosticar y arreglar cualquier tipo de falla</strong>{' '}
+              <font className="wsw-03">
+                Contamos con conocimiento suficiente para{" "}
+                <strong>diagnosticar y arreglar cualquier tipo de falla</strong>{" "}
                 que su computadora posea.
               </font>
             </p>
           </div>
 
-          <div className='card_servicio'>
+          <div className="card_servicio">
             <h2>
-              <font className='wnd-font-size-80'>
-                <font className='wnd-font-size-120 wsw-38'>
-                  <a href='/reparacion-de-pc/'>
+              <font className="wnd-font-size-80">
+                <font className="wnd-font-size-120 wsw-38">
+                  <a href="/reparacion-de-pc/">
                     Instalación y Actualización de Software
                   </a>
                 </font>
               </font>
             </h2>
             <p>
-              <font className='wsw-03'>
+              <font className="wsw-03">
                 Instalación y actualización de
                 <strong> programas a pedido</strong>
                 <strong>.</strong> (antivirus, office, programas de diseño,
@@ -1177,109 +1260,109 @@ const Home = () => {
             </p>
           </div>
 
-          <div className='card_servicio'>
+          <div className="card_servicio">
             <h2>
-              <font className='wsw-38'>
-                <a href='/formateo-e-instalacion-de-windows/'>
+              <font className="wsw-38">
+                <a href="/formateo-e-instalacion-de-windows/">
                   Configuración e Instalación de Drivers
                 </a>
               </font>
             </h2>
             <p>
-              <font className='wsw-03'>
-                Mediante los mejores software se realiza una{' '}
+              <font className="wsw-03">
+                Mediante los mejores software se realiza una{" "}
                 <strong>instalación adecuada de drivers.</strong>
               </font>
             </p>
           </div>
 
-          <div className='card_servicio'>
+          <div className="card_servicio">
             <h2>
-              <font className='wsw-38'>
-                <a href='/mantenimiento-y-soporte-tecnico-de-pc-para-empresas/'>
+              <font className="wsw-38">
+                <a href="/mantenimiento-y-soporte-tecnico-de-pc-para-empresas/">
                   Soporte de Redes
                 </a>
               </font>
             </h2>
             <p>
-              <font className='wsw-03'>
-                <strong>Soporte</strong> técnico <strong>de redes</strong>{' '}
+              <font className="wsw-03">
+                <strong>Soporte</strong> técnico <strong>de redes</strong>{" "}
                 integral
-                <strong>acondicionado a</strong> las exigencias de{' '}
+                <strong>acondicionado a</strong> las exigencias de{" "}
                 <strong>su empresa.</strong>
               </font>
             </p>
           </div>
 
-          <div className='card_servicio'>
+          <div className="card_servicio">
             <h2>
-              <font className='wsw-38'>
-                <a href='/reparacion-de-pc/'>Recuperación de Datos y Backups</a>
+              <font className="wsw-38">
+                <a href="/reparacion-de-pc/">Recuperación de Datos y Backups</a>
                 &nbsp;
               </font>
             </h2>
             <p>
-              <font className='wsw-03'>
-                <strong>Mediante un Software </strong>de recuperación de datos{' '}
+              <font className="wsw-03">
+                <strong>Mediante un Software </strong>de recuperación de datos{" "}
                 <strong>se logran obtener la información perdida</strong>
               </font>
             </p>
           </div>
 
-          <div className='card_servicio'>
+          <div className="card_servicio">
             <h2>
-              <font className='wsw-38'>
-                <a href='/mantenimiento-y-soporte-tecnico-de-pc-para-empresas/'>
+              <font className="wsw-38">
+                <a href="/mantenimiento-y-soporte-tecnico-de-pc-para-empresas/">
                   Planes a Medida
                 </a>
               </font>
             </h2>
             <p>
-              <font className='wsw-03'>
+              <font className="wsw-03">
                 Se prepara un <strong>plan de servicio ilimitado</strong>
-                <strong>adaptado</strong> <strong>a</strong> las necesidades de{' '}
+                <strong>adaptado</strong> <strong>a</strong> las necesidades de{" "}
                 <strong>tu empresa</strong>o PyME.
               </font>
             </p>
           </div>
 
-          <div className='card_servicio'>
+          <div className="card_servicio">
             <h2>
-              <font className='wsw-38'>
-                <a href='/eliminacion-de-virus/'>
+              <font className="wsw-38">
+                <a href="/eliminacion-de-virus/">
                   Mantenimiento de Software y Antivirus
                 </a>
               </font>
             </h2>
             <p>
-              <font className='wsw-03'>
-                &nbsp;Se realizan{' '}
+              <font className="wsw-03">
+                &nbsp;Se realizan{" "}
                 <strong>limpiezas de fondo para optimizar</strong> el
                 funcionamiento de <strong>tu computadora</strong> o notebook
               </font>
             </p>
           </div>
 
-          <div className='card_servicio'>
+          <div className="card_servicio">
             <h2>
-              <font className='wnd-font-size-110'>
-                <font className='wsw-38'>
-                  <a href='/contacto/'>Soporte Post-venta</a>
+              <font className="wnd-font-size-110">
+                <font className="wsw-38">
+                  <a href="/contacto/">Soporte Post-venta</a>
                 </font>
               </font>
             </h2>
             <p>
-              <font className='wsw-03'>
+              <font className="wsw-03">
                 Luego de la reparación de una PC <strong>cualquier</strong>
                 <strong>d</strong>
                 <strong>uda o consulta será resulta sin cargo alguno.</strong>
               </font>
             </p>
           </div>
-        </div>
+        </div> */}
 
-        <div className='d-flex justify-content-center'>
-          <p className=''>
+        <div className="d-flex justify-content-center">
+          <p className="">
             <strong>Para más información</strong>
 
             <strong>
@@ -1288,7 +1371,7 @@ const Home = () => {
 
             <strong>
               <em>
-                <a href='/contacto/'>Contáctenos</a>!
+                <a href="/contacto/">Contáctenos</a>!
               </em>
             </strong>
           </p>
