@@ -6,6 +6,7 @@ import Footer from './components/Footer/Footer';
 import Home from './pages/home/Home';
 import Error from './pages/error/Error404';
 import Contact from './pages/contact/Contact';
+import Redes from './pages/services/14';
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Route path='/error' element={ <Error /> } />
         <Route path='*' element={ <Error/>} />
         <Route path='/contact' element={ <Contact/> }/>  
+        <Route path='/soporte-redes' element={ <Redes/> }/>  
       </Routes> 
 
       <Footer/>
