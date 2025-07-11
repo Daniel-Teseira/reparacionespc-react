@@ -19,7 +19,7 @@ import React from 'react';
 
 const ServiciosRedes = () => {
   return (
-    <section className="p-6 md:p-12 max-w-6xl mx-auto">
+    <section className="p-6 md:p-12 max-w-6xl mx-auto container">
       <h1 className="text-3xl font-bold text-center text-blue-800 mb-10">
         Servicios de Mantenimiento e Instalaciones de Redes
       </h1>

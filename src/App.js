@@ -6,7 +6,7 @@ import Footer from './components/Footer/Footer';
 import Home from './pages/home/Home';
 import Error from './pages/error/Error404';
 import Contact from './pages/contact/Contact';
-import Redes from './pages/services/14';
+import Redes from './pages/services/SoporteRedes-14';
 
 
 function App() {
