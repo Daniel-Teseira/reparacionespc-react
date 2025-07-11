@@ -29,7 +29,7 @@ const Servicios = () => {
       id: 4,
       titulo: "Armado de PC",
       descripcion: "Arma y diseña tu PC a medida según tus necesidades (Oficina o Gamer). Con instalación de Windows, Office y programas.",
-      link: "/armado-de-pc/",
+      link: "/armado-pc/",
       destacado: false
     },
     {

@@ -7,6 +7,7 @@ import Home from './pages/home/Home';
 import Error from './pages/error/Error404';
 import Contact from './pages/contact/Contact';
 import Redes from './pages/services/SoporteRedes-14';
+import ArmadoPC from './pages/services/ArmadoPC';
 
 
 function App() {
@@ -19,7 +20,10 @@ function App() {
         <Route path='/error' element={ <Error /> } />
         <Route path='*' element={ <Error/>} />
         <Route path='/contact' element={ <Contact/> }/>  
-        <Route path='/soporte-redes' element={ <Redes/> }/>  
+        <Route path='/soporte-redes' element={ <Redes/> }/> 
+        <Route path='/armado-pc' element={ <ArmadoPC/> }/> 
+        {/* Aquí puedes agregar más rutas para otros servicios */}
+        {/* Ejemplo: <Route path='/otro-servicio' element={<OtroServicio />} /> */} 
       </Routes> 
 
       <Footer/>

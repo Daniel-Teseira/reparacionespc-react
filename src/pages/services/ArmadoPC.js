@@ -4,7 +4,7 @@ import React from 'react';
 
 const ArmadoPC = () => {
   return (
-    <section className="p-6 md:p-12 max-w-4xl mx-auto">
+    <section className="p-6 md:p-12 max-w-4xl mx-auto container">
       <h1 className="text-3xl font-bold text-blue-800 mb-6">
         🖥️ Armado de PC a Medida
       </h1>
