@@ -1,28 +1,27 @@
 import React from 'react';
-import img5 from '../../images/cards/1/image.png'; // Ajusta la ruta según tu estructura
+import img5 from '../../images/cards/1/image.png';
 
 const Servicios = () => {
-  // Array de servicios con toda la información
   const servicios = [
-    {
-      id: 1,
-      titulo: "Reparaciones a Domicilio",
-      descripcion: "Se aíslan los problemas de tu computadora o laptop y, a base de protocolo de búsqueda de fallas propio, se resuelven en tu domicilio.",
-      link: "/servicio-tecnico-de-pc-a-domicilio-en-capital-federal/",
-      destacado: true
-    },
-    {
-      id: 2,
-      titulo: "Soporte Técnico a Empresas/PyMEs",
-      descripcion: "Juntos arreglamos un plan de servicios y visitas acorde a las necesidades de su empresa. Ofrecemos planes presenciales, remotos y mixtos.",
-      link: "/mantenimiento-y-soporte-tecnico-de-pc-para-empresas/",
-      destacado: false
-    },
+    // {
+    //   id: 1,
+    //   titulo: "Reparaciones a Domicilio",
+    //   descripcion: "Se aíslan los problemas de tu computadora o laptop y, a base de protocolo de búsqueda de fallas propio, se resuelven en tu domicilio.",
+    //   link: "/servicio-tecnico-de-pc-a-domicilio-en-capital-federal/",
+    //   destacado: true
+    // },
+    // {
+    //   id: 2,
+    //   titulo: "Soporte Técnico a Empresas/PyMEs",
+    //   descripcion: "Juntos arreglamos un plan de servicios y visitas acorde a las necesidades de su empresa. Ofrecemos planes presenciales, remotos y mixtos.",
+    //   link: "/mantenimiento-y-soporte-tecnico-de-pc-para-empresas/",
+    //   destacado: false
+    // },
     {
       id: 3,
       titulo: "Limpieza y Mantenimiento General",
       descripcion: "Se realiza una Limpieza y Mantenimiento de Hardware y Software para optimizar el funcionamiento de tu computadora.",
-      link: "/reparacion-de-pc/",
+      link: "/limpieza-mantenimiento/",
       destacado: false
     },
     {
@@ -43,7 +42,7 @@ const Servicios = () => {
       id: 6,
       titulo: "Reemplazo de Componentes Dañados",
       descripcion: "En caso de encontrar un componente dañado en su computadora de ser posible se repara o si no se cambia.",
-      link: "/reparacion-de-pc/",
+      link: "/reemplazo-componentes/",
       destacado: false
     },
     {
@@ -64,7 +63,7 @@ const Servicios = () => {
       id: 9,
       titulo: "Actualización de Hardware",
       descripcion: "Cambiamos componentes obsoletos por otros que optimicen su rendimiento.",
-      link: "/armamos-tu-pc-gamer/",
+      link: "/actualizacion-hardware/",
       destacado: false
     },
     {
@@ -78,7 +77,7 @@ const Servicios = () => {
       id: 11,
       titulo: "Errores o Fallas del Equipo",
       descripcion: "Contamos con conocimiento suficiente para diagnosticar y arreglar cualquier tipo de falla que su computadora posea.",
-      link: "/diagnostico-fallas/",
+      link: "/errores-fallas/",
       destacado: false
     },
     {
@@ -113,7 +112,7 @@ const Servicios = () => {
       id: 16,
       titulo: "Planes a Medida",
       descripcion: "Se prepara un plan de servicio ilimitado adaptado a las necesidades de tu empresa o PyME.",
-      link: "/planes-empresas/",
+      link: "/planes-a-medida/",
       destacado: false
     },
     {
