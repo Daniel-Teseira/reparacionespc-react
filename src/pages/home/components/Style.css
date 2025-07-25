@@ -1,0 +1,14 @@
+.cardInfo{
+    z-index: 1;
+    width: 40%; /*o usá una medida fija como 400px */
+    margin:  2rem ;
+    /*backgroundColor:  rgba(0; 0; 0; 0.47) ;*/
+    color:  white ;
+    padding:  2rem ;
+    border-radius:  1rem ;
+    /*boxShadow:  0 0 50px rgba(255; 255; 255; 0.38) */
+     background-color:  rgba(60, 110, 113, 0.7) ; /*fondo semitransparente */
+    backdrop-filter:  blur(5px) ;                /* desenfoque real*/
+    -webkit-backdrop-filter:  blur(10px) ;         /* soporte para Safari*/
+    box-shadow:  0 0 15px rgba(0, 0, 0, 0.3) 
+    }
