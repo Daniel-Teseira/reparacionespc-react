@@ -6,10 +6,10 @@ import img4 from '../../../images/carrusel/redes2.png';
 
 const Carrusel = () => {
   return (
-    <section class='carrusel'>
+    <section class='carrusel position-relative'>
         <div
           id='carouselhome'
-          class='carousel slide carousel-fade'
+          class='carousel slide carousel-fade '
           data-bs-ride='carousel'
         >
           <div class='carousel-indicators'>
@@ -40,7 +40,7 @@ const Carrusel = () => {
               aria-label='Slide 4'
             ></button>
           </div>
-          <div class='carousel-inner'>
+          <div class='carousel-inner imagen'>
             <div class='carousel-item active'>
               <img src={img1} class='d-block w-100' alt='Reparacion PC 1'></img>
               <div class='carousel-caption d-none d-md-block'>
@@ -105,7 +105,7 @@ const Carrusel = () => {
             <span class='visually-hidden'>Next</span>
           </button>
         </div>
-      </section>
+    </section>
   )
 }
 

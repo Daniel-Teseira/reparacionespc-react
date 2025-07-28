@@ -114,57 +114,53 @@ const Nosotros = () => {
           </p>
         </div>
 
-        <div class='d-flex flex-wrap justify-content-evenly '>
-          <div class='card col-5'>
-            <div class='card-body'>
-              <h5 class='card-title1 d-flex justify-content-center'>
-                Estrategia y satisfacción
-              </h5>
+        <div class='d-flex flex-wrap justify-content-evenly'>
+          <div class='card col-5 cardInfo'>            
+            <h2 class='d-flex justify-content-center'>
+              Estrategia y satisfacción
+            </h2>
 
-              <p class='card-text texto2'>
-                Tendrá un{' '}
-                <a
-                  href='https://www.europapress.es/portaltic/internet/noticia-importancia-soporte-tecnico-mantenimiento-exito-pagina-web-20221003115908.html'
-                  target='_blank'
-                  rel='noopener noreferrer'
-                >
-                  
-                  socio tecnológico estratégico
-                </a>
-                , que le ayudará a desarrollar e implementar nuevas tecnologías
-                en forma oportuna y eficiente, como así también mantener
-                preventivamente su plataforma informática, servidores e
-                impresoras.
-              </p>
+            <p class='card-text texto2'>
+              Tendrá un{' '}
+              <a
+                href='https://www.europapress.es/portaltic/internet/noticia-importancia-soporte-tecnico-mantenimiento-exito-pagina-web-20221003115908.html'
+                target='_blank'
+                rel='noopener noreferrer'
+              >
+                
+                socio tecnológico estratégico
+              </a>
+              , que le ayudará a desarrollar e implementar nuevas tecnologías
+              en forma oportuna y eficiente, como así también mantener
+              preventivamente su plataforma informática, servidores e
+              impresoras.
+            </p>
 
-              <p class='card-text texto2'>
-                Contamos con la infraestructura, procedimientos, recursos y
-                personal capacitado en servicios de atención al cliente para
-                lograr la satisfacción integral que su empresa necesita en
-                materia de tecnología.
-              </p>
-            </div>
+            <p class='card-text texto2'>
+              Contamos con la infraestructura, procedimientos, recursos y
+              personal capacitado en servicios de atención al cliente para
+              lograr la satisfacción integral que su empresa necesita en
+              materia de tecnología.
+            </p>            
           </div>
 
-          <div class='card col-5'>
-            <div class='card-body'>
-              <h5 class='card-title1 d-flex justify-content-center'>
-                Metodología de trabajo
-              </h5>
+          <div class='card col-5 cardInfo'>            
+            <h2 class='d-flex justify-content-center'>
+              Metodología de trabajo
+            </h2>
 
-              <p class='card-text texto2'>
-                Nuestra metodología de trabajo le permitirá tener el detalle de
-                los trabajos realizados en sus computadores. En base al
-                seguimiento entregamos informes en el momento de las fallas y
-                recomendaciones pertinentes para cada caso en particular.
-              </p>
-              <p class='card-text texto2'>
-                Realizamos constantes revisiones para tener el detalle de los
-                componentes de su plataforma informática y poder optimizar la
-                utilización de la misma. Asesoramos en nuevos proyectos
-                basándonos en nuestra experiencia adquirida.
-              </p>
-            </div>
+            <p class='card-text texto2'>
+              Nuestra metodología de trabajo le permitirá tener el detalle de
+              los trabajos realizados en sus computadores. En base al
+              seguimiento entregamos informes en el momento de las fallas y
+              recomendaciones pertinentes para cada caso en particular.
+            </p>
+            <p class='card-text texto2'>
+              Realizamos constantes revisiones para tener el detalle de los
+              componentes de su plataforma informática y poder optimizar la
+              utilización de la misma. Asesoramos en nuevos proyectos
+              basándonos en nuestra experiencia adquirida.
+            </p>            
           </div>
         </div>
 
@@ -235,48 +231,44 @@ const Nosotros = () => {
 
         <div class='d-flex'>
           <div class='col-4 d-flex flex-wrap justify-content-evenly'>
-            <div class='card' style={{ width: '18rem' }}>
-              <div class='card-body'>
-                <h5 class='d-flex card-title justify-content-center py-1'>
-                  Entendimiento
-                </h5>
-                <p class='card-text texto2'>
-                  Cada cliente es un mundo y personalizamos el servicio en base
-                  a su necesidad. Nos importa el estado de sus computadoras, que
-                  podamos prevenir las fallas antes que sucedan y si suceden,
-                  resolver en el menor tiempo posible.
-                </p>
-              </div>
+            <div class='card card-body' style={{ width: '18rem' }}>              
+              <h4 class='d-flex card-title justify-content-center py-1'>
+                Entendimiento
+              </h4>
+              <p class='card-text texto2'>
+                Cada cliente es un mundo y personalizamos el servicio en base
+                a su necesidad. Nos importa el estado de sus computadoras, que
+                podamos prevenir las fallas antes que sucedan y si suceden,
+                resolver en el menor tiempo posible.
+              </p>              
             </div>
           </div>
 
           <div class='col-4 d-flex flex-wrap justify-content-evenly'>
-            <div class='card' style={{ width: '18rem' }}>
-              <div class='card-body'>
-                <h5 class='d-flex card-title justify-content-center py-1'>
-                  Trabajar en equipo
-                </h5>
-                <p class='card-text texto2'>
-                  En <strong>NOMBRE DE LA EMPRESA </strong>contamos con más de 30
-                  profesionales con experiencia en diversos conocimientos para
-                  poder cubrir todas las necesidades que pudieran surgir.
-                </p>
-              </div>
+            <div class='card card-body' style={{ width: '18rem' }}>              
+              <h4 class='d-flex card-title justify-content-center py-1'>
+                Trabajar en equipo
+              </h4>
+
+              <p class='card-text texto2'>
+                En <strong>NOMBRE DE LA EMPRESA </strong>contamos con más de 30
+                profesionales con experiencia en diversos conocimientos para
+                poder cubrir todas las necesidades que pudieran surgir.
+              </p>              
             </div>
           </div>
 
           <div class='col-4 d-flex flex-wrap justify-content-evenly'>
-            <div class='card' style={{ width: '18rem' }}>
-              <div class='card-body'>
-                <h5 class='d-flex card-title justify-content-center py-1'>
-                  Innovación
-                </h5>
-                <p class='card-text texto2'>
-                  Permanentemente nos capacitamos en nuevas tecnologías para
-                  estar siempre en la vanguardia del mercado de reparación de
-                  computadoras.
-                </p>
-              </div>
+            <div class='card card-body' style={{ width: '18rem' }}>
+              <h4 class='d-flex card-title justify-content-center py-1'>
+                Innovación
+              </h4>
+              
+              <p class='card-text texto2'>
+                Permanentemente nos capacitamos en nuevas tecnologías para
+                estar siempre en la vanguardia del mercado de reparación de
+                computadoras.
+              </p>              
             </div>
           </div>
         </div>

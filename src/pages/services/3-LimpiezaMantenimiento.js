@@ -10,12 +10,7 @@ const LimpiezaMantenimiento = () => {
         <img
           src={img}
           alt='Limpieza y Mantenimiento'
-          class='w-100 img-fluid'
-          style={{ 
-            height: 'calc(100vh - 70px)', 
-            objectFit: 'cover',
-            opacity: 0.8
-          }}
+          class='w-100 img-fluid imagen'          
         />
 
         <section
@@ -29,22 +24,7 @@ const LimpiezaMantenimiento = () => {
           </p>
         </section>
 
-        <section class='p-6 md:p-12 max-w-4xl mx-auto container'style={{
-          zIndex: 1,
-          width: '50%', // o usá una medida fija como 400px
-          margin: '2rem',
-          backgroundColor: 'rgba(40, 75, 99, 0.72)' ,
-          color: 'rgba(255, 255, 255, 1)',
-          padding: '2rem',
-          boxShadow: '0 0 50px rgba(0, 0, 0, 0.38)',
-          backdropFilter: 'blur(5px)',                // desenfoque real
-          WebkitBackdropFilter: 'blur(10px)',          // soporte para Safari
-          
-          borderRadius: '1rem'
-          //boxShadow: '0 0 50px ) 
-          }}>
-
-          
+        <section class='p-6 md:p-12 max-w-4xl mx-auto container cardInfo'>
           <h2 class='text-xl font-semibold text-blue-700 mb-2'>🔧 ¿Qué incluye?</h2>
             <ul class='list-disc pl-6 text-gray-700 mb-4'>
               <li>Limpieza interna de componentes físicos (cooler, fuente, motherboard).</li>
@@ -58,7 +38,7 @@ const LimpiezaMantenimiento = () => {
             </p> 
         </section>
     </section>
-
+    
     <Nosotros/>
   </>
   );
