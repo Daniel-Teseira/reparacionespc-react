@@ -13,8 +13,7 @@ const LimpiezaMantenimiento = () => {
         />
 
         <section
-          class='position-absolute top-0 end-0 cardInfo'
-          
+          class='position-absolute top-0 end-0 cardInfo'          
         >
           <h1 class='text-3xl font-bold mb-4'>🧼 Limpieza y Mantenimiento General</h1>
           <p>

@@ -5,33 +5,43 @@
 // https://www.graytech.com.ar/reparacion-de-notebook-servicio-tecnico-notebook/
 // https://www.graytech.com.ar/reparacion-de-pc-servicio-tecnico-pc/
 
-
-
-// --- Archivo: ReparacionGeneral.js ---
-
-import React from 'react';
+import img from '../../images/services/5/image.png';
+import '../home/components/Style.css';
 
 const ReparacionGeneral = () => {
   return (
-    <section class='p-6 md:p-12 max-w-4xl mx-auto'>
-      <h1 class='text-3xl font-bold text-blue-800 mb-6'>
-        🛠️ Reparación General de Equipos
-      </h1>
-      <p class='text-gray-700 mb-4'>
-        Diagnóstico completo de computadoras y notebooks ante fallas técnicas o bajo rendimiento. Seguimos un protocolo propio para aislar y resolver el problema.
-      </p>
-      <h2 class='text-xl font-semibold text-blue-700 mb-2'>🔧 ¿Qué incluye?</h2>
-      <ul class='list-disc pl-6 text-gray-700 mb-4'>
-        <li>Identificación precisa del fallo.</li>
-        <li>Reemplazo o reparación de piezas defectuosas.</li>
-        <li>Verificación de compatibilidad y funcionamiento post-reparación.</li>
-        <li>Informe detallado de lo realizado.</li>
-        <li>Consejos para evitar futuros problemas similares.</li>
-      </ul>
-      <p class='bg-blue-100 p-4 rounded-lg text-blue-800 font-medium'>
-        Devolvemos funcionalidad completa a tu equipo sin necesidad de reemplazarlo por uno nuevo.
-      </p>
-    </section>
+    <>  
+      <section class='position-relative'>
+        <img  
+          src={img}
+          alt='Reparación General' 
+          class='w-100 img-fluid imagen'
+        />
+
+        <section class='position-absolute top-0 end-0 cardInfo'>
+          <h1 class='text-3xl font-bold text-blue-800 mb-6'>
+          🛠️ Reparación General de Equipos
+          </h1>
+          <p class='text-gray-700 mb-4'>
+            Diagnóstico completo de computadoras y notebooks ante fallas técnicas o bajo rendimiento. Seguimos un protocolo propio para aislar y resolver el problema.
+          </p>
+        </section>
+
+        <section class='p-6 md:p-12 max-w-4xl mx-auto container cardInfo'>
+          <h2 class='text-xl font-semibold text-blue-700 mb-2'>🔍 ¿Qué incluye?</h2>
+          <ul class='list-disc pl-6 text-gray-700 mb-4'>
+            <li>Diagnóstico detallado de hardware y software.</li>
+            <li>Reparación de componentes dañados (placa madre, disco duro, memoria RAM).</li>
+            <li>Actualización de sistemas operativos y controladores.</li>
+            <li>Optimización del rendimiento general del equipo.</li>
+            <li>Recuperación de datos en caso de fallos críticos.</li>
+          </ul>
+          <p class='bg-blue-100 p-4 rounded-lg text-blue-800 font-medium'>
+            Servicio ideal para prolongar la vida útil de tu equipo y evitar gastos innecesarios en nuevos dispositivos.
+          </p>
+        </section>         
+      </section>
+    </>
   );
 };
 
