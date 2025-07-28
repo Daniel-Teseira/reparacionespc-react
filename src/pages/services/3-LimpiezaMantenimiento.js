@@ -1,4 +1,3 @@
-import React from 'react';
 import img from '../../images/services/3/image.png';
 import Nosotros from '../home/components/Nosotros';
 import '../home/components/Style.css';

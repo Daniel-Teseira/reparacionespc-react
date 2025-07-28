@@ -80,13 +80,21 @@
   .texto2{
     text-align: justify;
   }
+
+  .text-link{
+    text-decoration: none;
+    color: black;
+  }
   
   .card_servicio a, .contacto a, .como_trabajamos a, .servicios a{
     text-decoration: none;
     color: var(--color-a);
   }
   
-
+  .text-span{
+    color: var(--color-a);
+    font-weight: bold;
+  }
   
   .nosotros {
     color: rgb(0, 0, 0);

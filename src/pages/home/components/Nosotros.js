@@ -4,8 +4,8 @@ const Nosotros = () => {
       <section class='nosotros py-2'>
         <div>
           <div>
-            <p class='d-flex justify-content-center'>
-              SOLUCIONES INFORMÁTICAS{' '}
+            <p class='d-flex justify-content-center text-span'>
+              SOLUCIONES INFORMÁTICAS
             </p>
             <h2 class='d-flex justify-content-center'>
               Algunos de nuestros factores diferenciales
@@ -108,7 +108,7 @@ const Nosotros = () => {
         <div class='d-flex texto1 justify-content-center'>
           <p>
             LE BRINDAMOS UN SERVICIO PROFESIONAL A UN PRECIO INSUPERABLE <br />
-            <span style={{ color: '#0056db' }}>
+            <span class='text-span'>
               <strong>USTED PODRÁ CONCENTRARSE EN SU NEGOCIO</strong>
             </span>
           </p>
@@ -126,8 +126,8 @@ const Nosotros = () => {
                 href='https://www.europapress.es/portaltic/internet/noticia-importancia-soporte-tecnico-mantenimiento-exito-pagina-web-20221003115908.html'
                 target='_blank'
                 rel='noopener noreferrer'
-              >
-                
+                class='text-link'
+              >                
                 socio tecnológico estratégico
               </a>
               , que le ayudará a desarrollar e implementar nuevas tecnologías
