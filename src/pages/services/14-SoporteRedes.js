@@ -17,73 +17,83 @@ import React from 'react';
 // Cambio o reparaciones de componentes o conectores
 // Potenciación de señal de Wi-Fi
 
+import img from '../../images/services/14/Google_AI_Studio_2025-07-29T15_44_31.237Z.png';
+import '../home/components/Style.css';
+
 const ServiciosRedes = () => {
   return (
-    <section class='p-6 md:p-12 max-w-6xl mx-auto container'>
-      <h1 class='text-3xl font-bold text-center text-blue-800 mb-10'>
-        Servicios de Mantenimiento e Instalaciones de Redes
-      </h1>
+    <>
 
-      {/* Instalación */}
-      <div class='mb-10'>
-        <h2 class='text-2xl font-semibold text-blue-700 mb-4'>🔧 Instalación y configuración de redes estructuradas</h2>
-        <p class='mb-4 text-gray-700'>
-          Diseñamos e instalamos redes cableadas e inalámbricas adaptadas a las necesidades de tu empresa, comercio u hogar.
-        </p>
-        <ul class='list-disc pl-6 text-gray-700'>
-          <li>Tendido de cableado estructurado (UTP, FTP, fibra óptica)</li>
-          <li>Armado de racks, canalizaciones y organizadores</li>
-          <li>Instalación de routers, switches, puntos de acceso Wi-Fi</li>
-          <li>Pruebas de conectividad y rendimiento</li>
-        </ul>
-      </div>
+      <section class='position-relative' >
+        <img
+          src={img}
+          alt='Limpieza y Mantenimiento'
+          class='w-100 img-fluid imagen'          
+        />
 
-      {/* Mantenimiento */}
-      <div class='mb-10'>
-        <h2 class='text-2xl font-semibold text-blue-700 mb-4'>🛠️ Mantenimiento preventivo y correctivo</h2>
-        <p class='mb-4 text-gray-700'>
-          El mantenimiento de red es clave para evitar cortes de servicio, pérdida de productividad y riesgos de seguridad.
-        </p>
-        <ul class='list-disc pl-6 text-gray-700'>
-          <li>Revisión periódica de dispositivos de red</li>
-          <li>Diagnóstico y resolución de fallas</li>
-          <li>Actualización de firmware y configuraciones</li>
-          <li>Monitoreo remoto y asistencia técnica programada</li>
-        </ul>
-      </div>
+        <section
+          class='position-absolute top-0 end-0 cardInfo'          
+        >
+          <h1 class='text-3xl font-bold text-center text-blue-800 mb-10'>
+            Servicios de Mantenimiento e Instalaciones de Redes
+          </h1>
+          <p>
+            Texto breve sobre la importancia de un buen mantenimiento de redes y cómo nuestros servicios pueden ayudar a optimizar el rendimiento y la seguridad de tus sistemas.
+          </p>
+        </section>
 
-      {/* Normas */}
-      <div class='mb-10'>
-        <h2 class='text-2xl font-semibold text-blue-700 mb-4'>⚖️ Cumplimiento de normas y buenas prácticas</h2>
-        <p class='text-gray-700'>
-          Trabajamos según estándares internacionales como <strong>TIA/EIA-568</strong>, cumpliendo también con normativas eléctricas locales.
-          Usamos herramientas certificadas y seguimos procedimientos de instalación profesional.
-        </p>
-      </div>
+        {/* Instalación */}
+        <section class='p-6 md:p-12 max-w-4xl mx-auto container cardInfo'>
+          <h2 class='text-2xl font-semibold text-blue-700 mb-4'>🔧 Instalación y configuración de redes estructuradas</h2>
+          <p class='mb-4 text-gray-700'>
+            Diseñamos e instalamos redes cableadas e inalámbricas adaptadas a las necesidades de tu empresa, comercio u hogar.
+          </p>
+          <ul class='list-disc pl-6 text-gray-700'>
+            <li>Tendido de cableado estructurado (UTP, FTP, fibra óptica)</li>
+            <li>Armado de racks, canalizaciones y organizadores</li>
+            <li>Instalación de routers, switches, puntos de acceso Wi-Fi</li>
+            <li>Pruebas de conectividad y rendimiento</li>
+          </ul>
+        </section>
 
-      {/* Tecnología */}
-      <div class='mb-10'>
-        <h2 class='text-2xl font-semibold text-blue-700 mb-4'>🚀 Tecnología de calidad y visión a futuro</h2>
-        <p class='mb-4 text-gray-700'>
-          Apostamos por soluciones de alta calidad con marcas reconocidas y productos con respaldo técnico.
-        </p>
-        <ul class='list-disc pl-6 text-gray-700'>
-          <li>Cámaras de seguridad IP</li>
-          <li>Sistemas de domótica y control de acceso</li>
-          <li>Ampliación de puestos de trabajo</li>
-          <li>Mayor demanda de velocidad y tráfico</li>
-        </ul>
-      </div>
+        {/* Mantenimiento */}
+         <section class='p-6 md:p-12 max-w-4xl mx-auto container cardInfo'>
+          <h2 class='text-2xl font-semibold text-blue-700 mb-4'>🛠️ Mantenimiento preventivo y correctivo</h2>
+          <p class='mb-4 text-gray-700'>
+            El mantenimiento de red es clave para evitar cortes de servicio, pérdida de productividad y riesgos de seguridad.
+          </p>
+          <ul class='list-disc pl-6 text-gray-700'>
+            <li>Revisión periódica de dispositivos de red</li>
+            <li>Diagnóstico y resolución de fallas</li>
+            <li>Actualización de firmware y configuraciones</li>
+            <li>Monitoreo remoto y asistencia técnica programada</li>
+          </ul>
+        </section>
 
-      {/* Contacto */}
-      <div class='text-center bg-blue-100 p-6 rounded-xl shadow-md'>
-        <h3 class='text-xl font-semibold text-blue-800 mb-2'>📞 Consultanos</h3>
-        <p class='text-gray-700'>
-          Ofrecemos abonos mensuales, servicios puntuales o proyectos llave en mano. 
-          ¡Solicitá un diagnóstico sin cargo y conocé cómo podemos ayudarte!
-        </p>
-      </div>
-    </section>
+         {/* Normas */}
+         <section class='p-6 md:p-12 max-w-4xl mx-auto container cardInfo'>
+          <h2 class='text-2xl font-semibold text-blue-700 mb-4'>⚖️ Cumplimiento de normas y buenas prácticas</h2>
+          <p class='text-gray-700'>
+            Trabajamos según estándares internacionales como <strong>TIA/EIA-568</strong>, cumpliendo también con normativas eléctricas locales.
+            Usamos herramientas certificadas y seguimos procedimientos de instalación profesional.
+          </p>
+        </section>
+
+        {/* Tecnología */}
+         <section class='p-6 md:p-12 max-w-4xl mx-auto container cardInfo'>
+           <h2 class='text-2xl font-semibold text-blue-700 mb-4'>🚀 Tecnología de calidad y visión a futuro</h2>
+          <p class='mb-4 text-gray-700'>
+            Apostamos por soluciones de alta calidad con marcas reconocidas y productos con respaldo técnico.
+          </p>
+          <ul class='list-disc pl-6 text-gray-700'>
+            <li>Cámaras de seguridad IP</li>
+            <li>Sistemas de domótica y control de acceso</li>
+            <li>Ampliación de puestos de trabajo</li>
+            <li>Mayor demanda de velocidad y tráfico</li>
+          </ul>
+        </section>
+      </section>
+    </>
   );
 };
 

@@ -1,25 +1,31 @@
 import './Home.css';
 
-import Carrusel from './components/Carrusel';
-import Servicios from '../../components/cards/Servicios';
-import Contacto from './components/Contacto';
-import PreguntasFrecuentes from './components/PreguntasFrecuentes';
+//import Carrusel from './components/Carrusel';
 // import ComoTrabajamos from './components/ComoTrabajamos';
+//import Contacto from './components/Contacto';
+//import Nosotros from './components/Nosotros';
+//import PorqueElegirnos from './components/PorqueElegirnos';
+//import PreguntasFrecuentes from './components/PreguntasFrecuentes';
 // import SpeedTest from './components/SpeedTest';
-// import PorqueElegirnos from './components/PorqueElegirnos';
+
+import Servicios from '../../components/cards/Servicios';
 
 const Home = () => {
   return (
     <>    
-      <Carrusel/>
+      {/* <Carrusel/> */}
       <Servicios/>
 
-      <PreguntasFrecuentes/>
-      <Contacto/>      
+      {/* <PreguntasFrecuentes/> */}
+      {/* <Contacto/>       */}
       {/* <ComoTrabajamos/> */}
       
       {/* <SpeedTest/> */}
       {/* <PorqueElegirnos/> */}
+
+      {/* <Nosotros/> */}
+
+
 
           
       {/*agregar:

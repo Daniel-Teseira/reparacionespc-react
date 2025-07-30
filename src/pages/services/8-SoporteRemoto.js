@@ -1,4 +1,4 @@
-import img from '../../images/services/3/image.png';
+import img from '../../images/services/8/Google_AI_Studio_2025-07-28T22_27_56.689Z.png';
 import '../home/components/Style.css';
 
 const SoporteRemoto = () => {

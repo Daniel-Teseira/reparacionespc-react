@@ -35,10 +35,10 @@ const LimpiezaMantenimiento = () => {
               Ideal para mantener el equipo fresco, rápido y libre de errores. Recomendamos hacerlo cada 6 a 12 meses.
             </p> 
         </section>
-    </section>
+      </section>
     
-    <Nosotros/>
-  </>
+      <Nosotros/>
+    </>
   );
 };
 
