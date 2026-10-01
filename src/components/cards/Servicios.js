@@ -1,5 +1,21 @@
 import React from 'react';
-import img5 from '../../images/cards/1/image.png';
+import TransitionLink from '../TransitionLink/TransitionLink';
+import limpiezaImage from '../../images/services/3/image.png';
+import armadoImage from '../../images/services/4/image.png';
+import reparacionImage from '../../images/services/5/image.png';
+import componentesImage from '../../images/services/6/image (2).png';
+import windowsImage from '../../images/services/7/Google_AI_Studio_2025-07-28T15_33_56.390Z.png';
+import remotoImage from '../../images/services/8/Google_AI_Studio_2025-07-29T11_58_48.552Z.png';
+import hardwareImage from '../../images/services/9/Google_AI_Studio_2025-07-29T12_06_25.082Z.png';
+import virusImage from '../../images/services/10/Google_AI_Studio_2025-07-29T12_09_16.016Z.png';
+import fallasImage from '../../images/services/11/Google_AI_Studio_2025-07-29T12_13_20.663Z.png';
+import softwareImage from '../../images/services/12/Google_AI_Studio_2025-07-29T15_54_05.653Z.png';
+import driversImage from '../../images/services/13/Google_AI_Studio_2025-07-29T15_42_44.247Z.png';
+import redesImage from '../../images/services/14/Google_AI_Studio_2025-07-29T15_44_45.277Z.png';
+import datosImage from '../../images/services/15/Google_AI_Studio_2025-07-29T15_46_09.147Z.png';
+import planesImage from '../../images/services/16/Google_AI_Studio_2025-07-29T15_47_12.323Z.png';
+import mantenimientoImage from '../../images/services/17/Google_AI_Studio_2025-07-29T15_48_27.691Z.png';
+import postventaImage from '../../images/services/18/Google_AI_Studio_2025-07-29T15_52_34.511Z.png';
 
 const Servicios = () => {
   const servicios = [
@@ -20,6 +36,7 @@ const Servicios = () => {
     {
       id: 3,
       titulo: "Limpieza y Mantenimiento General",
+      imagen: limpiezaImage,
       descripcion: "Se realiza una Limpieza y Mantenimiento de Hardware y Software para optimizar el funcionamiento de tu computadora.",
       link: "/limpieza-mantenimiento/",
       destacado: false
@@ -27,6 +44,7 @@ const Servicios = () => {
     {
       id: 4,
       titulo: "Armado de PC",
+      imagen: armadoImage,
       descripcion: "Arma y diseña tu PC a medida según tus necesidades (Oficina o Gamer). Con instalación de Windows, Office y programas.",
       link: "/armado-pc/",
       destacado: false
@@ -34,6 +52,7 @@ const Servicios = () => {
     {
       id: 5,
       titulo: "Reparación General",
+      imagen: reparacionImage,
       descripcion: "Se aíslan los problemas de tu computadora o laptop y, a base de protocolo de búsqueda de fallas propio, se resuelven.",
       link: "/reparacion-de-pc/",
       destacado: false
@@ -41,6 +60,7 @@ const Servicios = () => {
     {
       id: 6,
       titulo: "Reemplazo de Componentes Dañados",
+      imagen: componentesImage,
       descripcion: "En caso de encontrar un componente dañado en su computadora de ser posible se repara o si no se cambia.",
       link: "/reemplazo-componentes/",
       destacado: false
@@ -48,6 +68,7 @@ const Servicios = () => {
     {
       id: 7,
       titulo: "Formateo e Instalación de Windows",
+      imagen: windowsImage,
       descripcion: "Formateo e instalación de Windows con o sin pérdida de datos. Incluye instalación de programas solicitados.",
       link: "/formateo-e-instalacion-de-windows/",
       destacado: false
@@ -55,6 +76,7 @@ const Servicios = () => {
     {
       id: 8,
       titulo: "Soporte Remoto",
+      imagen: remotoImage,
       descripcion: "Soporte técnico remoto para obtener nuestro service de computadoras sin la necesidad de transportar equipos.",
       link: "/soporte-remoto/",
       destacado: false
@@ -62,6 +84,7 @@ const Servicios = () => {
     {
       id: 9,
       titulo: "Actualización de Hardware",
+      imagen: hardwareImage,
       descripcion: "Cambiamos componentes obsoletos por otros que optimicen su rendimiento.",
       link: "/actualizacion-hardware/",
       destacado: false
@@ -69,6 +92,7 @@ const Servicios = () => {
     {
       id: 10,
       titulo: "Eliminación de Virus, Malware y Spyware",
+      imagen: virusImage,
       descripcion: "Mediante la utilización de última tecnología se elimina todo elemento dañino.",
       link: "/eliminacion-de-virus/",
       destacado: false
@@ -76,6 +100,7 @@ const Servicios = () => {
     {
       id: 11,
       titulo: "Errores o Fallas del Equipo",
+      imagen: fallasImage,
       descripcion: "Contamos con conocimiento suficiente para diagnosticar y arreglar cualquier tipo de falla que su computadora posea.",
       link: "/errores-fallas/",
       destacado: false
@@ -83,6 +108,7 @@ const Servicios = () => {
     {
       id: 12,
       titulo: "Instalación y Actualización de Software",
+      imagen: softwareImage,
       descripcion: "Instalación y actualización de programas a pedido (antivirus, office, programas de diseño, videojuegos, etc.).",
       link: "/instalacion-software/",
       destacado: false
@@ -90,6 +116,7 @@ const Servicios = () => {
     {
       id: 13,
       titulo: "Configuración e Instalación de Drivers",
+      imagen: driversImage,
       descripcion: "Mediante los mejores software se realiza una instalación adecuada de drivers.",
       link: "/instalacion-drivers/",
       destacado: false
@@ -97,6 +124,7 @@ const Servicios = () => {
     {
       id: 14,
       titulo: "Soporte de Redes",
+      imagen: redesImage,
       descripcion: "Soporte técnico de redes integral acondicionado a las exigencias de su empresa.",
       link: "/soporte-redes/",
       destacado: false
@@ -104,6 +132,7 @@ const Servicios = () => {
     {
       id: 15,
       titulo: "Recuperación de Datos y Backups",
+      imagen: datosImage,
       descripcion: "Mediante un Software de recuperación de datos se logran obtener la información perdida.",
       link: "/recuperacion-datos/",
       destacado: false
@@ -111,6 +140,7 @@ const Servicios = () => {
     {
       id: 16,
       titulo: "Planes a Medida",
+      imagen: planesImage,
       descripcion: "Se prepara un plan de servicio ilimitado adaptado a las necesidades de tu empresa o PyME.",
       link: "/planes-a-medida/",
       destacado: false
@@ -118,6 +148,7 @@ const Servicios = () => {
     {
       id: 17,
       titulo: "Mantenimiento de Software y Antivirus",
+      imagen: mantenimientoImage,
       descripcion: "Se realizan limpiezas de fondo para optimizar el funcionamiento de tu computadora o notebook.",
       link: "/mantenimiento-software/",
       destacado: false
@@ -125,107 +156,50 @@ const Servicios = () => {
     {
       id: 18,
       titulo: "Soporte Post-venta",
+      imagen: postventaImage,
       descripcion: "Luego de la reparación de una PC cualquier duda o consulta será resulta sin cargo alguno.",
       link: "/soporte-postventa/",
       destacado: false
     }
   ];
 
-  // Servicio destacado (el primero con imagen)
-  const servicioDestacado = servicios.find(servicio => servicio.destacado);
-  
-  // Servicios regulares (sin imagen)
-  const serviciosRegulares = servicios.filter(servicio => !servicio.destacado);
-
   return (
-    <section className="servicios">
-      <div className="d-flex justify-content-center">
-        <h2 className="wnd-align-center">
-          Nuestro Servicio<strong>&nbsp;</strong>Técnico de PC
-          <strong> </strong>y Notebook
-        </h2>
-      </div>
-
-      {/* Servicio destacado con imagen */}
-      {servicioDestacado && (
-        <div className="container my-5">
-          <div className="row justify-content-center gap-3">
-            <div className="">
-              <div className="card border-0 position-relative text-center flex-row h-100">
-                {/* Imagen desplazada hacia arriba */}
-                <img
-                  src={img5}
-                  alt={servicioDestacado.titulo}
-                  className="img-fluid w-50 object-fit-cover"
-                  style={{
-                    transform: "translateY(-5%)",
-                    zIndex: 1,
-                    borderRadius: "1rem",
-                    boxShadow: "0 4px 50px rgba(0, 0, 0, 0.36)",
-                  }}
-                />
-
-                {/* Texto desplazado hacia abajo */}
-                <div
-                  className="card-body"
-                  style={{
-                    transform: "translateX(-5%)",
-                    zIndex: 10,
-                    boxShadow: "0 4px 50px rgba(0, 0, 0, 0.2)",
-                  }}
-                >
-                  <h3 className="card-title fw-bold mb-3">
-                    {servicioDestacado.titulo}
-                  </h3>
-                  <p
-                    className="card-text fw-bold"
-                    style={{ fontSize: "1.2rem" }}
-                  >
-                    {servicioDestacado.descripcion}
-                  </p>
-                  <a 
-                    href={servicioDestacado.link} 
-                    className="btn btn-primary mt-3"
-                  >
-                    Más información
-                  </a>
-                </div>
-              </div>
-            </div>
+    <section className="services-section" id="servicios">
+      <div className="container">
+        <div className="section-heading">
+          <div>
+            <span className="section-kicker">QUÉ PODEMOS HACER</span>
+            <h2>Soluciones para que tu equipo <span>rinda mejor.</span></h2>
           </div>
+          <p>Desde una limpieza preventiva hasta una reparación compleja: encontramos la solución adecuada para vos.</p>
         </div>
-      )}
 
-      {/* Servicios regulares en formato de tarjetas */}
-      <div className="d-flex flex-wrap justify-content-evenly">
-        {serviciosRegulares.map((servicio) => (
-          <div key={servicio.id} className="card_servicio">
-            <h2>
-              <a href={servicio.link}>
-                {servicio.titulo}
-              </a>
-            </h2>
-            <p>
-              <font className="wsw-03">
-                {servicio.descripcion}
-              </font>
-            </p>
-          </div>
-        ))}
-      </div>
+        <div className="services-grid">
+          {servicios.map((servicio, index) => (
+            <article key={servicio.id} className="service-card">
+              <TransitionLink className="service-card-image" to={servicio.link} tabIndex={-1} aria-hidden="true">
+                <img src={servicio.imagen} alt="" loading="lazy" />
+                <span className="service-image-index">{String(index + 1).padStart(2, '0')}</span>
+              </TransitionLink>
+              <div className="service-card-content">
+                <div className="service-card-top">
+                  <span className="service-icon" aria-hidden="true">{['⌘', '⚙', '⌕', '↗'][index % 4]}</span>
+                  <span className="service-index">SERVICIO TÉCNICO</span>
+                </div>
+                <h3>{servicio.titulo}</h3>
+                <p>{servicio.descripcion}</p>
+                <TransitionLink className="service-link" to={servicio.link} aria-label={`Ver ${servicio.titulo}`}>
+                  Ver servicio <span aria-hidden="true">↗</span>
+                </TransitionLink>
+              </div>
+            </article>
+          ))}
+        </div>
 
-      <div className="d-flex justify-content-center">
-        <p className="">
-          <strong>Para más información</strong>
-          <strong>
-            <em>¡</em>
-          </strong>
-          <strong>
-            <em>
-              <a href="/contacto/">Contáctenos</a>!
-            </em>
-          </strong>
-        </p>
+        <div className="services-cta">
+          <div><strong>¿No sabés qué necesita tu equipo?</strong><span>Contanos qué está pasando y te orientamos.</span></div>
+          <TransitionLink className="button button-primary" to="/contact">Hablemos <span aria-hidden="true">↗</span></TransitionLink>
+        </div>
       </div>
     </section>
   );

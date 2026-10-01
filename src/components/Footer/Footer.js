@@ -1,136 +1,43 @@
-//import React from 'react'
+import TransitionLink from '../TransitionLink/TransitionLink';
 import './Footer.css';
 
-const Footer = () => {
-  return (
-    <section className='info-pie d-fleX col-12'>
-    <div className='grupo-1'>
-      <div className='d-flex flex-column'>
-        <div className='info-1 d-flex flex-column col-12'>
-          <p>
-            LLEGASTE HASTA EL FINAL
-          </p>
-          <h3>
-            ¿Necesitas reparar tu equipo?
-          </h3>
+const Footer = () => (
+  <footer className="site-footer">
+    <div className="container">
+      <div className="footer-cta">
+        <div>
+          <span className="footer-kicker">¿EMPEZAMOS?</span>
+          <h2>Estamos para ayudarte con tu equipo.</h2>
+        </div>
+        <TransitionLink className="button footer-button" to="/contact">Contactar al técnico <span aria-hidden="true">↗</span></TransitionLink>
+      </div>
+
+      <div className="footer-main">
+        <div className="footer-about">
+          <TransitionLink className="footer-brand" to="/home"><span className="brand-mark" aria-hidden="true">⌘</span> Reparaciones PC</TransitionLink>
+          <p>Servicio técnico, mantenimiento y soporte para que tu computadora siga tu ritmo.</p>
+        </div>
+        <div className="footer-column">
+          <h3>Servicios</h3>
+          <TransitionLink to="/reparacion-de-pc">Reparación de PC</TransitionLink>
+          <TransitionLink to="/limpieza-mantenimiento">Mantenimiento</TransitionLink>
+          <TransitionLink to="/recuperacion-datos">Recuperación de datos</TransitionLink>
+          <TransitionLink to="/soporte-remoto">Soporte remoto</TransitionLink>
+        </div>
+        <div className="footer-column footer-contact">
+          <h3>Contacto</h3>
+          <a href="tel:+543815694570">(+54) 381 569 4570</a>
+          <span>San Miguel de Tucumán</span>
+          <span>Lun. a vie. 09 a 20 · Sáb. 09 a 13</span>
         </div>
       </div>
 
-      <div className='d-flex flex-row col-12'>
-        <div className='info-2 d-flex flex-row col-6'>
-          <div className='info-num d-flex flex-column col-6'>
-            <p>
-              San Miguel de Tucumán
-            </p>
-            <strong>
-              (+54) 381 5694570
-            </strong>
-          </div>
-
-          <div className='info-ubi d-flex flex-column col-6'>
-            <strong>
-              <p>Lunes a Viernes de 09 a 20 hs</p>
-              <p>Sabados de 09 a 13 hs</p>
-            </strong>
-            <p>
-              Pasaje Baltazar Aguirre 789
-            </p>
-            <>
-            San Miguel de Tucumán, Tucumán
-            </>
-            <p>
-              CP 4.000
-            </p>
-          </div>
-        </div>
-
-        <div className='info-link d-flex flex-row col-6'>
-          <div className='link1 d-flex flex-column col-6'>
-            <div className=''>
-              <h2>
-                Links Útiles
-              </h2>
-            </div>
-
-            <div>
-              <ul>
-                <li>
-                  <a className='text-decoration-none text-white' href='https://www.supertek.com.ar/club/'>
-                    Beneficios al Gremio
-                  </a>
-                </li>
-
-                <li>
-                  <a className='text-decoration-none text-white' href='https://www.supertek.com.ar/club/'>
-                    Club Supertek
-                  </a>
-                </li>
-
-                <li>
-                  <a className='text-decoration-none text-white' href='https://www.supertek.com.ar/contacto'>
-                    Contacto
-                  </a>
-                </li>
-
-                <li>
-                  <a className='text-decoration-none text-white' href='https://www.supertek.com.ar/glosario/staking/'>
-                    Glosario
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div className='link2 d-flex flex-column col-6'>
-            <div className=''>
-              <div>
-                <h2>
-                  Más Links Útiles
-                </h2>
-              </div>
-
-              <div>
-                <ul>
-                  <li>
-                    <a className='text-decoration-none text-white' href='https://www.supertek.com.ar/blog'>
-                      Blog
-                    </a>
-                  </li>
-
-                  <li>
-                    <a className='text-decoration-none text-white'
-                      href='https://www.supertek.com.ar/trabaja-con-nosotros'>
-                      Trabajá con Nosotros
-                    </a>
-                  </li>
-
-                  <li>
-                    <a className='text-decoration-none text-white'
-                      href='https://www.supertek.com.ar/terminos-y-condiciones'>
-                      Términos y Condiciones
-                    </a>
-                  </li>
-
-                  <li>
-                    <a className='text-decoration-none text-white' href='https://www.supertek.com.ar/terminos-y-condiciones'>
-                      Vendé tu equipo
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div className="footer-bottom">
+        <span>© {new Date().getFullYear()} Reparaciones PC</span>
+        <span>Atención técnica con claridad y confianza.</span>
       </div>
     </div>
+  </footer>
+);
 
-
-    <div className='grupo-2 d-flex py-2 align-items-center justify-content-center text-white'>
-      <small>&copy; 2024 <b>Reparacion de Computadoras.</b> Todos los Derechos
-        Reservados</small>
-    </div>
-  </section>
-  )
-}
-
-export default Footer
+export default Footer;

@@ -224,7 +224,7 @@ const Nosotros = () => {
           <h2>
             ¿Por qué{' '}
             <strong>
-              <span style={{ color: 'rgb(55, 163, 177)' }}>NOMBRE DE LA EMPRESA?</span>
+              <span style={{ color: 'var(--color-blue)' }}>NOMBRE DE LA EMPRESA?</span>
             </strong>
           </h2>
         </div>

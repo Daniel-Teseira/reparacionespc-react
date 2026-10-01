@@ -1,64 +1,51 @@
+import TransitionLink from '../../components/TransitionLink/TransitionLink';
 import './Home.css';
-
-//import Carrusel from './components/Carrusel';
-// import ComoTrabajamos from './components/ComoTrabajamos';
-//import Contacto from './components/Contacto';
-//import Nosotros from './components/Nosotros';
-//import PorqueElegirnos from './components/PorqueElegirnos';
-//import PreguntasFrecuentes from './components/PreguntasFrecuentes';
-// import SpeedTest from './components/SpeedTest';
-
 import Servicios from '../../components/cards/Servicios';
+import tallerPc from '../../images/carrusel/pc2.png';
 
-const Home = () => {
-  return (
-    <>    
-      {/* <Carrusel/> */}
-      <Servicios/>
+const Home = () => (
+  <main className="home-page">
+    <section className="hero container">
+      <div className="hero-copy">
+        <span className="eyebrow"><span className="status-dot" /> Servicio técnico de PC y notebooks</span>
+        <h1>Tu equipo vuelve a <span>funcionar.</span></h1>
+        <p className="hero-description">
+          Diagnóstico claro, soluciones confiables y atención personalizada para que vuelvas a trabajar, estudiar o jugar sin interrupciones.
+        </p>
+        <div className="hero-actions">
+          <TransitionLink className="button button-primary" to="/contact">Solicitar asistencia <span aria-hidden="true">↗</span></TransitionLink>
+          <a className="button button-quiet" href="#servicios">Explorar servicios <span aria-hidden="true">↓</span></a>
+        </div>
+        <div className="hero-proof">
+          <span className="proof-mark" aria-hidden="true">✓</span>
+          <p><strong>Atención cercana</strong><br />Te explicamos cada paso y cada opción.</p>
+        </div>
+      </div>
 
-      {/* <PreguntasFrecuentes/> */}
-      {/* <Contacto/>       */}
-      {/* <ComoTrabajamos/> */}
-      
-      {/* <SpeedTest/> */}
-      {/* <PorqueElegirnos/> */}
+      <div className="hero-visual">
+        <div className="hero-image-frame">
+          <img src={tallerPc} alt="Técnica revisando una computadora en el taller" />
+        </div>
+        <div className="hero-float-card">
+          <span className="float-icon" aria-hidden="true">⌘</span>
+          <span><strong>Diagnóstico</strong><small>Hardware y software</small></span>
+          <span className="float-check" aria-hidden="true">✓</span>
+        </div>
+        <div className="hero-corner-note">REPARACIÓN <span>·</span> MANTENIMIENTO <span>·</span> SOPORTE</div>
+      </div>
+    </section>
 
-      {/* <Nosotros/> */}
+    <section className="trust-strip" aria-label="Áreas de servicio">
+      <div className="container trust-strip-inner">
+        <span>Hardware</span><i />
+        <span>Software</span><i />
+        <span>Redes</span><i />
+        <span>Soporte remoto</span>
+      </div>
+    </section>
 
-
-
-          
-      {/*agregar:
-    https://visiontecnologica.com.ar/licencias-de-software/
-    https://visiontecnologica.com.ar/cableado-de-redes/
-    https://visiontecnologica.com.ar/soporte-tecnico-de-pc/
-
-    importante:
-    https://www.reparacionesdecomputadoras.com.ar/servicios/ (se agrego, falta pagina servicio por servicio)
-
-    https://visiontecnologica.com.ar/mantenimiento-de-computadoras/
-    https://visiontecnologica.com.ar/abonos-de-redes-para-empresas/
-
-    https://www.supertek.com.ar/
-
-    https://www.coninfopc.com.ar/#servicios
-
-    https://www.tecnicosdepcs.com.ar/servicios.php
-    https://www.tecnicosdepcs.com.ar/tecnico-de-pc.php
-    https://www.tecnicosdepcs.com.ar/mantenimiento-de-pc.php
-    https://www.tecnicosdepcs.com.ar/reparacion-de-pc.php
-
-    https://www.graytech.com.ar/
-    https://www.graytech.com.ar/otros-servicios/
-
-    https://www.pcserviciotecnico.com/remocion-de-virus
-    https://www.pcserviciotecnico.com/instalacion-de-aplicaciones
-    https://www.pcserviciotecnico.com/antivirus
-    https://www.pcserviciotecnico.com/recuperacion-de-datos
-    https://www.pcserviciotecnico.com/sistemas-operativos
-    https://www.pcserviciotecnico.com/copia-de-seguridad*/}
-    </>
-  );
-};
+    <Servicios />
+  </main>
+);
 
 export default Home;

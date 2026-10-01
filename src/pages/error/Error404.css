@@ -1,0 +1,4 @@
+.error-page { min-height: 60vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding-top: 4rem; padding-bottom: 4rem; text-align: center; }
+.error-code { color: var(--color-blue); font-size: 0.85rem; font-weight: 850; letter-spacing: 0.18em; }
+.error-page h1 { max-width: 680px; margin: 0.7rem 0; color: var(--color-ink); font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 850; letter-spacing: -0.055em; }
+.error-page p { margin-bottom: 1.5rem; color: var(--color-muted); }

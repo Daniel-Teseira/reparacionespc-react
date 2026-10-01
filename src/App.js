@@ -1,60 +1,50 @@
 import './App.css';
-import { Route, Routes, Navigate } from 'react-router-dom';
+import { Route, Routes, Navigate, useLocation } from 'react-router-dom';
 import React from 'react';
 import NavBar from './components/NavBar/NavBar';
 import Footer from './components/Footer/Footer';
 import Home from './pages/home/Home';
 import Error from './pages/error/Error404';
 import Contact from './pages/contact/Contact';
-import Redes from './pages/services/14-SoporteRedes';
-import ArmadoPC from './pages/services/4-ArmadoPC';
-import LimpiezaMantenimiento from './pages/services/3-LimpiezaMantenimiento';
-import ReparacionGeneral from './pages/services/5-ReparacionGeneral';
-import ReemplazoComponentes from './pages/services/6-ReemplazoComponentes';
-import FormateoWindows from './pages/services/7-FormateoWindows';
-import SoporteRemoto from './pages/services/8-SoporteRemoto';
-import EliminacionVirus from './pages/services/10-EliminacionVirus';
-import ErroresFallas from './pages/services/11-ErroresFallas';
-import InstalacionSoftware from './pages/services/12-InstalacionSoftware';
-import ConfiguracionDrivers from './pages/services/13-ConfiguracionDrivers';
-import RecuperacionDatos from './pages/services/15-RecuperacionDatos';
-import PlanesMedida from './pages/services/16-PlanesMedida';
-import MantenimientoSoftware from './pages/services/17-MantenimientoSoftware';
-import SoportePostVenta from './pages/services/18-SoportePostVenta';
-import ActualizacionHardware from './pages/services/9-ActualizacionHardware';
+import ServicePage from './components/services/ServicePage';
+import { serviceDetails } from './data/serviceDetails';
+import { PageTransitionProvider } from './context/PageTransitionContext';
 
 function App() {
+  const { pathname } = useLocation();
+
   return (
-    <>
-      <NavBar name='nav'/> 
-     <Routes>
+    <PageTransitionProvider>
+      <NavBar name="nav" />
+      <div key={pathname} className="route-content">
+        <Routes>
         <Route index element={<Navigate to='/home' />} />
         <Route path='/home' element={ <Home /> } />
         <Route path='/error' element={ <Error /> } />
         <Route path='*' element={ <Error/>} />
         <Route path='/contact' element={ <Contact/> }/>  
 
-        <Route path='/soporte-redes' element={ <Redes/> }/> 
-        <Route path='/armado-pc' element={ <ArmadoPC/> }/>  
-        <Route path='/limpieza-mantenimiento' element={ <LimpiezaMantenimiento/> }/>
-        <Route path='/reparacion-de-pc' element={ <ReparacionGeneral/> }/>
-        <Route path='/reemplazo-componentes' element={ <ReemplazoComponentes/> }/>
-        <Route path='/formateo-e-instalacion-de-windows' element={ <FormateoWindows/> }/>
-        <Route path='/soporte-remoto' element={ <SoporteRemoto/> }/>
-        <Route path='/eliminacion-de-virus' element={ <EliminacionVirus/> }/>
-        <Route path='/errores-fallas' element={ <ErroresFallas/> }/>
-        <Route path='/instalacion-software' element={ <InstalacionSoftware/> }/>
-        <Route path='/instalacion-drivers' element={ <ConfiguracionDrivers/> }/>
-        <Route path='/recuperacion-datos' element={ <RecuperacionDatos/> }/>
-        <Route path='/planes-a-medida' element={ <PlanesMedida/> }/>
-        <Route path='/mantenimiento-software' element={ <MantenimientoSoftware/> }/>
-        <Route path='/soporte-postventa' element={ <SoportePostVenta/> }/>
-        <Route path='/actualizacion-hardware' element={ <ActualizacionHardware/> }/>
+        <Route path='/soporte-redes' element={<ServicePage service={serviceDetails[14]} />} />
+        <Route path='/armado-pc' element={<ServicePage service={serviceDetails[4]} />} />
+        <Route path='/limpieza-mantenimiento' element={<ServicePage service={serviceDetails[3]} />} />
+        <Route path='/reparacion-de-pc' element={<ServicePage service={serviceDetails[5]} />} />
+        <Route path='/reemplazo-componentes' element={<ServicePage service={serviceDetails[6]} />} />
+        <Route path='/formateo-e-instalacion-de-windows' element={<ServicePage service={serviceDetails[7]} />} />
+        <Route path='/soporte-remoto' element={<ServicePage service={serviceDetails[8]} />} />
+        <Route path='/eliminacion-de-virus' element={<ServicePage service={serviceDetails[10]} />} />
+        <Route path='/errores-fallas' element={<ServicePage service={serviceDetails[11]} />} />
+        <Route path='/instalacion-software' element={<ServicePage service={serviceDetails[12]} />} />
+        <Route path='/instalacion-drivers' element={<ServicePage service={serviceDetails[13]} />} />
+        <Route path='/recuperacion-datos' element={<ServicePage service={serviceDetails[15]} />} />
+        <Route path='/planes-a-medida' element={<ServicePage service={serviceDetails[16]} />} />
+        <Route path='/mantenimiento-software' element={<ServicePage service={serviceDetails[17]} />} />
+        <Route path='/soporte-postventa' element={<ServicePage service={serviceDetails[18]} />} />
+        <Route path='/actualizacion-hardware' element={<ServicePage service={serviceDetails[9]} />} />
         
-      </Routes> 
-
-      <Footer/>
-    </>
+        </Routes>
+      </div>
+      <Footer />
+    </PageTransitionProvider>
   );
 }
 
