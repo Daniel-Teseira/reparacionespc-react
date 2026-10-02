@@ -14,7 +14,7 @@ const Contacto = () => {
         <div class='d-flex flex-wrap justify-content-evenly flex-column col-5 informacion'>
           <div class='d-flex direccion'>
             <div class='direccion-svg'>
-              <a href='https://goo.gl/maps/XehQcBdWdJor3SVv5' target='_blank' rel='noopener noreferrer'>
+              <a href='https://maps.google.com/?q=Coronel+Zelaya+451,+San+Miguel+de+Tucum%C3%A1n' target='_blank' rel='noopener noreferrer'>
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
                   width='16'
@@ -33,7 +33,7 @@ const Contacto = () => {
 
             <div class='direccion-titulo'>
               <h4 class='et_pb_module_header'>
-                <a href='https://goo.gl/maps/XehQcBdWdJor3SVv5' target='_blank' rel='noopener noreferrer'>
+                <a href='https://maps.google.com/?q=Coronel+Zelaya+451,+San+Miguel+de+Tucum%C3%A1n' target='_blank' rel='noopener noreferrer'>
                   Dirección
                 </a>
               </h4>
@@ -41,11 +41,11 @@ const Contacto = () => {
               <div class='et_pb_blurb_description'>
                 <p>
                   <a
-                    href='https://goo.gl/maps/XehQcBdWdJor3SVv5'
+                    href='https://maps.google.com/?q=Coronel+Zelaya+451,+San+Miguel+de+Tucum%C3%A1n'
                     target='_blank'
                     rel='noopener noreferrer'
                   >
-                    Coronel Zelaya 451, Duplex 7
+                    Coronel Zelaya 451
                     <br />
                     San Miguel de Tucumán, Tucumán
                   </a>
@@ -99,8 +99,8 @@ const Contacto = () => {
               <h4 class='telefono-titulo'>Teléfono</h4>
 
               <div class='telefono-num'>
-                <a href='tel:+543815694570' class='text-decoration-none'>
-                  (+54) 381-5694570
+                <a href='tel:+543812012118' class='text-decoration-none'>
+                  (+54) 381-2012118
                 </a>
               </div>
             </div>

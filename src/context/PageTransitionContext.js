@@ -12,7 +12,7 @@ export const usePageTransition = () => useContext(PageTransitionContext);
 
 export const PageTransitionProvider = ({ children }) => {
   const navigate = useNavigate();
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
   const [phase, setPhase] = useState('idle');
   const [animatedPath, setAnimatedPath] = useState(null);
   const timers = useRef([]);
@@ -33,9 +33,15 @@ export const PageTransitionProvider = ({ children }) => {
   useEffect(() => () => clearTimers(), [clearTimers]);
 
   useEffect(() => {
+    if (hash) {
+      window.requestAnimationFrame(() => {
+        document.getElementById(decodeURIComponent(hash.slice(1)))?.scrollIntoView({ behavior: 'smooth' });
+      });
+      return;
+    }
     document.documentElement.scrollTop = 0;
     document.body.scrollTop = 0;
-  }, [pathname]);
+  }, [pathname, hash]);
 
   const navigateWithTransition = useCallback((to) => {
     const destination = typeof to === 'string' ? to.split(/[?#]/)[0] : to.pathname;

@@ -26,7 +26,8 @@ const Footer = () => (
         </div>
         <div className="footer-column footer-contact">
           <h3>Contacto</h3>
-          <a href="tel:+543815694570">(+54) 381 569 4570</a>
+          <a href="tel:+543812012118">(+54) 381 201 2118</a>
+          <span>Coronel Zelaya 451</span>
           <span>San Miguel de Tucumán</span>
           <span>Lun. a vie. 09 a 20 · Sáb. 09 a 13</span>
         </div>

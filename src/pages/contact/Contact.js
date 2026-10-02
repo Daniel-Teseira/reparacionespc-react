@@ -14,13 +14,13 @@ const Contact = () => (
         <span className="contact-label">LLAMANOS</span>
         <h2>Hablemos de tu reparación</h2>
         <p>Contanos qué problema tiene tu computadora y te orientamos sobre los próximos pasos.</p>
-        <a className="button button-primary" href="tel:+543815694570">(+54) 381 569 4570 <span aria-hidden="true">↗</span></a>
+        <a className="button button-primary" href="tel:+543812012118">(+54) 381 201 2118 <span aria-hidden="true">↗</span></a>
       </article>
       <article className="contact-card">
         <span className="contact-icon" aria-hidden="true">⌖</span>
         <span className="contact-label">DÓNDE ESTAMOS</span>
         <h2>San Miguel de Tucumán</h2>
-        <p>Pasaje Baltazar Aguirre 789<br />San Miguel de Tucumán, Tucumán · CP 4000</p>
+        <p>Coronel Zelaya 451<br />San Miguel de Tucumán, Tucumán</p>
         <span className="contact-detail-note">Atención en el taller</span>
       </article>
       <article className="contact-card">
