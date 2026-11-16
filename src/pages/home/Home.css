@@ -79,7 +79,7 @@
 .hero-float-card strong { color: var(--color-ink); font-size: 0.9rem; }
 .hero-float-card small { margin-top: 0.15rem; color: var(--color-muted); font-size: 0.77rem; }
 .float-check { margin-left: auto; color: var(--color-accent); font-weight: 900; }
-.hero-corner-note { position: absolute; right: 0; bottom: 0; color: var(--color-muted); font-size: 0.59rem; font-weight: 800; letter-spacing: 0.09em; }
+.hero-corner-note { position: absolute; right: 0; bottom: 0; color: var(--color-muted); font-size: 0.7rem; font-weight: 800; letter-spacing: 0.09em; }
 .hero-corner-note span { padding: 0 0.35rem; color: var(--color-accent); }
 
 .trust-strip { border-top: 1px solid var(--color-line); border-bottom: 1px solid var(--color-line); background: #fff; }
@@ -151,7 +151,7 @@
   .hero-visual { padding-left: 0.7rem; }
   .hero-image-frame { height: min(88vw, 390px); }
   .hero-float-card { left: -0.4rem; bottom: 3rem; }
-  .hero-corner-note { right: 0.2rem; font-size: 0.48rem; }
+  .hero-corner-note { right: 0.2rem; font-size: 0.7rem; letter-spacing: 0.04em; }
   .trust-strip-inner { flex-wrap: wrap; justify-content: flex-start; gap: 0.7rem 1rem; padding-top: 1rem; padding-bottom: 1rem; font-size: 0.75rem; }
   .services-section { padding: 4.5rem 0 3.5rem; }
   .services-grid { grid-template-columns: 1fr; }

@@ -17,6 +17,23 @@ const Home = () => {
   const [activeImage, setActiveImage] = useState(0);
   const [paused, setPaused] = useState(false);
   const [reduceMotion, setReduceMotion] = useState(false);
+  // Solo se descargan la imagen visible y la siguiente; las demás se agregan a medida que el carrusel avanza.
+  const [mounted, setMounted] = useState(() => new Set([0]));
+
+  useEffect(() => {
+    if (!mounted.has(activeImage)) {
+      setMounted((current) => new Set(current).add(activeImage));
+      return undefined;
+    }
+    if (paused || reduceMotion || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
+    const next = (activeImage + 1) % heroImages.length;
+    if (mounted.has(next)) return undefined;
+    // Esperar a que termine la carga inicial para no competir con el contenido principal.
+    const schedule = () => setMounted((current) => new Set(current).add(next));
+    if (document.readyState === 'complete') { schedule(); return undefined; }
+    window.addEventListener('load', schedule, { once: true });
+    return () => window.removeEventListener('load', schedule);
+  }, [activeImage, paused, reduceMotion, mounted]);
 
   useEffect(() => {
     const media = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -40,7 +57,7 @@ const Home = () => {
   <main className="home-page" id="main-content" tabIndex={-1}>
     <section className="hero-section">
       <div className="hero-ambient" aria-hidden="true">
-        {heroImages.map((image, index) => (
+        {heroImages.map((image, index) => mounted.has(index) && (
           <ResponsiveImage
             key={image.src}
             className={index === activeImage ? 'is-active' : ''}
@@ -70,7 +87,7 @@ const Home = () => {
 
         <div className="hero-visual">
           <div className="hero-image-frame" role="group" aria-roledescription="carrusel" aria-label="Imágenes de servicios técnicos">
-            {heroImages.map((image, index) => (
+            {heroImages.map((image, index) => mounted.has(index) && (
               <ResponsiveImage
                 key={image.src}
                 className={index === activeImage ? 'is-active' : ''}

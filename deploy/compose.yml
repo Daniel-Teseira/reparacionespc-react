@@ -1,6 +1,6 @@
 services:
   web:
-    image: nginx:stable-alpine
+    image: nginx:1.30.6-alpine
     restart: unless-stopped
     ports:
       - "192.168.1.250:3005:80"

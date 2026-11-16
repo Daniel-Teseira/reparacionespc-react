@@ -31,7 +31,7 @@ const ServicePage = ({ service }) => {
           {sections.map((section, index) => (
             <article className="service-detail-card" key={section.title}>
               <div className="service-detail-card-heading">
-                <span className="service-detail-number">{String(index + 1).padStart(2, '0')}</span>
+                <span className="service-detail-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
                 <span className="service-detail-kicker">{index === 0 ? 'INCLUIDO EN EL SERVICIO' : 'ÁREA DE TRABAJO'}</span>
               </div>
               <h3>{section.title}</h3>

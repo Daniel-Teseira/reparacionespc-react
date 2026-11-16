@@ -17,7 +17,13 @@ export default defineConfig({
         const redirect = (location) => { response.statusCode = 301; response.setHeader('Location', location + url.search); response.end(); };
         if (url.pathname === '/home' || url.pathname === '/home/') return redirect('/');
         if (url.pathname.length > 1 && url.pathname.endsWith('/') && pagePaths.has(url.pathname.slice(0, -1))) return redirect(url.pathname.slice(0, -1));
-        if (!request.headers.accept?.includes('text/html') || pagePaths.has(url.pathname)) return next();
+        if (pagePaths.has(url.pathname)) {
+          // Como `try_files $uri/index.html` de nginx: cada ruta recibe su propio HTML prerenderizado,
+          // no el del inicio (que provocaría errores de hidratación).
+          if (url.pathname !== '/') request.url = `${url.pathname}/index.html${url.search}`;
+          return next();
+        }
+        if (!request.headers.accept?.includes('text/html')) return next();
         response.statusCode = 404;
         response.setHeader('Content-Type', 'text/html; charset=utf-8');
         response.end(readFileSync(path.resolve('build/404.html')));

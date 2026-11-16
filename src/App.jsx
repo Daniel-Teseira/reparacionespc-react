@@ -8,6 +8,7 @@ import Contact from './pages/contact/Contact';
 import ServicePage from './components/services/ServicePage';
 import RouteFocus from './components/RouteFocus';
 import Seo from './components/Seo';
+import MobileContactBar from './components/MobileContactBar/MobileContactBar';
 import { services } from './data/services';
 
 export default function App() {
@@ -27,5 +28,6 @@ export default function App() {
       </Routes>
     </div>
     <Footer />
+    <MobileContactBar />
   </>;
 }

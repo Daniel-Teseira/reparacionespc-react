@@ -1,0 +1,25 @@
+/*
+ * Solo se carga cuando JavaScript está desactivado (desde <noscript> en index.html).
+ * Las páginas ya llegan prerenderizadas; esto hace usable la navegación sin JavaScript.
+ * Todas las reglas empiezan con `html` para ganarle al CSS principal, que se carga después.
+ */
+
+/* El menú de servicios se abre con hover o foco de teclado en escritorio. */
+html #services-mega-menu[hidden] { display: block !important; }
+html .nav-services:hover .services-mega-menu,
+html .nav-services:focus-within .services-mega-menu { opacity: 1; pointer-events: auto; transform: translate(-50%, 0); visibility: visible; }
+
+/* Controles que necesitan JavaScript. */
+html .services-show-all,
+html .carousel-control { display: none; }
+
+@media (max-width: 991px) {
+  /* Menú móvil siempre visible y con todos los servicios desplegados. */
+  html .site-navbar, html .site-navbar.is-scrolled { position: static; }
+  html .site-navbar .navbar-toggler,
+  html .services-chevron { display: none; }
+  html .site-navbar .navbar-collapse { display: block; }
+  html .services-mega-menu { display: block; max-height: none; opacity: 1; transform: none; visibility: visible; }
+}
+
+html .noscript-note { margin: 0; padding: 0.7rem 1rem; background: #fff1e5; color: #694725; font-size: 0.9rem; text-align: center; }

@@ -17,6 +17,8 @@ export default [
       'react-hooks/rules-of-hooks': 'error',
       'react-hooks/exhaustive-deps': 'warn',
       'react/prop-types': 'off',
+      // React 18 espera el atributo en minúsculas (ver ResponsiveImage.jsx).
+      'react/no-unknown-property': ['error', { ignore: ['fetchpriority'] }],
     },
   },
 ];
