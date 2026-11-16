@@ -96,7 +96,7 @@ Componentes y páginas:
 - `src/components/services/ServicePage.jsx`: presentación compartida de los servicios.
 - `src/components/cards/Servicios.jsx`: tarjetas del catálogo.
 - `src/components/ContactForm.jsx`: validación y preparación de la consulta para WhatsApp.
-- `src/components/Seo.jsx`, `RouteFocus.jsx` y `ResponsiveImage.jsx`: metadatos por página, foco accesible al cambiar de ruta e imágenes con `srcset`.
+- `src/components/Seo.jsx`, `RouteFocus.jsx` y `ResponsiveImage.jsx`: metadatos por página, foco accesible al cambiar de ruta e imágenes responsivas (`<picture>` con AVIF y WebP).
 - `src/pages/home/`, `src/pages/contact/`, `src/pages/error/`: inicio (con `components/HomeInfo.jsx` para proceso de atención y preguntas frecuentes), contacto y 404.
 
 Imágenes y scripts:
@@ -109,7 +109,7 @@ Imágenes y scripts:
 - `e2e/`: pruebas de Playwright.
 - `scripts/generate-site.mjs`: prerenderizado, `robots.txt` y `sitemap.xml` (se ejecuta dentro de `npm run build`).
 - `scripts/verify-build.mjs`, `optimize-images.mjs`, `generate-icons.mjs`: verificación, imágenes e íconos.
-- `deploy/`: Nginx, Docker Compose y scripts de publicación en el NUC.
+- `deploy/`: Nginx, Docker Compose y scripts de publicación en el NUC; `deploy/https/` tiene Caddy para HTTPS cuando haya dominio.
 
 Después de cambiar una imagen o agregar un servicio, actualizá el catálogo y sus fuentes de imagen, ejecutá `npm run images:optimize` y comprobá pruebas y compilación. Los textos de presupuesto, diagnóstico y garantía deben ajustarse únicamente a condiciones reales del negocio.
 
@@ -143,4 +143,4 @@ Publicá el contenido de `build/` en la raíz del dominio. La compilación gener
 
 La publicación en el NUC está automatizada con `deploy/update-nuc.ps1`; ver [deploy/NUC.md](deploy/NUC.md). La configuración de Nginx (`deploy/nginx.conf` y `deploy/security-headers.conf`) incluye compresión, caché, cabeceras de seguridad, redirecciones y 404 reales. `npm run preview` imita esas redirecciones y el 404, pero no las cabeceras.
 
-El workflow de GitHub Actions (`.github/workflows/ci.yml`) ejecuta, con Node 22, lint, pruebas, compilación y `check:build` en cada push y pull request. La variable pública de repositorio `SITE_URL` permite incluir el dominio definitivo en CI.
+El workflow de GitHub Actions (`.github/workflows/ci.yml`) usa la versión de Node de `.nvmrc` y ejecuta lint, pruebas unitarias, compilación, `check:build` y las pruebas de Playwright en cada push y pull request. Si algo falla, el informe de Playwright queda como artefacto del workflow durante 7 días. La variable pública de repositorio `SITE_URL` permite incluir el dominio definitivo en CI.

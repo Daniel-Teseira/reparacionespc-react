@@ -90,6 +90,8 @@ docker compose -p reparacionespc -f deploy/compose.yml up -d --force-recreate --
 printf '%s\n' "$PWD" > ~/reparacionespc/current-release
 ```
 
+Con HTTPS activo (existe `~/reparacionespc/https.env`), reemplazá `-f deploy/compose.yml` por `--env-file ~/reparacionespc/https.env -f deploy/compose.yml -f deploy/https/compose.https.yml`, igual que en `deploy/install.sh`. Lo mismo vale para los comandos de abajo.
+
 ## Estado y registros
 
 ```sh
@@ -97,3 +99,5 @@ cd "$(cat ~/reparacionespc/current-release)"
 docker compose -p reparacionespc -f deploy/compose.yml ps
 docker compose -p reparacionespc -f deploy/compose.yml logs --tail=100 web
 ```
+
+Con HTTPS activo, los registros de Caddy (certificados incluidos) se ven con `logs --tail=100 caddy`.
