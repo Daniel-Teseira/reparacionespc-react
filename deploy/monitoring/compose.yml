@@ -4,7 +4,7 @@
 services:
   uptime-kuma:
     # "slim" usa SQLite (sin MariaDB ni Chromium integrados); "rootless" corre sin root.
-    image: louislam/uptime-kuma:2.5.9-slim-rootless
+    image: louislam/uptime-kuma:2.5.11-slim-rootless
     restart: unless-stopped
     ports:
       - "192.168.1.250:3006:3001"
