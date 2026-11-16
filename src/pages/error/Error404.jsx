@@ -1,4 +1,4 @@
-import TransitionLink from '../../components/TransitionLink/TransitionLink';
+import { Link } from 'react-router-dom';
 import './Error404.css';
 
 const Error404 = () => {
@@ -7,7 +7,7 @@ const Error404 = () => {
       <span className="error-code">404</span>
       <h1>Esta página no está disponible.</h1>
       <p>El enlace puede haber cambiado o estar escrito incorrectamente.</p>
-      <TransitionLink className="button button-primary" to="/home">Volver al inicio <span aria-hidden="true">↗</span></TransitionLink>
+      <Link className="button button-primary" to="/">Volver al inicio <span aria-hidden="true">↗</span></Link>
     </main>
   )
 }

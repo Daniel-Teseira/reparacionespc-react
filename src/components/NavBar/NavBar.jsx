@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
-import { useLocation } from 'react-router-dom';
-import TransitionLink from '../TransitionLink/TransitionLink';
+import { Link, useLocation } from 'react-router-dom';
 import { services } from '../../data/services';
 import './NavBar.css';
+
+const HOVER_DESKTOP = '(min-width: 992px) and (hover: hover) and (pointer: fine)';
 
 const NavBar = () => {
   const { pathname, key } = useLocation();
@@ -49,10 +50,10 @@ const NavBar = () => {
       }}>
       <nav className="navbar navbar-expand-lg" aria-label="Navegación principal">
         <div className="container">
-          <TransitionLink className="navbar-brand" to="/home" onClick={closeNav}>
+          <Link className="navbar-brand" to="/" onClick={closeNav}>
             <span className="brand-mark" aria-hidden="true">⌘</span>
             Reparaciones PC
-          </TransitionLink>
+          </Link>
 
           <button
             ref={mobileToggleRef}
@@ -72,13 +73,13 @@ const NavBar = () => {
           <div className={`navbar-collapse justify-content-end${isMobileNavOpen ? ' is-expanded' : ''}`} id="navbarNavDropdown">
             <ul className="navbar-nav">
               <li className="nav-item">
-                <TransitionLink className="nav-link" to="/home" onClick={closeNav} aria-current={pathname === '/home' ? 'page' : undefined}>Inicio</TransitionLink>
+                <Link className="nav-link" to="/" onClick={closeNav} aria-current={['/', '/home'].includes(pathname) ? 'page' : undefined}>Inicio</Link>
               </li>
               <li
                 className={`nav-item nav-services${isServicesOpen ? ' is-open' : ''}`}
-                onPointerEnter={() => window.matchMedia('(min-width: 992px) and (hover: hover) and (pointer: fine)').matches && setIsServicesOpen(true)}
+                onPointerEnter={() => window.matchMedia(HOVER_DESKTOP).matches && setIsServicesOpen(true)}
                 onPointerLeave={(event) => {
-                  if (window.matchMedia('(min-width: 992px) and (hover: hover) and (pointer: fine)').matches && !event.currentTarget.contains(document.activeElement)) setIsServicesOpen(false);
+                  if (event.pointerType === 'mouse' && window.matchMedia(HOVER_DESKTOP).matches) setIsServicesOpen(false);
                 }}
                 onBlur={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) setIsServicesOpen(false); }}
               >
@@ -88,7 +89,12 @@ const NavBar = () => {
                   type="button"
                   aria-expanded={isServicesOpen}
                   aria-controls="services-mega-menu"
-                  onClick={() => setIsServicesOpen((open) => !open)}
+                  onClick={(event) => {
+                    // Con mouse en escritorio el menú ya se abrió al pasar el cursor: el clic no debe cerrarlo.
+                    // El teclado (detail === 0) y las pantallas táctiles siguen alternando.
+                    if (event.detail > 0 && window.matchMedia(HOVER_DESKTOP).matches) setIsServicesOpen(true);
+                    else setIsServicesOpen((open) => !open);
+                  }}
                 >
                   Servicios <span className="services-chevron" aria-hidden="true" />
                 </button>
@@ -102,20 +108,20 @@ const NavBar = () => {
                       <span>ASISTENCIA PARA TU EQUIPO</span>
                       <h2>¿Qué necesitás resolver?</h2>
                     </div>
-                    <TransitionLink className="services-menu-all" to="/home?servicios=todos#servicios" onClick={closeNav}>Ver todos <span aria-hidden="true">↗</span></TransitionLink>
+                    <Link className="services-menu-all" to="/?servicios=todos#servicios" onClick={closeNav}>Ver todos <span aria-hidden="true">↗</span></Link>
                   </div>
                   <div className="services-menu-grid">
                     {services.map((service) => (
-                      <TransitionLink key={service.id} className="services-menu-link" to={service.path} onClick={closeNav} aria-current={pathname.replace(/\/+$/, '') === service.path ? 'page' : undefined}>
+                      <Link key={service.id} className="services-menu-link" to={service.path} onClick={closeNav} aria-current={pathname.replace(/\/+$/, '') === service.path ? 'page' : undefined}>
                         <span className="services-menu-mark" aria-hidden="true">↗</span>
                         {service.title}
-                      </TransitionLink>
+                      </Link>
                     ))}
                   </div>
                 </div>
               </li>
               <li className="nav-item">
-                <TransitionLink className="nav-contact-button" to="/contact" onClick={closeNav} aria-current={pathname === '/contact' ? 'page' : undefined}>Contactar <span aria-hidden="true">↗</span></TransitionLink>
+                <Link className="nav-contact-button" to="/contact" onClick={closeNav} aria-current={pathname === '/contact' ? 'page' : undefined}>Contactar <span aria-hidden="true">↗</span></Link>
               </li>
             </ul>
           </div>

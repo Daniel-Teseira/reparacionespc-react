@@ -1,4 +1,4 @@
-import TransitionLink from '../TransitionLink/TransitionLink';
+import { Link } from 'react-router-dom';
 import './ServicePage.css';
 import ResponsiveImage from '../ResponsiveImage';
 import { whatsappUrl } from '../../data/business';
@@ -54,7 +54,7 @@ const ServicePage = ({ service }) => {
         <h2>Revisamos tu caso y te orientamos.</h2>
         <p>Contanos qué necesita tu computadora y coordinamos los próximos pasos.</p>
         <a className="service-contact-button" href={whatsappUrl(`Hola, quiero consultar por el servicio de ${title}.`)} target="_blank" rel="noopener noreferrer">Consultar por WhatsApp <span aria-hidden="true">↗</span></a>
-        <TransitionLink className="service-consult-link" to={`/contact?servicio=${slug}`}>Describir el problema en el formulario</TransitionLink>
+        <Link className="service-consult-link" to={`/contact?servicio=${slug}`}>Describir el problema en el formulario</Link>
         <span className="service-contact-foot"><i /> Atención técnica personalizada</span>
       </aside>
     </div>

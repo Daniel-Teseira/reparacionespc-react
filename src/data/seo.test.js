@@ -5,13 +5,19 @@ import { services } from './services';
 describe('Metadatos y publicación', () => {
   it('usa una canonical estable sin variantes de parámetros o barra final', () => {
     expect(pageMetadata('/armado-pc/', 'https://example.test').canonical).toBe('https://example.test/armado-pc');
-    expect(pageMetadata('/', 'https://example.test').canonical).toBe('https://example.test/home');
+    expect(pageMetadata('/home', 'https://example.test').canonical).toBe('https://example.test/');
+    expect(pageMetadata('/', 'https://example.test').canonical).toBe('https://example.test/');
   });
   it('cada servicio tiene título y descripción propios', () => {
     const metas = services.map((service) => pageMetadata(service.path, 'https://example.test'));
     expect(new Set(metas.map((meta) => meta.title)).size).toBe(services.length);
     expect(new Set(metas.map((meta) => meta.description)).size).toBe(services.length);
     metas.forEach((meta) => expect(meta.structuredData.makesOffer.itemOffered['@type']).toBe('Service'));
+  });
+  it('publica las preguntas frecuentes solo en el inicio', () => {
+    expect(pageMetadata('/').faqData.mainEntity.length).toBeGreaterThan(0);
+    expect(metadataTags(pageMetadata('/'))).toContain('"@type":"FAQPage"');
+    expect(pageMetadata('/contact').faqData).toBeNull();
   });
   it('rechaza dominios con rutas, protocolos o credenciales incorrectas', () => {
     for (const value of ['https://example.test/ruta', 'javascript:alert(1)', 'https://user:pass@example.test', 'https://example.test/?x=1']) {

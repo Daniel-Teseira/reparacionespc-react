@@ -8,6 +8,13 @@ export const business = {
   city: 'San Miguel de Tucumán',
   region: 'Tucumán',
   hours: 'Lun. a vie. 09 a 20 · Sáb. 09 a 13',
+  // Completar solo con datos reales; los campos vacíos no se publican.
+  // geo: { latitude: -26.8, longitude: -65.2 } (coordenadas del local en Google Maps).
+  geo: null,
+  // sameAs: ['https://www.instagram.com/...', 'https://www.facebook.com/...'].
+  sameAs: [],
+  // priceRange: '$$'.
+  priceRange: '',
   mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Coronel+Zelaya+451%2C+San+Miguel+de+Tucum%C3%A1n',
 };
 

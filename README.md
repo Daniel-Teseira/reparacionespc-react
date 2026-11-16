@@ -40,6 +40,7 @@ Sin `VITE_SITE_URL`, el sitio funciona localmente y las canonical se resuelven e
 | `npm run test:watch` | Pruebas en modo interactivo |
 | `npm run lint` | Revisión de JavaScript, JSX y hooks |
 | `npm run images:optimize` | Regenera los WebP responsivos y la imagen social |
+| `npm run icons` | Regenera `favicon.ico` e íconos PNG desde `public/favicon.svg` |
 | `npm run build` | Genera `build/`, HTML por ruta y metadatos; sitemap si hay dominio |
 | `npm run check:build` | Comprueba páginas, metadatos, 404 e imágenes de la compilación |
 | `npm run preview` | Previsualiza la compilación local |
@@ -47,7 +48,9 @@ Sin `VITE_SITE_URL`, el sitio funciona localmente y las canonical se resuelven e
 ## Contenido y estructura
 
 - `src/data/services.json`: fuente única de nombres, rutas, resúmenes y alcance de los servicios. Rutas, menú y tarjetas se generan desde este catálogo.
-- `src/data/business.js`: teléfono, domicilio, horarios y enlaces de contacto compartidos.
+- `src/data/business.js`: teléfono, domicilio, horarios y enlaces de contacto compartidos. Los campos opcionales `geo`, `sameAs` y `priceRange` se publican en los datos estructurados solo si se completan.
+- `src/data/faq.js`: preguntas frecuentes del inicio, publicadas también como `FAQPage`.
+- `src/base.css`: reinicio de estilos, contenedor y barra de navegación (reemplaza a Bootstrap).
 - `src/data/seo.js`: títulos, descripciones, canonical, Open Graph y datos estructurados.
 - `src/components/services/ServicePage.jsx`: presentación compartida de los servicios.
 - `src/components/ContactForm.jsx`: validación y preparación de la consulta para WhatsApp.
@@ -76,20 +79,8 @@ npm run build
 npm run check:build
 ```
 
-Publicá el contenido de `build/` en la raíz del dominio. La compilación genera HTML con contenido por cada ruta, metadatos únicos, `404.html`, `robots.txt`, y `sitemap.xml` cuando está configurado el dominio. La ruta `/` comparte canonical con `/home`; las variantes con barra final y las consultas apuntan a la URL estable del servicio.
+Publicá el contenido de `build/` en la raíz del dominio. La compilación genera HTML con contenido por cada ruta, metadatos únicos, `404.html`, `robots.txt`, y `sitemap.xml` cuando está configurado el dominio. El inicio canónico es `/`; `/home` y las variantes con barra final redirigen con 301 a la URL estable.
 
-Netlify puede usar el archivo `_redirects` generado: los archivos existentes se sirven normalmente y las rutas desconocidas devuelven la página 404 con estado 404. En otros alojamientos, configurá la búsqueda de `ruta/index.html` y una página de error 404. Evitá devolver siempre el inicio con estado 200 para las rutas inexistentes.
+La publicación en el NUC está automatizada con `deploy/update-nuc.ps1`; ver [deploy/NUC.md](deploy/NUC.md). La configuración de Nginx (`deploy/nginx.conf` y `deploy/security-headers.conf`) incluye compresión, caché, cabeceras de seguridad, redirecciones y 404 reales. `npm run preview` imita esas redirecciones y el 404, pero no las cabeceras.
 
-Ejemplo para Nginx, dentro del bloque `server` del sitio:
-
-```nginx
-location / {
-    try_files $uri $uri/index.html =404;
-}
-error_page 404 /404.html;
-location = /404.html {
-    internal;
-}
-```
-
-La previsualización de Vite no sustituye la configuración HTTP del alojamiento. Verificá el estado 404 y las redirecciones en el entorno de publicación. El proyecto incluye un workflow de GitHub Actions que ejecuta lint, pruebas y compilación; la variable pública de repositorio `SITE_URL` permite incluir el dominio definitivo en CI.
+El proyecto incluye un workflow de GitHub Actions que ejecuta lint, pruebas y compilación; la variable pública de repositorio `SITE_URL` permite incluir el dominio definitivo en CI.

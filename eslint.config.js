@@ -4,11 +4,11 @@ import react from 'eslint-plugin-react';
 import hooks from 'eslint-plugin-react-hooks';
 
 export default [
-  { ignores: ['node_modules/**', 'build/**', 'tmp/**', 'public/speedtest/**'] },
+  { ignores: ['node_modules/**', 'build/**', 'tmp/**'] },
   js.configs.recommended,
   {
     files: ['**/*.{js,jsx,mjs}'],
-    languageOptions: { ecmaVersion: 'latest', sourceType: 'module', parserOptions: { ecmaFeatures: { jsx: true } }, globals: { ...globals.browser, ...globals.node } },
+    languageOptions: { ecmaVersion: 'latest', sourceType: 'module', parserOptions: { ecmaFeatures: { jsx: true } }, globals: { ...globals.browser, ...globals.node, __BUILD_YEAR__: 'readonly' } },
     plugins: { react, 'react-hooks': hooks },
     settings: { react: { version: 'detect' } },
     rules: {

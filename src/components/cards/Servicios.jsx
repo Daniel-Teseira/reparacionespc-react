@@ -1,5 +1,4 @@
-import { useSearchParams } from 'react-router-dom';
-import TransitionLink from '../TransitionLink/TransitionLink';
+import { Link, useSearchParams } from 'react-router-dom';
 import ResponsiveImage from '../ResponsiveImage';
 import { services } from '../../data/services';
 import useHydrated from '../../utils/useHydrated';
@@ -29,7 +28,7 @@ export default function Servicios() {
         <div className="services-grid" id="services-grid">
           {services.slice(0, showAll ? services.length : 6).map((service, index) => (
             <article key={service.id} className="service-card">
-              <TransitionLink className="service-card-link" to={service.path} aria-label={`Ver servicio: ${service.title}`}>
+              <Link className="service-card-link" to={service.path} aria-label={`Ver servicio: ${service.title}`}>
                 <div className="service-card-image">
                   <ResponsiveImage image={service.cardImage} sizes="(max-width: 650px) 100vw, (max-width: 991px) 50vw, 400px" loading="lazy" />
                   <span className="service-image-index">{String(index + 1).padStart(2, '0')}</span>
@@ -43,7 +42,7 @@ export default function Servicios() {
                   <p>{service.summary}</p>
                   <span className="service-link" aria-hidden="true">Ver servicio <span>↗</span></span>
                 </div>
-              </TransitionLink>
+              </Link>
             </article>
           ))}
         </div>
@@ -56,7 +55,7 @@ export default function Servicios() {
         </div>
         <div className="services-cta">
           <div><strong>¿No sabés qué necesita tu equipo?</strong><span>Contanos qué está pasando y te orientamos.</span></div>
-          <TransitionLink className="button button-primary" to="/contact">Hablemos <span aria-hidden="true">↗</span></TransitionLink>
+          <Link className="button button-primary" to="/contact">Hablemos <span aria-hidden="true">↗</span></Link>
         </div>
       </div>
     </section>

@@ -1,5 +1,6 @@
 import { business } from './business';
 import { serviceAtPath } from './services';
+import { questions } from './faq';
 
 export function siteOrigin(value) {
   if (!value) return '';
@@ -16,7 +17,7 @@ export function pageMetadata(pathname, origin = '') {
   const home = path === '/' || path === '/home';
   const contact = path === '/contact';
   const known = home || contact || Boolean(service);
-  const canonicalPath = home ? '/home' : path;
+  const canonicalPath = home ? '/' : path;
   const title = service ? `${service.title} en Tucumán | Reparaciones PC`
     : home ? 'Reparación de PC en Tucumán | Reparaciones PC'
     : contact ? 'Contacto y consultas en Tucumán | Reparaciones PC'
@@ -31,9 +32,15 @@ export function pageMetadata(pathname, origin = '') {
     '@type': 'LocalBusiness',
     '@id': origin ? `${origin}/#business` : undefined,
     name: business.name,
+    description: 'Servicio técnico de PC y notebooks: reparación, mantenimiento, redes y soporte remoto.',
     telephone: business.phone,
-    url: origin ? `${origin}/home` : undefined,
+    url: origin ? `${origin}/` : undefined,
     image: origin ? `${origin}/images/social-preview.jpg` : undefined,
+    hasMap: business.mapsUrl,
+    areaServed: { '@type': 'City', name: business.city },
+    ...(business.geo ? { geo: { '@type': 'GeoCoordinates', ...business.geo } } : {}),
+    ...(business.sameAs.length ? { sameAs: business.sameAs } : {}),
+    ...(business.priceRange ? { priceRange: business.priceRange } : {}),
     address: { '@type': 'PostalAddress', streetAddress: business.street, addressLocality: business.city, addressRegion: business.region, addressCountry: 'AR' },
     openingHoursSpecification: [
       { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], opens: '09:00', closes: '20:00' },
@@ -41,7 +48,12 @@ export function pageMetadata(pathname, origin = '') {
     ],
     ...(service ? { makesOffer: { '@type': 'Offer', itemOffered: { '@type': 'Service', name: service.title, description: service.summary } } } : {}),
   } : null;
-  return { title, description, canonical, noindex: !known, structuredData, origin };
+  const faqData = home ? {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: questions.map(([name, text]) => ({ '@type': 'Question', name, acceptedAnswer: { '@type': 'Answer', text } })),
+  } : null;
+  return { title, description, canonical, noindex: !known, structuredData, faqData, origin };
 }
 
 const escape = (value) => String(value).replace(/[&<>"']/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
@@ -61,6 +73,8 @@ export function metadataTags(meta) {
   ];
   if (meta.canonical) tags.push(`<link data-seo rel="canonical" href="${escape(meta.canonical)}">`, `<meta data-seo property="og:url" content="${escape(meta.canonical)}">`);
   if (meta.origin) tags.push(`<meta data-seo property="og:image" content="${escape(meta.origin)}/images/social-preview.jpg">`, `<meta data-seo name="twitter:image" content="${escape(meta.origin)}/images/social-preview.jpg">`);
-  if (meta.structuredData) tags.push(`<script data-seo type="application/ld+json">${JSON.stringify(meta.structuredData).replace(/</g, '\\u003c')}</script>`);
+  for (const data of [meta.structuredData, meta.faqData]) {
+    if (data) tags.push(`<script data-seo type="application/ld+json">${JSON.stringify(data).replace(/</g, '\\u003c')}</script>`);
+  }
   return tags.join('\n');
 }

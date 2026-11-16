@@ -4,37 +4,60 @@ Destino: `daniel@192.168.1.250`, carpeta `~/reparacionespc`.
 Acceso: `http://192.168.1.250:3005`.
 Requiere Docker y Docker Compose, ya usados por Proyecto Alma en ese equipo.
 
-En PowerShell, desde la raiz del proyecto, preparar la version:
+## Actualizar (un solo comando)
+
+En PowerShell, desde la raíz del proyecto:
 
 ```powershell
-npm run build
-if ($LASTEXITCODE -ne 0) { throw 'Fallo la compilacion' }
-npm run check:build
-if ($LASTEXITCODE -ne 0) { throw 'Fallo la verificacion' }
-New-Item -ItemType Directory -Force tmp | Out-Null
-tar -czf tmp/reparacionespc-nuc.tar.gz build deploy/compose.yml deploy/nginx.conf deploy/install.sh
-if ($LASTEXITCODE -ne 0) { throw 'Fallo la creacion del paquete' }
+powershell -ExecutionPolicy Bypass -File deploy/update-nuc.ps1
 ```
 
-Copiar e instalar desde PowerShell. SSH pide la contrasena en la consola:
+El script:
+
+1. Ejecuta lint, pruebas, compilación y `check:build`.
+2. Empaqueta `build/` y la configuración de `deploy/`.
+3. Copia el paquete al NUC y lo instala en una carpeta de versión nueva (`~/reparacionespc/releases`). Conserva las últimas 5 versiones.
+4. Verifica desde tu PC: las 18 rutas responden 200, el HTML publicado es idéntico al local, `/home` y `/contact/` redirigen con 301, están las cabeceras de seguridad, se descargan los recursos y una ruta inexistente responde 404.
+
+Opciones:
+
+- `-SkipBuild`: publica la compilación existente sin recompilar.
+- `-VerifyOnly`: solo verifica lo que está publicado.
+- `-RemoteHost`, `-RemoteUser`, `-WebPort`: otro equipo, usuario o puerto.
+
+El resultado queda en `tmp/nuc-update-result.json`.
+
+## Acceso con clave SSH (recomendado)
+
+Sin clave, SSH pide la contraseña dos veces (copia e instalación). Para no tener que escribirla, se configura una sola vez:
 
 ```powershell
-scp .\tmp\reparacionespc-nuc.tar.gz daniel@192.168.1.250:~/reparacionespc-nuc.tar.gz
-if ($LASTEXITCODE -ne 0) { throw 'Fallo la copia al NUC' }
-ssh daniel@192.168.1.250 'tar -xOf ~/reparacionespc-nuc.tar.gz deploy/install.sh | sh'
+ssh-keygen -t ed25519
+type $env:USERPROFILE\.ssh\id_ed25519.pub | ssh daniel@192.168.1.250 "mkdir -p ~/.ssh && chmod 700 ~/.ssh && cat >> ~/.ssh/authorized_keys && chmod 600 ~/.ssh/authorized_keys"
 ```
 
-Se copia la web compilada y su configuracion HTTP. Docker la sirve con Nginx
-y la inicia de nuevo cuando se reinicia el NUC. Las rutas desconocidas devuelven
-la pagina 404 del sitio con estado HTTP 404.
+## Qué se publica
 
-Cada instalacion usa una carpeta de version limpia en `~/reparacionespc/releases`, conservando la anterior para recuperacion.
+Docker sirve `build/` con Nginx (`deploy/nginx.conf`) y lo reinicia cuando se reinicia el NUC:
 
-Para actualizar, repetir la preparacion, la copia y la instalacion. La primera
-instalacion puede descargar la imagen de Nginx. Si otro servicio ya ocupa el
-puerto 3005, Docker informa el conflicto y debe revisarse antes de continuar.
+- Compresión gzip para HTML, CSS, JS, SVG y JSON.
+- Caché: `/assets/` un año (los nombres llevan hash), `/images/` un mes y el HTML se revalida en cada visita.
+- Cabeceras de seguridad (`deploy/security-headers.conf`): CSP, `nosniff`, `X-Frame-Options`, `Referrer-Policy` y `Permissions-Policy`.
+- Redirecciones 301: `/home` → `/` y barra final → sin barra (`/contact/` → `/contact`).
+- Las rutas desconocidas devuelven la página 404 del sitio con estado HTTP 404.
 
-Desde una sesion SSH, consultar el estado o los registros:
+Si el sitio se publica con HTTPS detrás de un proxy, conviene agregar allí `Strict-Transport-Security`.
+
+## Volver a una versión anterior
+
+```sh
+cd ~/reparacionespc/releases && ls
+cd ~/reparacionespc/releases/<version>
+docker compose -p reparacionespc -f deploy/compose.yml up -d --force-recreate --wait
+printf '%s\n' "$PWD" > ~/reparacionespc/current-release
+```
+
+## Estado y registros
 
 ```sh
 cd "$(cat ~/reparacionespc/current-release)"

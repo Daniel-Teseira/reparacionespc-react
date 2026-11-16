@@ -4,15 +4,20 @@ import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import catalog from './src/data/services.json';
 
-const pagePaths = new Set(['/', '/home', '/contact', ...catalog.map((service) => `/${service.slug}`)]);
+const pagePaths = new Set(['/', '/contact', ...catalog.map((service) => `/${service.slug}`)]);
 
 export default defineConfig({
+  define: { __BUILD_YEAR__: JSON.stringify(new Date().getFullYear()) },
   plugins: [react(), {
-    name: 'preview-not-found',
+    // Imita en `npm run preview` las redirecciones y el 404 de deploy/nginx.conf.
+    name: 'preview-like-nginx',
     configurePreviewServer(server) {
       server.middlewares.use((request, response, next) => {
-        const pathname = new URL(request.url, 'http://localhost').pathname.replace(/\/+$/, '') || '/';
-        if (!request.headers.accept?.includes('text/html') || pagePaths.has(pathname)) return next();
+        const url = new URL(request.url, 'http://localhost');
+        const redirect = (location) => { response.statusCode = 301; response.setHeader('Location', location + url.search); response.end(); };
+        if (url.pathname === '/home' || url.pathname === '/home/') return redirect('/');
+        if (url.pathname.length > 1 && url.pathname.endsWith('/') && pagePaths.has(url.pathname.slice(0, -1))) return redirect(url.pathname.slice(0, -1));
+        if (!request.headers.accept?.includes('text/html') || pagePaths.has(url.pathname)) return next();
         response.statusCode = 404;
         response.setHeader('Content-Type', 'text/html; charset=utf-8');
         response.end(readFileSync(path.resolve('build/404.html')));

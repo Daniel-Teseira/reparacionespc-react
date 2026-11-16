@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import TransitionLink from '../../components/TransitionLink/TransitionLink';
+import { Link } from 'react-router-dom';
 import './Home.css';
 import Servicios from '../../components/cards/Servicios';
 import images from '../../data/images.json';
@@ -59,7 +59,7 @@ const Home = () => {
           </p>
           <p className="hero-location">Atención en San Miguel de Tucumán y soporte remoto.</p>
           <div className="hero-actions">
-            <TransitionLink className="button button-primary" to="/contact">Solicitar asistencia <span aria-hidden="true">↗</span></TransitionLink>
+            <Link className="button button-primary" to="/contact">Solicitar asistencia <span aria-hidden="true">↗</span></Link>
             <a className="button button-quiet" href="#servicios">Explorar servicios <span aria-hidden="true">↓</span></a>
           </div>
           <div className="hero-proof">

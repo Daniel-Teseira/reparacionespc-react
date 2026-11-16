@@ -1,54 +1,96 @@
-param([string]$ProjectRoot = (Split-Path -Parent $PSScriptRoot))
+param(
+    [string]$ProjectRoot = (Split-Path -Parent $PSScriptRoot),
+    [string]$RemoteHost = '192.168.1.250',
+    [string]$RemoteUser = 'daniel',
+    [int]$WebPort = 3005,
+    [switch]$SkipBuild,
+    [switch]$VerifyOnly
+)
+
+# Compila, empaqueta, copia e instala el sitio en el NUC y verifica la publicacion.
+# Con una clave SSH configurada (ver deploy/NUC.md) no pide contrasena.
 
 $ErrorActionPreference = 'Stop'
 Set-Location -LiteralPath $ProjectRoot
 $Host.UI.RawUI.WindowTitle = 'Actualizar Reparaciones PC en el NUC'
+New-Item -ItemType Directory -Force 'tmp' | Out-Null
 $resultFile = Join-Path $ProjectRoot 'tmp/nuc-update-result.json'
 $package = Join-Path $ProjectRoot 'tmp/reparacionespc-nuc.tar.gz'
+$target = "$RemoteUser@$RemoteHost"
+$baseUrl = "http://${RemoteHost}:$WebPort"
 
 function Save-Result([string]$Status, [string]$Message) {
     @{ status = $Status; message = $Message; time = (Get-Date).ToString('o') } |
         ConvertTo-Json | Set-Content -LiteralPath $resultFile -Encoding UTF8
 }
 
+function Invoke-Step([string]$Description, [scriptblock]$Command) {
+    Write-Host "-> $Description" -ForegroundColor Cyan
+    & $Command
+    if ($LASTEXITCODE -ne 0) { throw "Fallo: $Description" }
+}
+
+# Devuelve estado HTTP, cabeceras y cuerpo sin seguir redirecciones.
+function Get-Http([string]$Path) {
+    $request = [System.Net.HttpWebRequest]::Create($baseUrl + $Path)
+    $request.AllowAutoRedirect = $false
+    $request.Timeout = 20000
+    $request.Accept = 'text/html'
+    try { $response = $request.GetResponse() }
+    catch [System.Net.WebException] {
+        if (-not $_.Exception.Response) { throw }
+        $response = $_.Exception.Response
+    }
+    $reader = New-Object System.IO.StreamReader($response.GetResponseStream())
+    $result = @{ Status = [int]$response.StatusCode; Headers = $response.Headers; Body = $reader.ReadToEnd() }
+    $reader.Close(); $response.Close()
+    return $result
+}
+
 try {
-    Save-Result 'authenticating' 'Esperando autenticacion SSH en la consola.'
-    Write-Host 'Actualizacion de Reparaciones PC en 192.168.1.250' -ForegroundColor Cyan
-    Write-Host 'Ingresa la contrasena del usuario daniel cuando SSH la solicite. No se muestra al escribir.'
-    Write-Host 'Se solicita una vez para copiar y otra vez para instalar.'
-    & scp -o ConnectTimeout=15 $package 'daniel@192.168.1.250:~/reparacionespc-nuc.tar.gz'
-    if ($LASTEXITCODE -ne 0) { throw 'No se pudo copiar el paquete al NUC.' }
-    Save-Result 'installing' 'Paquete copiado. Instalando en una carpeta de version limpia.'
-    & ssh -o ConnectTimeout=15 'daniel@192.168.1.250' 'tar -xOf ~/reparacionespc-nuc.tar.gz deploy/install.sh | sh'
-    if ($LASTEXITCODE -ne 0) { throw 'La instalacion remota no termino correctamente.' }
-    Save-Result 'verifying' 'Verificando paginas, version publicada y respuesta 404.'
-    $baseUrl = 'http://192.168.1.250:3005'
-    $catalog = Get-Content -LiteralPath 'src/data/services.json' -Raw | ConvertFrom-Json
-    $routes = @('/', '/home', '/contact') + @($catalog | ForEach-Object { '/' + $_.slug })
+    if (-not $VerifyOnly) {
+        if (-not $SkipBuild) {
+            Save-Result 'building' 'Compilando y verificando la version local.'
+            Invoke-Step 'Revisando el codigo' { npm run lint }
+            Invoke-Step 'Ejecutando pruebas' { npm test }
+            Invoke-Step 'Compilando' { npm run build }
+            Invoke-Step 'Verificando la compilacion' { npm run check:build }
+        }
+        Invoke-Step 'Empaquetando' { tar -czf $package build deploy/compose.yml deploy/nginx.conf deploy/security-headers.conf deploy/install.sh }
+
+        Save-Result 'copying' "Copiando el paquete a $target."
+        Invoke-Step "Copiando a $target" { scp -o ConnectTimeout=15 $package "${target}:~/reparacionespc-nuc.tar.gz" }
+        Save-Result 'installing' 'Paquete copiado. Instalando en una carpeta de version limpia.'
+        Invoke-Step 'Instalando en el NUC' { ssh -o ConnectTimeout=15 $target 'tar -xOf ~/reparacionespc-nuc.tar.gz deploy/install.sh | sh' }
+    }
+
+    Save-Result 'verifying' 'Verificando paginas, redirecciones, recursos y respuesta 404.'
+    $catalog = Get-Content -LiteralPath 'src/data/services.json' -Raw -Encoding UTF8 | ConvertFrom-Json
+    $routes = @('/', '/contact') + @($catalog | ForEach-Object { '/' + $_.slug })
     foreach ($route in $routes) {
-        $response = Invoke-WebRequest -UseBasicParsing -Uri ($baseUrl + $route) -TimeoutSec 20
-        if ($response.StatusCode -ne 200) { throw "Respuesta inesperada para $route" }
+        $response = Get-Http $route
+        if ($response.Status -ne 200) { throw "Respuesta $($response.Status) para $route" }
     }
-    $download = Join-Path $ProjectRoot 'tmp/nuc-deploy-home.html'
-    Invoke-WebRequest -UseBasicParsing -Uri "$baseUrl/home" -OutFile $download -TimeoutSec 20
-    if ((Get-FileHash -LiteralPath $download).Hash -ne (Get-FileHash -LiteralPath 'build/home/index.html').Hash) {
-        throw 'El HTML publicado no coincide con la compilacion local.'
+    $homePage = Get-Http '/'
+    $localHome = Get-Content -LiteralPath 'build/index.html' -Raw -Encoding UTF8
+    if ($homePage.Body -ne $localHome) { throw 'El HTML publicado no coincide con la compilacion local.' }
+    if (-not $homePage.Headers['Content-Security-Policy']) { throw 'Faltan las cabeceras de seguridad.' }
+    foreach ($redirect in @(@('/home', '/'), @('/contact/', '/contact'))) {
+        $response = Get-Http $redirect[0]
+        if ($response.Status -ne 301 -or $response.Headers['Location'] -ne $redirect[1]) {
+            throw "$($redirect[0]) deberia redirigir a $($redirect[1]) (respondio $($response.Status))."
+        }
     }
-    $missingStatus = 0
-    try { $missingStatus = (Invoke-WebRequest -UseBasicParsing -Uri "$baseUrl/__verificar_ruta_inexistente__" -TimeoutSec 20).StatusCode }
-    catch {
-        if ($_.Exception.Response) { $missingStatus = [int]$_.Exception.Response.StatusCode }
-        else { throw }
+    $missing = Get-Http '/__verificar_ruta_inexistente__'
+    if ($missing.Status -ne 404) { throw "La ruta inexistente respondio $($missing.Status) en vez de 404." }
+    foreach ($asset in [regex]::Matches($localHome, '(?:src|href)="(/assets/[^" ]+)"')) {
+        $response = Get-Http $asset.Groups[1].Value
+        if ($response.Status -ne 200) { throw "No se pudo descargar $($asset.Groups[1].Value)." }
     }
-    if ($missingStatus -ne 404) { throw "La ruta inexistente respondio $missingStatus en vez de 404." }
-    $html = Get-Content -LiteralPath 'build/home/index.html' -Raw
-    $assets = [regex]::Matches($html, '(?:src|href)="(/assets/[^" ]+)"')
-    foreach ($asset in $assets) {
-        $response = Invoke-WebRequest -UseBasicParsing -Uri ($baseUrl + $asset.Groups[1].Value) -TimeoutSec 20
-        if ($response.StatusCode -ne 200) { throw 'No se pudo descargar un recurso de la version publicada.' }
-    }
-    Save-Result 'complete' 'NUC actualizado: 19 rutas, HTML identico al local, recursos y estado 404 verificados.'
-    Write-Host 'Actualizacion y verificacion completadas.' -ForegroundColor Green
+
+    $message = "Publicacion en $baseUrl verificada: $($routes.Count) rutas, HTML identico al local, redirecciones, cabeceras, recursos y 404 verificados."
+    Save-Result 'complete' $message
+    Write-Host $message -ForegroundColor Green
 }
 catch {
     Save-Result 'failed' $_.Exception.Message

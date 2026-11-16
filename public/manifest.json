@@ -1,15 +1,13 @@
 {
   "short_name": "Reparaciones PC",
   "name": "Reparaciones PC · Servicio técnico en Tucumán",
+  "lang": "es-AR",
   "icons": [
-    {
-      "src": "/favicon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any"
-    }
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
   ],
-  "start_url": "/home",
+  "start_url": "/",
   "display": "standalone",
   "theme_color": "#142329",
   "background_color": "#ffffff"

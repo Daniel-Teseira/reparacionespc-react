@@ -1,12 +1,5 @@
-import TransitionLink from '../../../components/TransitionLink/TransitionLink';
-
-const questions = [
-  ['¿Cuánto cuesta reparar mi computadora?', 'El costo depende de la falla y de los componentes que necesite el equipo. Consultanos las condiciones del diagnóstico y del presupuesto antes de coordinar la revisión.'],
-  ['¿Cuánto demora el trabajo?', 'El tiempo depende del diagnóstico, las pruebas necesarias y la disponibilidad de repuestos. Consultá la estimación para tu caso al coordinar el servicio.'],
-  ['¿Puedo conservar mis archivos?', 'Avisanos antes de la revisión qué información necesitás conservar. Siempre que sea posible, prepará una copia de seguridad. La recuperación depende del estado del dispositivo y no se puede garantizar sin evaluarlo.'],
-  ['¿Pueden ayudarme de forma remota?', 'Algunos problemas de software y configuración pueden revisarse a distancia. Necesitás conexión a internet y autorizar la sesión desde tu computadora. Consultanos si tu caso es apto.'],
-  ['¿Qué garantía tiene el servicio?', 'Pedí las condiciones de garantía y del soporte posterior para el trabajo presupuestado. El alcance depende de la reparación y de los componentes utilizados.'],
-];
+import { Link } from 'react-router-dom';
+import { questions } from '../../../data/faq';
 
 export default function HomeInfo() {
   return <>
@@ -22,7 +15,7 @@ export default function HomeInfo() {
       </div>
     </section>
     <section className="faq-section container" aria-labelledby="faq-heading">
-      <div><span className="section-kicker">PREGUNTAS FRECUENTES</span><h2 id="faq-heading">Antes de traer tu equipo.</h2><p>Si tu consulta es distinta, contanos qué está pasando.</p><TransitionLink className="button button-quiet" to="/contact">Consultar al técnico <span aria-hidden="true">↗</span></TransitionLink></div>
+      <div><span className="section-kicker">PREGUNTAS FRECUENTES</span><h2 id="faq-heading">Antes de traer tu equipo.</h2><p>Si tu consulta es distinta, contanos qué está pasando.</p><Link className="button button-quiet" to="/contact">Consultar al técnico <span aria-hidden="true">↗</span></Link></div>
       <div className="faq-list">{questions.map(([question, answer]) => <details key={question}><summary>{question}</summary><p>{answer}</p></details>)}</div>
     </section>
   </>;
