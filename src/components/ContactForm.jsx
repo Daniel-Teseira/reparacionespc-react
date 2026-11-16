@@ -28,7 +28,7 @@ export default function ContactForm({ service = '' }) {
   }
 
   return (
-    <form className="contact-form" onSubmit={handleSubmit} onChange={() => { setPrepared(null); setError(''); }} aria-labelledby="contact-form-heading">
+    <form className="contact-form" onSubmit={handleSubmit} onInput={() => { setPrepared(null); setError(''); }} aria-labelledby="contact-form-heading">
       <h2 id="contact-form-heading">Prepará tu consulta</h2>
       <p id="contact-form-help">Completá los datos y revisá el mensaje en WhatsApp antes de enviarlo. Este formulario no guarda tus datos ni envía mensajes automáticamente.</p>
       <div className="contact-form-fields">

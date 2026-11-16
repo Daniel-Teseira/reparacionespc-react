@@ -7,8 +7,10 @@
     "node": ">=22.13.0"
   },
   "dependencies": {
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "preact": "^11.2.0",
+    "preact-render-to-string": "^6.8.3",
+    "react": "npm:@preact/compat@^18.3.2",
+    "react-dom": "npm:@preact/compat@^18.3.2",
     "react-router-dom": "^7.18.5"
   },
   "scripts": {
@@ -25,12 +27,13 @@
     "test:e2e": "playwright test"
   },
   "devDependencies": {
+    "@babel/core": "^7.29.13",
     "@eslint/js": "^9.39.0",
     "@playwright/test": "^1.65.1",
+    "@preact/preset-vite": "^2.10.6",
     "@testing-library/jest-dom": "^7.0.1",
-    "@testing-library/react": "^16.3.3",
+    "@testing-library/preact": "^3.2.6",
     "@testing-library/user-event": "^14.6.12",
-    "@vitejs/plugin-react": "^6.3.0",
     "eslint": "^9.39.0",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.0.0",

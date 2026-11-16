@@ -15,7 +15,7 @@ powershell -ExecutionPolicy Bypass -File deploy/update-nuc.ps1
 
 El script:
 
-1. Ejecuta lint, pruebas, compilación y `check:build`.
+1. Ejecuta lint, pruebas unitarias, compilación, `check:build` y las pruebas en navegador (Playwright).
 2. Empaqueta `build/` y la configuración de `deploy/`.
 3. Copia el paquete al NUC y lo instala en una carpeta de versión nueva (`~/reparacionespc/releases`). Conserva las últimas 5 versiones.
 4. Verifica desde tu PC: las 18 rutas responden 200, el HTML publicado es idéntico al local, `/home` y `/contact/` redirigen con 301, están las cabeceras de seguridad, se descargan los recursos y una ruta inexistente responde 404.

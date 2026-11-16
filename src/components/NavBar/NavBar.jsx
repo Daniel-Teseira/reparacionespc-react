@@ -13,6 +13,7 @@ const NavBar = () => {
   const headerRef = useRef(null);
   const mobileToggleRef = useRef(null);
   const servicesToggleRef = useRef(null);
+  const servicesItemRef = useRef(null);
   const closeNav = () => { setIsServicesOpen(false); setIsMobileNavOpen(false); };
 
   useEffect(() => {
@@ -26,6 +27,15 @@ const NavBar = () => {
     setIsServicesOpen(false);
     setIsMobileNavOpen(false);
   }, [key]);
+
+  // Cerrar el menú de servicios cuando el foco sale de él (por ejemplo, con Tab).
+  // Se usa `focusout` nativo porque en Preact `onBlur` no se propaga desde los hijos.
+  useEffect(() => {
+    const item = servicesItemRef.current;
+    const closeOnFocusOut = (event) => { if (!item.contains(event.relatedTarget)) setIsServicesOpen(false); };
+    item.addEventListener('focusout', closeOnFocusOut);
+    return () => item.removeEventListener('focusout', closeOnFocusOut);
+  }, []);
 
   useEffect(() => {
     const closeOutside = (event) => {
@@ -76,12 +86,12 @@ const NavBar = () => {
                 <Link className="nav-link" to="/" onClick={closeNav} aria-current={['/', '/home'].includes(pathname) ? 'page' : undefined}>Inicio</Link>
               </li>
               <li
+                ref={servicesItemRef}
                 className={`nav-item nav-services${isServicesOpen ? ' is-open' : ''}`}
                 onPointerEnter={() => window.matchMedia(HOVER_DESKTOP).matches && setIsServicesOpen(true)}
                 onPointerLeave={(event) => {
                   if (event.pointerType === 'mouse' && window.matchMedia(HOVER_DESKTOP).matches) setIsServicesOpen(false);
                 }}
-                onBlur={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) setIsServicesOpen(false); }}
               >
                 <button
                   ref={servicesToggleRef}

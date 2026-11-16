@@ -55,6 +55,7 @@ try {
             Invoke-Step 'Ejecutando pruebas' { npm test }
             Invoke-Step 'Compilando' { npm run build }
             Invoke-Step 'Verificando la compilacion' { npm run check:build }
+            Invoke-Step 'Pruebas en navegador' { npm run test:e2e }
         }
         Invoke-Step 'Empaquetando' { tar -czf $package build deploy/compose.yml deploy/nginx.conf deploy/security-headers.conf deploy/install.sh }
 

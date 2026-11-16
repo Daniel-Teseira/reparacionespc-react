@@ -8,26 +8,36 @@ El sitio no tiene autenticación, base de datos, seguimiento de reparaciones ni 
 
 | Herramienta | Versión | Uso |
 | --- | --- | --- |
-| React y React DOM | 18.3 | Interfaz y prerenderizado con `renderToString` |
+| Preact (con `preact/compat`) | 11 | Interfaz con la API de React y prerenderizado con `preact-render-to-string` |
 | React Router | 7 | Rutas del inicio, contacto, servicios y 404 |
-| Vite | 8 | Servidor de desarrollo y compilación |
-| Vitest + Testing Library + jsdom | 5 / 16 / 29 | Pruebas |
+| Vite + `@preact/preset-vite` | 8 | Servidor de desarrollo y compilación |
+| Vitest + Preact Testing Library + jsdom | 5 / 3 / 29 | Pruebas unitarias |
+| Playwright | 1.65 | Pruebas en navegador real (escritorio y celular) |
 | ESLint | 9 | Revisión de código (con `eslint-plugin-react` y `react-hooks`) |
-| sharp | 0.35 | Generación de WebP e íconos |
+| sharp | 0.35 | Generación de AVIF, WebP e íconos |
+
+### Preact en lugar de React
+
+El código usa la API de React (`useState`, `react-router-dom`, etc.), pero `react` y `react-dom` son alias de `@preact/compat` en `package.json`. Así React Router, el prerenderizado y las pruebas usan Preact sin cambios en el código, y el JavaScript del sitio pesa la mitad (36 KB comprimido frente a 72 KB con React).
+
+Diferencias a tener en cuenta al escribir componentes:
+
+- `onChange` en un `<form>` o en un contenedor responde al evento nativo `change` (al salir del campo). Para reaccionar a cada tecla usá `onInput`.
+- `onBlur` y `onFocus` no se propagan desde los hijos. Para detectar que el foco sale de un grupo usá un listener nativo de `focusout` (ver `NavBar.jsx`).
+- Las pruebas en navegador (`npm run test:e2e`) fallan ante cualquier error de consola, incluidos los de hidratación.
 
 Los estilos son CSS propio (`src/base.css` y un CSS por componente); el sitio ya no usa Bootstrap.
 
 ### Versiones que se mantienen a propósito
 
-- **React 18.3**: React 19 agrega ~23 KB gzip sin beneficio para este sitio.
 - **jsdom 29**: jsdom 30 o superior exige Node 22.22.
 - **ESLint 9**: `eslint-plugin-react` todavía no admite ESLint 10.
 
-Al actualizar dependencias, revisá estas tres restricciones antes de subir de versión mayor y ejecutá la secuencia completa de [Publicación](#publicación).
+Al actualizar dependencias, revisá estas restricciones antes de subir de versión mayor y ejecutá la secuencia completa de [Publicación](#publicación).
 
 ## Requisitos y ejecución
 
-- Node.js 22.12 o superior (campo `engines` de `package.json`, mínimo de Vite 8). Para ejecutar las pruebas, jsdom 29 pide 22.13 o superior dentro de la línea 22.
+- Node.js 22.13 o superior (campo `engines` de `package.json` y `.nvmrc`; jsdom 29 lo necesita para las pruebas).
 - npm y acceso al registro oficial de paquetes.
 
 ```sh
@@ -57,10 +67,11 @@ Sin `VITE_SITE_URL`, el sitio funciona localmente y las canonical se resuelven e
 | Comando | Resultado |
 | --- | --- |
 | `npm start` | Servidor de desarrollo Vite |
-| `npm test` | Pruebas con Vitest y Testing Library |
+| `npm test` | Pruebas unitarias con Vitest y Testing Library |
+| `npm run test:e2e` | Pruebas en navegador con Playwright sobre `build/` (la primera vez: `npx playwright install chromium`) |
 | `npm run test:watch` | Pruebas en modo interactivo |
 | `npm run lint` | Revisión de JavaScript, JSX y hooks |
-| `npm run images:optimize` | Regenera los WebP responsivos, `src/data/images.json` y la imagen social |
+| `npm run images:optimize` | Regenera los AVIF y WebP responsivos, `src/data/images.json` y la imagen social |
 | `npm run icons` | Regenera `favicon.ico` e íconos PNG desde `public/favicon.svg` |
 | `npm run build` | Genera `build/`, HTML por ruta y metadatos; sitemap si hay dominio |
 | `npm run check:build` | Comprueba páginas, metadatos, 404, íconos, imágenes y que el CSS pese menos de 80 KB |
@@ -92,7 +103,10 @@ Imágenes y scripts:
 
 - `scripts/image-sources.json`: relación de originales y recursos utilizados.
 - `src/images/`: originales conservados para regenerar las imágenes; no se copian a producción.
-- `public/images/optimized/`: WebP generados que usa el sitio.
+- `public/images/optimized/`: AVIF y WebP generados que usa el sitio (`<picture>` sirve AVIF y deja WebP como alternativa).
+- `public/nojs.css`: estilos que se cargan solo sin JavaScript para que el menú y los servicios sigan accesibles.
+- `src/components/MobileContactBar/`: barra fija de WhatsApp y llamada en celulares.
+- `e2e/`: pruebas de Playwright.
 - `scripts/generate-site.mjs`: prerenderizado, `robots.txt` y `sitemap.xml` (se ejecuta dentro de `npm run build`).
 - `scripts/verify-build.mjs`, `optimize-images.mjs`, `generate-icons.mjs`: verificación, imágenes e íconos.
 - `deploy/`: Nginx, Docker Compose y scripts de publicación en el NUC.
@@ -105,7 +119,7 @@ Después de cambiar una imagen o agregar un servicio, actualizá el catálogo y 
 2. `scripts/generate-site.mjs` compila `src/entry-server.jsx` en `tmp/prerender/` y renderiza cada ruta (`/`, `/contact`, las 16 de servicios y `404`).
 3. Cada página recibe su propio `<title>`, descripción, canonical, Open Graph y JSON-LD, y se guarda como `build/<ruta>/index.html`.
 4. Se escriben `robots.txt` y, si hay `VITE_SITE_URL`, `sitemap.xml`.
-5. En el navegador, React hidrata el HTML ya generado.
+5. En el navegador, Preact hidrata el HTML ya generado.
 
 ## Cómo funciona el formulario
 
@@ -122,6 +136,7 @@ npm run lint
 npm test
 npm run build
 npm run check:build
+npm run test:e2e
 ```
 
 Publicá el contenido de `build/` en la raíz del dominio. La compilación genera HTML con contenido por cada ruta, metadatos únicos, `404.html`, `robots.txt`, y `sitemap.xml` cuando está configurado el dominio. El inicio canónico es `/`; `/home` y las variantes con barra final redirigen con 301 a la URL estable.

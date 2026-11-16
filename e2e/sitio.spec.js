@@ -64,6 +64,12 @@ test.describe('Inicio', () => {
     await page.getByRole('button', { name: /Mostrar menos/ }).click();
     await expect(grid.locator('article')).toHaveCount(6);
   });
+
+  test('?servicios=todos abre el catálogo completo al cargar', async ({ page }) => {
+    await page.goto('/?servicios=todos');
+    await expect(page.locator('#services-grid article')).toHaveCount(catalog.length);
+    await expect(page.getByRole('button', { name: /Mostrar menos/ })).toBeVisible();
+  });
 });
 
 test.describe('Navegación', () => {
@@ -90,6 +96,17 @@ test.describe('Navegación', () => {
     await expect(toggle).toHaveAttribute('aria-expanded', 'false');
     await expect(toggle).toBeFocused();
   });
+
+  test('el menú de servicios se cierra al salir con Tab', async ({ page, isMobile }) => {
+    test.skip(isMobile, 'La navegación con Tab se prueba en escritorio');
+    await page.goto('/contact');
+    const toggle = page.getByRole('button', { name: /^Servicios/ });
+    await toggle.focus();
+    await page.keyboard.press('Enter');
+    await expect(toggle).toHaveAttribute('aria-expanded', 'true');
+    await page.getByRole('link', { name: 'Contactar', exact: true }).focus();
+    await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+  });
 });
 
 test.describe('Contacto', () => {
@@ -103,6 +120,10 @@ test.describe('Contacto', () => {
     const text = new URL(await link.getAttribute('href')).searchParams.get('text');
     expect(text).toContain('Hola, soy Ana.');
     expect(text).toContain(catalog[1].title);
+    // Al editar el formulario, el mensaje preparado deja de ser válido y se oculta enseguida.
+    await page.getByLabel(/^Nombre/).press('End');
+    await page.keyboard.type(' María');
+    await expect(page.getByRole('status')).toHaveCount(0);
   });
 
   test('la barra fija de contacto aparece solo en celulares y no en /contact', async ({ page, isMobile }) => {

@@ -1,5 +1,5 @@
 import { defineConfig } from 'vitest/config';
-import react from '@vitejs/plugin-react';
+import preact from '@preact/preset-vite';
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import catalog from './src/data/services.json' with { type: 'json' };
@@ -8,7 +8,8 @@ const pagePaths = new Set(['/', '/contact', ...catalog.map((service) => `/${serv
 
 export default defineConfig({
   define: { __BUILD_YEAR__: JSON.stringify(new Date().getFullYear()) },
-  plugins: [react(), {
+  // Preact con la API de React: react y react-dom son alias de @preact/compat en package.json.
+  plugins: [preact(), {
     // Imita en `npm run preview` las redirecciones y el 404 de deploy/nginx.conf.
     name: 'preview-like-nginx',
     configurePreviewServer(server) {
