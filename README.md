@@ -1,168 +1,95 @@
-# Reparaciones de PC
+# Reparaciones PC
 
-## Descripción
+Web de servicios técnicos de PC y notebooks en San Miguel de Tucumán. Incluye un catálogo de 16 servicios, contacto por teléfono y WhatsApp, formulario que prepara consultas, ubicación, preguntas frecuentes y páginas prerenderizadas para SEO.
 
-El proyecto **Reparaciones de PC** es una aplicación web diseñada para gestionar y coordinar servicios de reparación de computadoras. La aplicación permite a los usuarios solicitar reparaciones, hacer seguimiento de sus solicitudes y obtener información sobre los servicios ofrecidos.
+El sitio no tiene autenticación, base de datos, seguimiento de reparaciones ni panel administrativo. Esas funciones requieren una etapa de desarrollo independiente.
 
-## Funcionalidades
+## Requisitos y ejecución
 
-- **Registro y Autenticación:** Los usuarios pueden registrarse y acceder a la aplicación.
-- **Solicitud de Reparación:** Los usuarios pueden solicitar reparaciones para sus computadoras.
-- **Seguimiento de Solicitudes:** Los usuarios pueden hacer seguimiento del estado de sus solicitudes.
-- **Información de Servicios:** Los usuarios pueden ver información detallada sobre los servicios de reparación ofrecidos.
-- **Panel Administrativo:** Los administradores pueden gestionar solicitudes y ver estadísticas.
+- Node.js 22.12 o superior.
+- npm y acceso al registro oficial de paquetes.
 
-## Instalación
+```sh
+npm ci
+npm start
+```
 
-Para instalar y ejecutar el proyecto localmente, sigue estos pasos:
+La web abre en `http://127.0.0.1:3005`. `npm run dev` es equivalente a `npm start`.
 
-1. **Clona el repositorio:**
+## Configuración pública
 
-    ```bash
-    git clone https://github.com/tu-usuario/reparacionespc-react.git
-    ```
+Copiá `.env.example` a `.env.local` y completá:
 
-2. **Navega al directorio del proyecto:**
+```dotenv
+VITE_SITE_URL=https://tu-dominio-real.com
+VITE_WHATSAPP_NUMBER=5493812012118
+```
 
-    ```bash
-    cd reparacionespc-react
-    ```
+El dominio del ejemplo debe reemplazarse por el dominio definitivo. Usá solo el origen, sin rutas ni parámetros. El teléfono de WhatsApp debe incluir código de país y área, sin espacios, `+`, `0` ni `15`. Para celulares argentinos corresponde `549` seguido del código de área y el número. Confirmá que el número publicado tenga WhatsApp antes de desplegar.
 
-3. **Instala las dependencias:**
+Estas variables son públicas y se incorporan al navegador: no guardes contraseñas ni claves en ellas. El antiguo `PORT` de Create React App ya no controla el servidor; el puerto está en `vite.config.js` y puede cambiarse con `npm start -- --port 3006`.
 
-    ```bash
-    npm install
-    ```
+Sin `VITE_SITE_URL`, el sitio funciona localmente y las canonical se resuelven en el navegador. La compilación avisa y omite el sitemap y las canonical estáticas para no publicar un dominio inventado. Para producción, configurá el dominio y volvé a compilar.
 
-4. **Inicia la aplicación:**
+## Comandos
 
-    ```bash
-    npm start
-    ```
+| Comando | Resultado |
+| --- | --- |
+| `npm start` | Servidor de desarrollo Vite |
+| `npm test` | Pruebas con Vitest y Testing Library |
+| `npm run test:watch` | Pruebas en modo interactivo |
+| `npm run lint` | Revisión de JavaScript, JSX y hooks |
+| `npm run images:optimize` | Regenera los WebP responsivos y la imagen social |
+| `npm run build` | Genera `build/`, HTML por ruta y metadatos; sitemap si hay dominio |
+| `npm run check:build` | Comprueba páginas, metadatos, 404 e imágenes de la compilación |
+| `npm run preview` | Previsualiza la compilación local |
 
-    La aplicación estará disponible en `http://localhost:3000`.
+## Contenido y estructura
 
-## Estructura del Proyecto
+- `src/data/services.json`: fuente única de nombres, rutas, resúmenes y alcance de los servicios. Rutas, menú y tarjetas se generan desde este catálogo.
+- `src/data/business.js`: teléfono, domicilio, horarios y enlaces de contacto compartidos.
+- `src/data/seo.js`: títulos, descripciones, canonical, Open Graph y datos estructurados.
+- `src/components/services/ServicePage.jsx`: presentación compartida de los servicios.
+- `src/components/ContactForm.jsx`: validación y preparación de la consulta para WhatsApp.
+- `src/pages/home/components/HomeInfo.jsx`: proceso de atención y preguntas frecuentes.
+- `scripts/image-sources.json`: relación de originales y recursos utilizados.
+- `src/data/images.json`: manifiesto generado con dimensiones y variantes responsivas.
+- `src/images/`: originales conservados para regenerar las imágenes; no se copian a producción.
+- `public/images/optimized/`: WebP generados que usa el sitio.
 
-- **`/src`**: Contiene el código fuente de la aplicación.
-  - **`/components`**: Componentes reutilizables de React.
-  - **`/pages`**: Páginas principales de la aplicación.
-  - **`/utils`**: Funciones y utilidades auxiliares.
-  - **`App.js`**: Componente principal de la aplicación.
-- **`/public`**: Archivos estáticos, incluyendo el `index.html`.
-- **`/styles`**: Archivos de estilo CSS.
-- **`README.md`**: Este archivo.
+Después de cambiar una imagen o agregar un servicio, actualizá el catálogo y sus fuentes de imagen, ejecutá `npm run images:optimize` y comprobá pruebas y compilación. Los textos de presupuesto, diagnóstico y garantía deben ajustarse únicamente a condiciones reales del negocio.
 
-## Contribuciones
+## Cómo funciona el formulario
 
-Si deseas contribuir a este proyecto, por favor sigue estos pasos:
+1. El visitante completa nombre, servicio y problema. Email y teléfono son opcionales.
+2. El formulario valida los datos y prepara el texto de la consulta.
+3. El visitante abre WhatsApp y confirma el envío allí.
 
-1. **Fork el repositorio.**
-2. **Crea una rama para tus cambios:**
+No hay un servidor de correo ni almacenamiento de consultas. El sitio no afirma que un mensaje fue entregado. Para recibir consultas directamente por correo o administrarlas, es necesario integrar un backend o proveedor y sus credenciales del lado del servidor.
 
-    ```bash
-    git checkout -b nombre-de-tu-rama
-    ```
+## Publicación
 
-3. **Haz tus cambios y confirma:**
+```sh
+npm run lint
+npm test
+npm run build
+npm run check:build
+```
 
-    ```bash
-    git add .
-    git commit -m "Descripción de los cambios"
-    ```
+Publicá el contenido de `build/` en la raíz del dominio. La compilación genera HTML con contenido por cada ruta, metadatos únicos, `404.html`, `robots.txt`, y `sitemap.xml` cuando está configurado el dominio. La ruta `/` comparte canonical con `/home`; las variantes con barra final y las consultas apuntan a la URL estable del servicio.
 
-4. **Empuja tus cambios a tu fork:**
+Netlify puede usar el archivo `_redirects` generado: los archivos existentes se sirven normalmente y las rutas desconocidas devuelven la página 404 con estado 404. En otros alojamientos, configurá la búsqueda de `ruta/index.html` y una página de error 404. Evitá devolver siempre el inicio con estado 200 para las rutas inexistentes.
 
-    ```bash
-    git push origin nombre-de-tu-rama
-    ```
+Ejemplo para Nginx, dentro del bloque `server` del sitio:
 
-5. **Crea un Pull Request en el repositorio original.**
+```nginx
+location / {
+    try_files $uri $uri/index.html =404;
+}
+error_page 404 /404.html;
+location = /404.html {
+    internal;
+}
+```
 
-## Licencia
-
-Este proyecto está licenciado bajo la Licencia MIT. Consulta el archivo [LICENSE](./LICENSE) para más detalles.
-
-## Contacto
-
-Si tienes preguntas o necesitas más información, no dudes en contactarme:
-
-- **Nombre:** Daniel Martin Teseira
-- **Correo Electrónico:** dteseira98@gmail.com
-- **GitHub:** [Daniel-Teseira](https://github.com/Daniel-Teseira)
-
-
-
-
-
-
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+La previsualización de Vite no sustituye la configuración HTTP del alojamiento. Verificá el estado 404 y las redirecciones en el entorno de publicación. El proyecto incluye un workflow de GitHub Actions que ejecuta lint, pruebas y compilación; la variable pública de repositorio `SITE_URL` permite incluir el dominio definitivo en CI.

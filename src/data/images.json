@@ -1,0 +1,218 @@
+{
+  "hero-pc1": {
+    "src": "/images/optimized/hero-pc1-1280.webp",
+    "width": 1280,
+    "height": 896,
+    "srcSet": "/images/optimized/hero-pc1-640.webp 640w, /images/optimized/hero-pc1-1280.webp 1280w"
+  },
+  "hero-pc2": {
+    "src": "/images/optimized/hero-pc2-1280.webp",
+    "width": 1280,
+    "height": 896,
+    "srcSet": "/images/optimized/hero-pc2-640.webp 640w, /images/optimized/hero-pc2-1280.webp 1280w"
+  },
+  "hero-redes1": {
+    "src": "/images/optimized/hero-redes1-1280.webp",
+    "width": 1280,
+    "height": 896,
+    "srcSet": "/images/optimized/hero-redes1-640.webp 640w, /images/optimized/hero-redes1-1280.webp 1280w"
+  },
+  "hero-redes2": {
+    "src": "/images/optimized/hero-redes2-1280.webp",
+    "width": 1280,
+    "height": 896,
+    "srcSet": "/images/optimized/hero-redes2-640.webp 640w, /images/optimized/hero-redes2-1280.webp 1280w"
+  },
+  "service3-hero": {
+    "src": "/images/optimized/service3-hero-1280.webp",
+    "width": 1280,
+    "height": 896,
+    "srcSet": "/images/optimized/service3-hero-640.webp 640w, /images/optimized/service3-hero-1280.webp 1280w"
+  },
+  "service3-card": {
+    "src": "/images/optimized/service3-card-800.webp",
+    "width": 800,
+    "height": 560,
+    "srcSet": "/images/optimized/service3-card-480.webp 480w, /images/optimized/service3-card-800.webp 800w"
+  },
+  "service4-hero": {
+    "src": "/images/optimized/service4-hero-1280.webp",
+    "width": 1280,
+    "height": 896,
+    "srcSet": "/images/optimized/service4-hero-640.webp 640w, /images/optimized/service4-hero-1280.webp 1280w"
+  },
+  "service4-card": {
+    "src": "/images/optimized/service4-card-800.webp",
+    "width": 800,
+    "height": 560,
+    "srcSet": "/images/optimized/service4-card-480.webp 480w, /images/optimized/service4-card-800.webp 800w"
+  },
+  "service5-hero": {
+    "src": "/images/optimized/service5-hero-1280.webp",
+    "width": 1280,
+    "height": 896,
+    "srcSet": "/images/optimized/service5-hero-640.webp 640w, /images/optimized/service5-hero-1280.webp 1280w"
+  },
+  "service5-card": {
+    "src": "/images/optimized/service5-card-800.webp",
+    "width": 800,
+    "height": 560,
+    "srcSet": "/images/optimized/service5-card-480.webp 480w, /images/optimized/service5-card-800.webp 800w"
+  },
+  "service6-hero": {
+    "src": "/images/optimized/service6-hero-1280.webp",
+    "width": 1280,
+    "height": 896,
+    "srcSet": "/images/optimized/service6-hero-640.webp 640w, /images/optimized/service6-hero-1280.webp 1280w"
+  },
+  "service6-card": {
+    "src": "/images/optimized/service6-card-800.webp",
+    "width": 800,
+    "height": 560,
+    "srcSet": "/images/optimized/service6-card-480.webp 480w, /images/optimized/service6-card-800.webp 800w"
+  },
+  "service7-hero": {
+    "src": "/images/optimized/service7-hero-1280.webp",
+    "width": 1280,
+    "height": 896,
+    "srcSet": "/images/optimized/service7-hero-640.webp 640w, /images/optimized/service7-hero-1280.webp 1280w"
+  },
+  "service7-card": {
+    "src": "/images/optimized/service7-card-800.webp",
+    "width": 800,
+    "height": 560,
+    "srcSet": "/images/optimized/service7-card-480.webp 480w, /images/optimized/service7-card-800.webp 800w"
+  },
+  "service8-hero": {
+    "src": "/images/optimized/service8-hero-1280.webp",
+    "width": 1280,
+    "height": 896,
+    "srcSet": "/images/optimized/service8-hero-640.webp 640w, /images/optimized/service8-hero-1280.webp 1280w"
+  },
+  "service8-card": {
+    "src": "/images/optimized/service8-card-800.webp",
+    "width": 800,
+    "height": 560,
+    "srcSet": "/images/optimized/service8-card-480.webp 480w, /images/optimized/service8-card-800.webp 800w"
+  },
+  "service9-hero": {
+    "src": "/images/optimized/service9-hero-1280.webp",
+    "width": 1280,
+    "height": 896,
+    "srcSet": "/images/optimized/service9-hero-640.webp 640w, /images/optimized/service9-hero-1280.webp 1280w"
+  },
+  "service9-card": {
+    "src": "/images/optimized/service9-card-800.webp",
+    "width": 800,
+    "height": 560,
+    "srcSet": "/images/optimized/service9-card-480.webp 480w, /images/optimized/service9-card-800.webp 800w"
+  },
+  "service10-hero": {
+    "src": "/images/optimized/service10-hero-1280.webp",
+    "width": 1280,
+    "height": 896,
+    "srcSet": "/images/optimized/service10-hero-640.webp 640w, /images/optimized/service10-hero-1280.webp 1280w"
+  },
+  "service10-card": {
+    "src": "/images/optimized/service10-card-800.webp",
+    "width": 800,
+    "height": 560,
+    "srcSet": "/images/optimized/service10-card-480.webp 480w, /images/optimized/service10-card-800.webp 800w"
+  },
+  "service11-hero": {
+    "src": "/images/optimized/service11-hero-1280.webp",
+    "width": 1280,
+    "height": 896,
+    "srcSet": "/images/optimized/service11-hero-640.webp 640w, /images/optimized/service11-hero-1280.webp 1280w"
+  },
+  "service11-card": {
+    "src": "/images/optimized/service11-card-800.webp",
+    "width": 800,
+    "height": 560,
+    "srcSet": "/images/optimized/service11-card-480.webp 480w, /images/optimized/service11-card-800.webp 800w"
+  },
+  "service12-hero": {
+    "src": "/images/optimized/service12-hero-1280.webp",
+    "width": 1280,
+    "height": 896,
+    "srcSet": "/images/optimized/service12-hero-640.webp 640w, /images/optimized/service12-hero-1280.webp 1280w"
+  },
+  "service12-card": {
+    "src": "/images/optimized/service12-card-800.webp",
+    "width": 800,
+    "height": 560,
+    "srcSet": "/images/optimized/service12-card-480.webp 480w, /images/optimized/service12-card-800.webp 800w"
+  },
+  "service13-hero": {
+    "src": "/images/optimized/service13-hero-1280.webp",
+    "width": 1280,
+    "height": 896,
+    "srcSet": "/images/optimized/service13-hero-640.webp 640w, /images/optimized/service13-hero-1280.webp 1280w"
+  },
+  "service13-card": {
+    "src": "/images/optimized/service13-card-800.webp",
+    "width": 800,
+    "height": 560,
+    "srcSet": "/images/optimized/service13-card-480.webp 480w, /images/optimized/service13-card-800.webp 800w"
+  },
+  "service14-hero": {
+    "src": "/images/optimized/service14-hero-1280.webp",
+    "width": 1280,
+    "height": 896,
+    "srcSet": "/images/optimized/service14-hero-640.webp 640w, /images/optimized/service14-hero-1280.webp 1280w"
+  },
+  "service14-card": {
+    "src": "/images/optimized/service14-card-800.webp",
+    "width": 800,
+    "height": 560,
+    "srcSet": "/images/optimized/service14-card-480.webp 480w, /images/optimized/service14-card-800.webp 800w"
+  },
+  "service15-hero": {
+    "src": "/images/optimized/service15-hero-1280.webp",
+    "width": 1280,
+    "height": 896,
+    "srcSet": "/images/optimized/service15-hero-640.webp 640w, /images/optimized/service15-hero-1280.webp 1280w"
+  },
+  "service15-card": {
+    "src": "/images/optimized/service15-card-800.webp",
+    "width": 800,
+    "height": 560,
+    "srcSet": "/images/optimized/service15-card-480.webp 480w, /images/optimized/service15-card-800.webp 800w"
+  },
+  "service16-hero": {
+    "src": "/images/optimized/service16-hero-1280.webp",
+    "width": 1280,
+    "height": 896,
+    "srcSet": "/images/optimized/service16-hero-640.webp 640w, /images/optimized/service16-hero-1280.webp 1280w"
+  },
+  "service16-card": {
+    "src": "/images/optimized/service16-card-800.webp",
+    "width": 800,
+    "height": 560,
+    "srcSet": "/images/optimized/service16-card-480.webp 480w, /images/optimized/service16-card-800.webp 800w"
+  },
+  "service17-hero": {
+    "src": "/images/optimized/service17-hero-1280.webp",
+    "width": 1280,
+    "height": 896,
+    "srcSet": "/images/optimized/service17-hero-640.webp 640w, /images/optimized/service17-hero-1280.webp 1280w"
+  },
+  "service17-card": {
+    "src": "/images/optimized/service17-card-800.webp",
+    "width": 800,
+    "height": 560,
+    "srcSet": "/images/optimized/service17-card-480.webp 480w, /images/optimized/service17-card-800.webp 800w"
+  },
+  "service18-hero": {
+    "src": "/images/optimized/service18-hero-1280.webp",
+    "width": 1280,
+    "height": 896,
+    "srcSet": "/images/optimized/service18-hero-640.webp 640w, /images/optimized/service18-hero-1280.webp 1280w"
+  },
+  "service18-card": {
+    "src": "/images/optimized/service18-card-800.webp",
+    "width": 800,
+    "height": 560,
+    "srcSet": "/images/optimized/service18-card-480.webp 480w, /images/optimized/service18-card-800.webp 800w"
+  }
+}

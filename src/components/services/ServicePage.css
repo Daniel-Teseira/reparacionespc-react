@@ -71,3 +71,5 @@
 @media (prefers-reduced-motion: reduce) {
   .service-detail-card, .service-contact-button { transition: none; }
 }
+.service-consult-link { display: block; margin-top: 1rem; color: #c7eff2; font-size: 0.85rem; text-underline-offset: 3px; }
+.service-consult-link:hover { color: #fff; }
