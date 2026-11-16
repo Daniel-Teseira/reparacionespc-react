@@ -4,9 +4,30 @@ Web de servicios técnicos de PC y notebooks en San Miguel de Tucumán. Incluye 
 
 El sitio no tiene autenticación, base de datos, seguimiento de reparaciones ni panel administrativo. Esas funciones requieren una etapa de desarrollo independiente.
 
+## Tecnologías
+
+| Herramienta | Versión | Uso |
+| --- | --- | --- |
+| React y React DOM | 18.3 | Interfaz y prerenderizado con `renderToString` |
+| React Router | 7 | Rutas del inicio, contacto, servicios y 404 |
+| Vite | 8 | Servidor de desarrollo y compilación |
+| Vitest + Testing Library + jsdom | 5 / 16 / 29 | Pruebas |
+| ESLint | 9 | Revisión de código (con `eslint-plugin-react` y `react-hooks`) |
+| sharp | 0.35 | Generación de WebP e íconos |
+
+Los estilos son CSS propio (`src/base.css` y un CSS por componente); el sitio ya no usa Bootstrap.
+
+### Versiones que se mantienen a propósito
+
+- **React 18.3**: React 19 agrega ~23 KB gzip sin beneficio para este sitio.
+- **jsdom 29**: jsdom 30 o superior exige Node 22.22.
+- **ESLint 9**: `eslint-plugin-react` todavía no admite ESLint 10.
+
+Al actualizar dependencias, revisá estas tres restricciones antes de subir de versión mayor y ejecutá la secuencia completa de [Publicación](#publicación).
+
 ## Requisitos y ejecución
 
-- Node.js 22.12 o superior.
+- Node.js 22.12 o superior (campo `engines` de `package.json`, mínimo de Vite 8). Para ejecutar las pruebas, jsdom 29 pide 22.13 o superior dentro de la línea 22.
 - npm y acceso al registro oficial de paquetes.
 
 ```sh
@@ -39,28 +60,52 @@ Sin `VITE_SITE_URL`, el sitio funciona localmente y las canonical se resuelven e
 | `npm test` | Pruebas con Vitest y Testing Library |
 | `npm run test:watch` | Pruebas en modo interactivo |
 | `npm run lint` | Revisión de JavaScript, JSX y hooks |
-| `npm run images:optimize` | Regenera los WebP responsivos y la imagen social |
+| `npm run images:optimize` | Regenera los WebP responsivos, `src/data/images.json` y la imagen social |
 | `npm run icons` | Regenera `favicon.ico` e íconos PNG desde `public/favicon.svg` |
 | `npm run build` | Genera `build/`, HTML por ruta y metadatos; sitemap si hay dominio |
-| `npm run check:build` | Comprueba páginas, metadatos, 404 e imágenes de la compilación |
-| `npm run preview` | Previsualiza la compilación local |
+| `npm run check:build` | Comprueba páginas, metadatos, 404, íconos, imágenes y que el CSS pese menos de 80 KB |
+| `npm run preview` | Previsualiza la compilación local con las redirecciones y el 404 de Nginx |
 
 ## Contenido y estructura
 
-- `src/data/services.json`: fuente única de nombres, rutas, resúmenes y alcance de los servicios. Rutas, menú y tarjetas se generan desde este catálogo.
+Datos y contenido:
+
+- `src/data/services.json`: fuente única de nombres, rutas, resúmenes y alcance de los servicios. Rutas, menú, tarjetas, prerenderizado y verificaciones se generan desde este catálogo.
+- `src/data/services.js`: combina el catálogo con las imágenes y resuelve el servicio de cada ruta.
 - `src/data/business.js`: teléfono, domicilio, horarios y enlaces de contacto compartidos. Los campos opcionales `geo`, `sameAs` y `priceRange` se publican en los datos estructurados solo si se completan.
 - `src/data/faq.js`: preguntas frecuentes del inicio, publicadas también como `FAQPage`.
+- `src/data/seo.js`: títulos, descripciones, canonical, Open Graph y datos estructurados (JSON-LD).
+- `src/data/images.json`: manifiesto generado con dimensiones y variantes responsivas. No se edita a mano.
+
+Componentes y páginas:
+
+- `src/App.jsx`: rutas de la aplicación. `src/index.jsx` hidrata en el navegador y `src/entry-server.jsx` renderiza cada ruta durante la compilación.
 - `src/base.css`: reinicio de estilos, contenedor y barra de navegación (reemplaza a Bootstrap).
-- `src/data/seo.js`: títulos, descripciones, canonical, Open Graph y datos estructurados.
+- `src/components/NavBar/` y `src/components/Footer/`: navegación con menú de servicios y pie de página.
 - `src/components/services/ServicePage.jsx`: presentación compartida de los servicios.
+- `src/components/cards/Servicios.jsx`: tarjetas del catálogo.
 - `src/components/ContactForm.jsx`: validación y preparación de la consulta para WhatsApp.
-- `src/pages/home/components/HomeInfo.jsx`: proceso de atención y preguntas frecuentes.
+- `src/components/Seo.jsx`, `RouteFocus.jsx` y `ResponsiveImage.jsx`: metadatos por página, foco accesible al cambiar de ruta e imágenes con `srcset`.
+- `src/pages/home/`, `src/pages/contact/`, `src/pages/error/`: inicio (con `components/HomeInfo.jsx` para proceso de atención y preguntas frecuentes), contacto y 404.
+
+Imágenes y scripts:
+
 - `scripts/image-sources.json`: relación de originales y recursos utilizados.
-- `src/data/images.json`: manifiesto generado con dimensiones y variantes responsivas.
 - `src/images/`: originales conservados para regenerar las imágenes; no se copian a producción.
 - `public/images/optimized/`: WebP generados que usa el sitio.
+- `scripts/generate-site.mjs`: prerenderizado, `robots.txt` y `sitemap.xml` (se ejecuta dentro de `npm run build`).
+- `scripts/verify-build.mjs`, `optimize-images.mjs`, `generate-icons.mjs`: verificación, imágenes e íconos.
+- `deploy/`: Nginx, Docker Compose y scripts de publicación en el NUC.
 
 Después de cambiar una imagen o agregar un servicio, actualizá el catálogo y sus fuentes de imagen, ejecutá `npm run images:optimize` y comprobá pruebas y compilación. Los textos de presupuesto, diagnóstico y garantía deben ajustarse únicamente a condiciones reales del negocio.
+
+## Cómo se genera el sitio
+
+1. `vite build` compila la aplicación en `build/`.
+2. `scripts/generate-site.mjs` compila `src/entry-server.jsx` en `tmp/prerender/` y renderiza cada ruta (`/`, `/contact`, las 16 de servicios y `404`).
+3. Cada página recibe su propio `<title>`, descripción, canonical, Open Graph y JSON-LD, y se guarda como `build/<ruta>/index.html`.
+4. Se escriben `robots.txt` y, si hay `VITE_SITE_URL`, `sitemap.xml`.
+5. En el navegador, React hidrata el HTML ya generado.
 
 ## Cómo funciona el formulario
 
@@ -83,4 +128,4 @@ Publicá el contenido de `build/` en la raíz del dominio. La compilación gener
 
 La publicación en el NUC está automatizada con `deploy/update-nuc.ps1`; ver [deploy/NUC.md](deploy/NUC.md). La configuración de Nginx (`deploy/nginx.conf` y `deploy/security-headers.conf`) incluye compresión, caché, cabeceras de seguridad, redirecciones y 404 reales. `npm run preview` imita esas redirecciones y el 404, pero no las cabeceras.
 
-El proyecto incluye un workflow de GitHub Actions que ejecuta lint, pruebas y compilación; la variable pública de repositorio `SITE_URL` permite incluir el dominio definitivo en CI.
+El workflow de GitHub Actions (`.github/workflows/ci.yml`) ejecuta, con Node 22, lint, pruebas, compilación y `check:build` en cada push y pull request. La variable pública de repositorio `SITE_URL` permite incluir el dominio definitivo en CI.

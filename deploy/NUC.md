@@ -3,6 +3,7 @@
 Destino: `daniel@192.168.1.250`, carpeta `~/reparacionespc`.
 Acceso: `http://192.168.1.250:3005`.
 Requiere Docker y Docker Compose, ya usados por Proyecto Alma en ese equipo.
+En tu PC, el script necesita Node.js 22.13 o superior (ver [README](../README.md#requisitos-y-ejecución)) y los comandos `ssh` y `scp` de OpenSSH, incluidos en Windows.
 
 ## Actualizar (un solo comando)
 
