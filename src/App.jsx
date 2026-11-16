@@ -1,5 +1,5 @@
 import './App.css';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { useLocation } from './router';
 import NavBar from './components/NavBar/NavBar';
 import Footer from './components/Footer/Footer';
 import Home from './pages/home/Home';
@@ -9,7 +9,17 @@ import ServicePage from './components/services/ServicePage';
 import RouteFocus from './components/RouteFocus';
 import Seo from './components/Seo';
 import MobileContactBar from './components/MobileContactBar/MobileContactBar';
-import { services } from './data/services';
+import { serviceAtPath } from './data/services';
+
+// Rutas fijas: inicio (también /home, que nginx redirige), contacto, un servicio por slug y 404.
+// Se aceptan con o sin barra final, igual que en el servidor.
+function pageFor(pathname) {
+  const path = pathname.replace(/\/+$/, '') || '/';
+  if (path === '/' || path === '/home') return <Home />;
+  if (path === '/contact') return <Contact />;
+  const service = serviceAtPath(path);
+  return service ? <ServicePage service={service} /> : <Error404 />;
+}
 
 export default function App() {
   const { pathname } = useLocation();
@@ -19,13 +29,7 @@ export default function App() {
     <RouteFocus />
     <NavBar />
     <div key={pathname} className="route-content">
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/contact" element={<Contact />} />
-        {services.map((service) => <Route key={service.id} path={service.path} element={<ServicePage service={service} />} />)}
-        <Route path="*" element={<Error404 />} />
-      </Routes>
+      {pageFor(pathname)}
     </div>
     <Footer />
     <MobileContactBar />

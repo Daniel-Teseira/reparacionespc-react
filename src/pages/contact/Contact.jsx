@@ -1,5 +1,5 @@
 import './Contact.css';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams } from '../../router';
 import { business, whatsappUrl } from '../../data/business';
 import { services } from '../../data/services';
 import ContactForm from '../../components/ContactForm';

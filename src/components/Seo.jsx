@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation } from '../router';
 import { metadataTags, pageMetadata, siteOrigin } from '../data/seo';
 
 export default function Seo() {

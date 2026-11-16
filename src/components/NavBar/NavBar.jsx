@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation } from '../../router';
 import { services } from '../../data/services';
 import './NavBar.css';
 

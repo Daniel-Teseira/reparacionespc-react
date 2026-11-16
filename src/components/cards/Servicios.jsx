@@ -1,4 +1,4 @@
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from '../../router';
 import ResponsiveImage from '../ResponsiveImage';
 import { services } from '../../data/services';
 import useHydrated from '../../utils/useHydrated';
@@ -12,7 +12,7 @@ export default function Servicios() {
     const next = new URLSearchParams(params);
     if (showAll) next.delete('servicios');
     else next.set('servicios', 'todos');
-    setParams(next, { replace: true, preventScrollReset: true });
+    setParams(next, { replace: true });
   };
 
   return (

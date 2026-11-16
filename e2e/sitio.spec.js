@@ -85,6 +85,22 @@ test.describe('Navegación', () => {
     await expect(page.getByRole('heading', { level: 1 })).toHaveText(catalog[1].title);
   });
 
+  test('otros servicios y migas de pan navegan sin recargar, y Atrás vuelve', async ({ page }) => {
+    await page.goto(`/${catalog[0].slug}`);
+    await page.waitForLoadState('networkidle');
+    // Si alguna navegación recargara la página, esta marca desaparecería.
+    await page.evaluate(() => { window.sinRecargar = true; });
+    await page.getByRole('region', { name: /También podemos ayudarte/ }).getByRole('link').first().click();
+    await expect(page).toHaveURL(`/${catalog[1].slug}`);
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText(catalog[1].title);
+    await page.goBack();
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText(catalog[0].title);
+    await page.getByRole('navigation', { name: 'Ruta de navegación' }).getByRole('link', { name: 'Servicios' }).click();
+    await expect(page.locator('#services-grid article')).toHaveCount(catalog.length);
+    await expect(page.locator('#servicios')).toBeInViewport();
+    expect(await page.evaluate(() => window.sinRecargar)).toBe(true);
+  });
+
   test('Escape cierra el menú de servicios', async ({ page, isMobile }) => {
     test.skip(isMobile, 'El atajo de teclado se prueba en escritorio');
     await page.goto('/contact');

@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link } from '../../../router';
 import { questions } from '../../../data/faq';
 
 export default function HomeInfo() {

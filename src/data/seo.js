@@ -35,7 +35,7 @@ export function pageMetadata(pathname, origin = '') {
     description: 'Servicio técnico de PC y notebooks: reparación, mantenimiento, redes y soporte remoto.',
     telephone: business.phone,
     url: origin ? `${origin}/` : undefined,
-    image: origin ? `${origin}/images/social-preview.jpg` : undefined,
+    image: origin ? `${origin}${socialImage.path}` : undefined,
     hasMap: business.mapsUrl,
     areaServed: { '@type': 'City', name: business.city },
     ...(business.geo ? { geo: { '@type': 'GeoCoordinates', ...business.geo } } : {}),
@@ -53,8 +53,20 @@ export function pageMetadata(pathname, origin = '') {
     '@type': 'FAQPage',
     mainEntity: questions.map(([name, text]) => ({ '@type': 'Question', name, acceptedAnswer: { '@type': 'Answer', text } })),
   } : null;
-  return { title, description, canonical, noindex: !known, structuredData, faqData, origin };
+  // Migas de pan para Google: solo con dominio configurado, porque exigen direcciones absolutas.
+  const breadcrumbData = service && canonical ? {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Inicio', item: `${siteOrigin(origin)}/` },
+      { '@type': 'ListItem', position: 2, name: service.title, item: canonical },
+    ],
+  } : null;
+  return { title, description, canonical, noindex: !known, structuredData, faqData, breadcrumbData, origin };
 }
+
+// Imagen para compartir en redes (scripts/optimize-images.mjs la genera de 1200 x 630).
+export const socialImage = { path: '/images/social-preview.jpg', width: 1200, height: 630, alt: 'Reparaciones PC: servicio técnico de computadoras en San Miguel de Tucumán' };
 
 const escape = (value) => String(value).replace(/[&<>"']/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
 
@@ -72,8 +84,19 @@ export function metadataTags(meta) {
     `<meta data-seo name="twitter:description" content="${escape(meta.description)}">`,
   ];
   if (meta.canonical) tags.push(`<link data-seo rel="canonical" href="${escape(meta.canonical)}">`, `<meta data-seo property="og:url" content="${escape(meta.canonical)}">`);
-  if (meta.origin) tags.push(`<meta data-seo property="og:image" content="${escape(meta.origin)}/images/social-preview.jpg">`, `<meta data-seo name="twitter:image" content="${escape(meta.origin)}/images/social-preview.jpg">`);
-  for (const data of [meta.structuredData, meta.faqData]) {
+  if (meta.origin) {
+    const image = escape(`${meta.origin}${socialImage.path}`);
+    tags.push(
+      `<meta data-seo property="og:image" content="${image}">`,
+      `<meta data-seo property="og:image:type" content="image/jpeg">`,
+      `<meta data-seo property="og:image:width" content="${socialImage.width}">`,
+      `<meta data-seo property="og:image:height" content="${socialImage.height}">`,
+      `<meta data-seo property="og:image:alt" content="${escape(socialImage.alt)}">`,
+      `<meta data-seo name="twitter:image" content="${image}">`,
+      `<meta data-seo name="twitter:image:alt" content="${escape(socialImage.alt)}">`,
+    );
+  }
+  for (const data of [meta.structuredData, meta.faqData, meta.breadcrumbData]) {
     if (data) tags.push(`<script data-seo type="application/ld+json">${JSON.stringify(data).replace(/</g, '\\u003c')}</script>`);
   }
   return tags.join('\n');

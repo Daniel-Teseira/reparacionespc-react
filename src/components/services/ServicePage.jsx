@@ -1,7 +1,8 @@
-import { Link } from 'react-router-dom';
+import { Link } from '../../router';
 import './ServicePage.css';
 import ResponsiveImage from '../ResponsiveImage';
 import { whatsappUrl } from '../../data/business';
+import { relatedServices } from '../../data/services';
 
 const ServicePage = ({ service }) => {
   const { heroImage, title, description, sections, note, slug } = service;
@@ -13,6 +14,13 @@ const ServicePage = ({ service }) => {
       <div className="service-hero-shade" />
       <div className="container service-hero-inner">
         <div className="service-hero-copy">
+          <nav className="service-breadcrumb" aria-label="Ruta de navegación">
+            <ol>
+              <li><Link to="/">Inicio</Link></li>
+              <li><Link to="/?servicios=todos#servicios">Servicios</Link></li>
+              <li aria-current="page">{title}</li>
+            </ol>
+          </nav>
           <span className="service-eyebrow"><i /> Servicio técnico especializado</span>
           <h1>{title}</h1>
           <p>{description}</p>
@@ -58,6 +66,24 @@ const ServicePage = ({ service }) => {
         <span className="service-contact-foot"><i /> Atención técnica personalizada</span>
       </aside>
     </div>
+
+    <section className="container service-related" aria-labelledby="related-heading">
+      <div className="service-content-heading">
+        <span>OTROS SERVICIOS</span>
+        <h2 id="related-heading">También podemos ayudarte con…</h2>
+      </div>
+      <ul className="service-related-grid">
+        {relatedServices(service).map((related) => (
+          <li key={related.id}>
+            <Link className="service-related-link" to={related.path}>
+              <strong>{related.title}</strong>
+              <span className="service-related-summary">{related.summary}</span>
+              <span className="service-related-more" aria-hidden="true">Ver servicio ↗</span>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </section>
   </main>
   );
 };

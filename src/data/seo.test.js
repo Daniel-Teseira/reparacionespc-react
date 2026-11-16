@@ -31,4 +31,18 @@ describe('Metadatos y publicación', () => {
     expect(html).not.toContain('</script><script>');
     expect(html).toContain('\\u003c/script>');
   });
+  it('publica migas de pan en los servicios cuando hay dominio', () => {
+    const meta = pageMetadata('/armado-pc', 'https://example.test');
+    expect(meta.breadcrumbData.itemListElement.map((item) => item.item)).toEqual(['https://example.test/', 'https://example.test/armado-pc']);
+    expect(metadataTags(meta)).toContain('"@type":"BreadcrumbList"');
+    expect(pageMetadata('/armado-pc').breadcrumbData).toBeNull();
+    expect(pageMetadata('/', 'https://example.test').breadcrumbData).toBeNull();
+  });
+  it('describe la imagen para compartir con medidas y texto alternativo', () => {
+    const html = metadataTags(pageMetadata('/', 'https://example.test'));
+    expect(html).toContain('property="og:image" content="https://example.test/images/social-preview.jpg"');
+    expect(html).toContain('property="og:image:width" content="1200"');
+    expect(html).toContain('property="og:image:height" content="630"');
+    expect(html).toMatch(/property="og:image:alt" content="[^"]+"/);
+  });
 });

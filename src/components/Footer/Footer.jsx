@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link } from '../../router';
 import './Footer.css';
 import { business, whatsappUrl } from '../../data/business';
 import { services } from '../../data/services';

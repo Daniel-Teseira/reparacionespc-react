@@ -1,13 +1,14 @@
 import { render, screen, within, waitFor } from '@testing-library/preact';
 import userEvent from '@testing-library/user-event';
-import { MemoryRouter } from 'react-router-dom';
+import { Router } from './router';
 import { describe, expect, it } from 'vitest';
 import App from './App';
 import { services } from './data/services';
 import { business } from './data/business';
 
 function renderPage(path = '/home') {
-  return render(<MemoryRouter initialEntries={[path]}><App /></MemoryRouter>);
+  window.history.replaceState(null, '', path);
+  return render(<Router><App /></Router>);
 }
 
 describe('Navegación y catálogo', () => {
@@ -62,6 +63,19 @@ describe('Navegación y catálogo', () => {
     expect(url.pathname).toBe(`/${business.whatsapp}`);
     expect(url.searchParams.get('text')).toContain(service.title);
     expect(screen.getByRole('link', { name: /Describir el problema/ })).toHaveAttribute('href', `/contact?servicio=${service.slug}`);
+  });
+
+  it('cada servicio muestra migas de pan y enlaza a otros tres servicios', async () => {
+    const user = userEvent.setup();
+    renderPage(services[0].path);
+    const breadcrumb = screen.getByRole('navigation', { name: 'Ruta de navegación' });
+    expect(within(breadcrumb).getByText(services[0].title)).toHaveAttribute('aria-current', 'page');
+    const related = screen.getByRole('region', { name: /También podemos ayudarte/ });
+    const links = within(related).getAllByRole('link');
+    expect(links.map((link) => link.getAttribute('href'))).toEqual(services.slice(1, 4).map((service) => service.path));
+    await user.click(links[0]);
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(services[1].title);
+    expect(window.location.pathname).toBe(services[1].path);
   });
 
   it('presenta una página desconocida sin indexarla', async () => {

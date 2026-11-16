@@ -1,9 +1,8 @@
 import { useEffect, useRef } from 'react';
-import { useLocation, useNavigationType } from 'react-router-dom';
+import { useLocation } from '../router';
 
 export default function RouteFocus() {
-  const { pathname, hash } = useLocation();
-  const navigationType = useNavigationType();
+  const { pathname, hash, type: navigationType } = useLocation();
 
   const previousPath = useRef(pathname);
 

@@ -2,14 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './base.css';
 import App from './App';
-import { BrowserRouter } from 'react-router-dom';
+import { Router } from './router';
 
 const container = document.getElementById('root');
 const app = (
   <React.StrictMode>
-    <BrowserRouter>
+    <Router>
       <App />
-    </BrowserRouter>
+    </Router>
 </React.StrictMode>
 );
 

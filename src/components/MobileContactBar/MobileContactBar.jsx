@@ -1,4 +1,4 @@
-import { useLocation } from 'react-router-dom';
+import { useLocation } from '../../router';
 import { business, whatsappUrl } from '../../data/business';
 import { serviceAtPath } from '../../data/services';
 import './MobileContactBar.css';
