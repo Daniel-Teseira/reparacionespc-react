@@ -19,6 +19,11 @@ docker compose -p reparacionespc "$@" up -d --force-recreate --remove-orphans --
 docker compose -p reparacionespc "$@" ps
 printf '%s\n' "$release" > "$base/current-release"
 
+# Monitoreo (Uptime Kuma) como proyecto aparte. Sin --force-recreate: se reinicia solo si cambió
+# su configuración. Un fallo acá no deshace la publicación del sitio, que ya terminó.
+docker compose -p reparacionespc-monitor -f deploy/monitoring/compose.yml up -d \
+  || echo "Aviso: no se pudo iniciar el monitoreo (deploy/monitoring/compose.yml)." >&2
+
 # Conservar solo las últimas versiones para poder volver atrás sin llenar el disco.
 ls -1d "$base"/releases/*/ | sort -r | tail -n "+$((keep + 1))" | while read -r old; do
   [ "${old%/}" = "$release" ] || rm -rf "$old"

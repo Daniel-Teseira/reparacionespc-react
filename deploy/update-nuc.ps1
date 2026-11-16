@@ -3,6 +3,7 @@ param(
     [string]$RemoteHost = '192.168.1.250',
     [string]$RemoteUser = 'daniel',
     [int]$WebPort = 3005,
+    [int]$MonitorPort = 3006,
     [switch]$SkipBuild,
     [switch]$VerifyOnly
 )
@@ -31,8 +32,8 @@ function Invoke-Step([string]$Description, [scriptblock]$Command) {
 }
 
 # Devuelve estado HTTP, cabeceras y cuerpo sin seguir redirecciones.
-function Get-Http([string]$Path) {
-    $request = [System.Net.HttpWebRequest]::Create($baseUrl + $Path)
+function Get-Http([string]$Path, [string]$Base = $baseUrl) {
+    $request = [System.Net.HttpWebRequest]::Create($Base + $Path)
     $request.AllowAutoRedirect = $false
     $request.Timeout = 20000
     $request.Accept = 'text/html'
@@ -57,7 +58,7 @@ try {
             Invoke-Step 'Verificando la compilacion' { npm run check:build }
             Invoke-Step 'Pruebas en navegador' { npm run test:e2e }
         }
-        Invoke-Step 'Empaquetando' { tar -czf $package build deploy/compose.yml deploy/nginx.conf deploy/security-headers.conf deploy/install.sh deploy/https }
+        Invoke-Step 'Empaquetando' { tar -czf $package build deploy/compose.yml deploy/nginx.conf deploy/security-headers.conf deploy/install.sh deploy/https deploy/monitoring }
 
         Save-Result 'copying' "Copiando el paquete a $target."
         Invoke-Step "Copiando a $target" { scp -o ConnectTimeout=15 $package "${target}:~/reparacionespc-nuc.tar.gz" }
@@ -75,7 +76,9 @@ try {
     $homePage = Get-Http '/'
     $localHome = Get-Content -LiteralPath 'build/index.html' -Raw -Encoding UTF8
     if ($homePage.Body -ne $localHome) { throw 'El HTML publicado no coincide con la compilacion local.' }
-    if (-not $homePage.Headers['Content-Security-Policy']) { throw 'Faltan las cabeceras de seguridad.' }
+    foreach ($header in @('Content-Security-Policy', 'Cross-Origin-Opener-Policy', 'Cross-Origin-Resource-Policy')) {
+        if (-not $homePage.Headers[$header]) { throw "Falta la cabecera de seguridad $header." }
+    }
     foreach ($redirect in @(@('/home', '/'), @('/contact/', '/contact'))) {
         $response = Get-Http $redirect[0]
         if ($response.Status -ne 301 -or $response.Headers['Location'] -ne $redirect[1]) {
@@ -88,8 +91,18 @@ try {
         $response = Get-Http $asset.Groups[1].Value
         if ($response.Status -ne 200) { throw "No se pudo descargar $($asset.Groups[1].Value)." }
     }
+    $image = [regex]::Match($localHome, '/images/optimized/[^" ,]+').Value
+    $response = Get-Http $image
+    if ($response.Status -ne 200 -or $response.Headers['Cache-Control'] -notmatch 'immutable') {
+        throw "La imagen $image no se sirve con cache permanente (respondio $($response.Status))."
+    }
+    try {
+        $monitor = Get-Http '/' "http://${RemoteHost}:$MonitorPort"
+        Write-Host "Monitoreo (Uptime Kuma) en http://${RemoteHost}:${MonitorPort}: respondio $($monitor.Status)." -ForegroundColor Green
+    }
+    catch { Write-Host "Aviso: el monitoreo no responde en http://${RemoteHost}:$MonitorPort." -ForegroundColor Yellow }
 
-    $message = "Publicacion en $baseUrl verificada: $($routes.Count) rutas, HTML identico al local, redirecciones, cabeceras, recursos y 404 verificados."
+    $message = "Publicacion en $baseUrl verificada: $($routes.Count) rutas, HTML identico al local, redirecciones, cabeceras, recursos, cache de imagenes y 404 verificados."
     Save-Result 'complete' $message
     Write-Host $message -ForegroundColor Green
 }
