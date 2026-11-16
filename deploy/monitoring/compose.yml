@@ -1,0 +1,22 @@
+# Monitoreo de disponibilidad con Uptime Kuma, como proyecto aparte (reparacionespc-monitor):
+# publicar o volver atrás una versión del sitio no lo reinicia ni borra su historial.
+# Panel: http://192.168.1.250:3006 (ver deploy/NUC.md para configurarlo).
+services:
+  uptime-kuma:
+    # "slim" usa SQLite (sin MariaDB ni Chromium integrados); "rootless" corre sin root.
+    image: louislam/uptime-kuma:2.5.9-slim-rootless
+    restart: unless-stopped
+    ports:
+      - "192.168.1.250:3006:3001"
+    volumes:
+      - uptime-kuma:/app/data
+    security_opt:
+      - no-new-privileges:true
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+volumes:
+  uptime-kuma:

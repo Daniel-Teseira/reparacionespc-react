@@ -1,0 +1,29 @@
+# Se suma a deploy/compose.yml solo si existe ~/reparacionespc/https.env en el NUC.
+services:
+  caddy:
+    image: caddy:2.11.9-alpine
+    restart: unless-stopped
+    depends_on:
+      - web
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    environment:
+      SITE_DOMAIN: ${SITE_DOMAIN:?Definí SITE_DOMAIN en https.env}
+    volumes:
+      # Las rutas relativas se resuelven desde deploy/ (carpeta del primer archivo compose).
+      - ./https/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    security_opt:
+      - no-new-privileges:true
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+volumes:
+  caddy_data:
+  caddy_config:

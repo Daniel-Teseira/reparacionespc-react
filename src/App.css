@@ -1,6 +1,6 @@
 :root {
   --color-ink: #18272d;
-  --color-muted: #64747a;
+  --color-muted: #596a70;
   --color-blue: #0f7582;
   --color-blue-dark: #095b66;
   --color-blue-soft: #e7f2f3;
@@ -11,13 +11,12 @@
   --color-dark: #142329;
 }
 
-* { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
   margin: 0;
   background: var(--color-page);
   color: var(--color-ink);
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -25,18 +24,16 @@ img { max-width: 100%; }
 a { transition: color 160ms ease; }
 ::selection { color: #fff; background: var(--color-blue); }
 
-.accordion {
-  --bs-accordion-border-color: var(--color-line);
-  --bs-accordion-btn-focus-box-shadow: 0 0 0 0.2rem rgba(15, 117, 130, 0.18);
-  --bs-accordion-active-color: var(--color-ink);
-  --bs-accordion-active-bg: var(--color-blue-soft);
-}
-
-.route-content { animation: route-content-enter 520ms cubic-bezier(0.2, 0.75, 0.25, 1) both; }
+.route-content { animation: route-content-enter 180ms ease-out both; }
+:where(a, button, input, select, textarea, summary):focus-visible { outline: 3px solid var(--color-accent); outline-offset: 4px; }
+main:focus, section[tabindex="-1"]:focus { outline: none; }
+section[id] { scroll-margin-top: 100px; }
+.skip-link { position: fixed; left: 1rem; top: 1rem; z-index: 3000; padding: 0.8rem 1rem; border-radius: 6px; background: #fff; color: var(--color-blue-dark); transform: translateY(-200%); }
+.skip-link:focus { transform: translateY(0); }
 
 @keyframes route-content-enter {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0.75; }
+  to { opacity: 1; }
 }
 
 @media (prefers-reduced-motion: reduce) {

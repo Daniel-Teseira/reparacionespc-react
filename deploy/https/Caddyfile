@@ -1,0 +1,13 @@
+# HTTPS con certificados automáticos de Let's Encrypt delante del contenedor web.
+# SITE_DOMAIN se define en ~/reparacionespc/https.env en el NUC (ver deploy/NUC.md).
+{$SITE_DOMAIN} {
+	encode zstd gzip
+	header Strict-Transport-Security "max-age=31536000"
+	# Solo tiene efecto con HTTPS: aísla la pestaña de ventanas abiertas por otros sitios.
+	header Cross-Origin-Opener-Policy "same-origin"
+	reverse_proxy web:8080
+}
+
+www.{$SITE_DOMAIN} {
+	redir https://{$SITE_DOMAIN}{uri} permanent
+}

@@ -1,0 +1,37 @@
+.mobile-contact-bar { display: none; }
+
+@media (max-width: 767px) {
+  .mobile-contact-bar {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1020;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 0.6rem;
+    padding: 0.6rem 0.75rem calc(0.6rem + env(safe-area-inset-bottom));
+    border-top: 1px solid rgba(237, 129, 40, 0.3);
+    background: rgba(20, 35, 41, 0.96);
+    box-shadow: 0 -10px 30px rgba(15, 20, 21, 0.18);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+  }
+  .mobile-contact-bar a {
+    min-height: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 800;
+    text-decoration: none;
+  }
+  .mobile-contact-whatsapp { background: var(--color-blue); color: #fff; }
+  .mobile-contact-whatsapp:hover { background: var(--color-blue-dark); color: #fff; }
+  .mobile-contact-call { border: 1px solid rgba(255, 255, 255, 0.28); color: #fff; }
+  .mobile-contact-call:hover { border-color: var(--color-accent); color: #ffb16f; }
+  /* Espacio para que la barra no tape el final del pie de página. */
+  body:has(.mobile-contact-bar) .site-footer { padding-bottom: calc(5.2rem + env(safe-area-inset-bottom)); }
+}
