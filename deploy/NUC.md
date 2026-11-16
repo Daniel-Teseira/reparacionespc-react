@@ -28,6 +28,12 @@ Opciones:
 
 El resultado queda en `tmp/nuc-update-result.json`.
 
+Para correr las pruebas en navegador (Playwright) directamente contra el sitio publicado:
+
+```powershell
+$env:E2E_BASE_URL = 'http://192.168.1.250:3005'; npm run test:e2e
+```
+
 ## Acceso con clave SSH (recomendado)
 
 Sin clave, SSH pide la contraseña dos veces (copia e instalación). Para no tener que escribirla, se configura una sola vez:
