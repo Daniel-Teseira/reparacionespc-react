@@ -2,7 +2,7 @@ import { defineConfig } from 'vitest/config';
 import react from '@vitejs/plugin-react';
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
-import catalog from './src/data/services.json';
+import catalog from './src/data/services.json' with { type: 'json' };
 
 const pagePaths = new Set(['/', '/contact', ...catalog.map((service) => `/${service.slug}`)]);
 
