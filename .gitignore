@@ -27,3 +27,7 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Configuración local de herramientas
+/.claude/launch.json
+/.claude/settings.local.json
