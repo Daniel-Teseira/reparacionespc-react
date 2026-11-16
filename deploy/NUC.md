@@ -47,7 +47,33 @@ Docker sirve `build/` con Nginx (`deploy/nginx.conf`) y lo reinicia cuando se re
 - Redirecciones 301: `/home` → `/` y barra final → sin barra (`/contact/` → `/contact`).
 - Las rutas desconocidas devuelven la página 404 del sitio con estado HTTP 404.
 
-Si el sitio se publica con HTTPS detrás de un proxy, conviene agregar allí `Strict-Transport-Security`.
+## Dominio y HTTPS (cuando haya dominio)
+
+La configuración está lista en `deploy/https/` (Caddy con certificados automáticos de Let's Encrypt, HSTS y redirección de `www`). Se activa sola en la próxima instalación si existe `~/reparacionespc/https.env`.
+
+Requisitos previos:
+
+1. El dominio apunta (registro DNS `A`) a la IP pública de tu conexión.
+2. El router reenvía los puertos 80 y 443 (TCP, y 443 UDP para HTTP/3) a `192.168.1.250`.
+3. Ningún otro contenedor del NUC usa los puertos 80 o 443. Revisalo con `docker ps`. Si Proyecto Alma ya tiene un proxy en esos puertos, conviene agregar el dominio a ese proxy (apuntando a `192.168.1.250:3005`) en lugar de activar este.
+
+Activación:
+
+```sh
+# En el NUC
+echo 'SITE_DOMAIN=tu-dominio.com' > ~/reparacionespc/https.env
+```
+
+```powershell
+# En tu PC: el dominio también va en la compilación (sitemap, canonical y vista previa al compartir).
+# ascii evita el BOM que agrega utf8 en Windows PowerShell y que rompería la variable.
+Set-Content .env.local 'VITE_SITE_URL=https://tu-dominio.com' -Encoding ascii
+powershell -ExecutionPolicy Bypass -File deploy/update-nuc.ps1
+```
+
+Para desactivar HTTPS, borrá `~/reparacionespc/https.env` y volvé a publicar: la instalación quita el contenedor de Caddy.
+
+Alternativa sin abrir puertos: un túnel de Cloudflare (`cloudflared`) apuntando a `http://192.168.1.250:3005`.
 
 ## Volver a una versión anterior
 

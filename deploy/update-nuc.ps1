@@ -57,7 +57,7 @@ try {
             Invoke-Step 'Verificando la compilacion' { npm run check:build }
             Invoke-Step 'Pruebas en navegador' { npm run test:e2e }
         }
-        Invoke-Step 'Empaquetando' { tar -czf $package build deploy/compose.yml deploy/nginx.conf deploy/security-headers.conf deploy/install.sh }
+        Invoke-Step 'Empaquetando' { tar -czf $package build deploy/compose.yml deploy/nginx.conf deploy/security-headers.conf deploy/install.sh deploy/https }
 
         Save-Result 'copying' "Copiando el paquete a $target."
         Invoke-Step "Copiando a $target" { scp -o ConnectTimeout=15 $package "${target}:~/reparacionespc-nuc.tar.gz" }

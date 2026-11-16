@@ -9,8 +9,14 @@ test -f "$release/build/index.html"
 test -f "$release/build/404.html"
 test -f "$release/deploy/security-headers.conf"
 cd "$release"
-docker compose -p reparacionespc -f deploy/compose.yml up -d --force-recreate --wait
-docker compose -p reparacionespc -f deploy/compose.yml ps
+# HTTPS opcional: si existe https.env (con SITE_DOMAIN), se agrega Caddy delante del sitio.
+if [ -f "$base/https.env" ]; then
+  set -- --env-file "$base/https.env" -f deploy/compose.yml -f deploy/https/compose.https.yml
+else
+  set -- -f deploy/compose.yml
+fi
+docker compose -p reparacionespc "$@" up -d --force-recreate --remove-orphans --wait
+docker compose -p reparacionespc "$@" ps
 printf '%s\n' "$release" > "$base/current-release"
 
 # Conservar solo las últimas versiones para poder volver atrás sin llenar el disco.
