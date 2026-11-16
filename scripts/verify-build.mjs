@@ -27,7 +27,8 @@ assert.doesNotMatch(notFound, /rel="canonical"/);
 
 for (const image of Object.values(images)) {
   assert(image.width > 0 && image.height > 0);
-  for (const variant of image.srcSet.split(', ')) {
+  assert(image.avifSrcSet, `Falta la versión AVIF de ${image.src}`);
+  for (const variant of [...image.srcSet.split(', '), ...image.avifSrcSet.split(', ')]) {
     await access(path.join('build', variant.split(' ')[0]));
   }
 }
@@ -40,4 +41,4 @@ const assets = await readdir('build/assets');
 const cssBytes = (await Promise.all(assets.filter((f) => f.endsWith('.css')).map((f) => stat(path.join('build/assets', f))))).reduce((sum, s) => sum + s.size, 0);
 assert(cssBytes < 80_000, `El CSS pesa ${Math.round(cssBytes / 1024)} KB; el límite es 80 KB.`);
 
-console.log(`Publicación verificada: ${routes.length} rutas, página 404, íconos, imágenes responsivas y CSS de ${Math.round(cssBytes / 1024)} KB.`);
+console.log(`Publicación verificada: ${routes.length} rutas, página 404, íconos, imágenes responsivas (WebP y AVIF) y CSS de ${Math.round(cssBytes / 1024)} KB.`);
