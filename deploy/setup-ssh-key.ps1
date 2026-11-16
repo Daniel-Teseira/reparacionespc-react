@@ -30,6 +30,16 @@ if (-not (Test-Path -LiteralPath $key)) {
     if ($LASTEXITCODE -ne 0) { Write-Host 'No se pudo crear la clave.' -ForegroundColor Red; exit 1 }
 }
 
+# Una clave con frase de contrasena obliga a escribirla en cada publicacion. '""' pasa una frase
+# vacia (Windows PowerShell 5.1 omite los argumentos vacios al llamar a programas externos).
+$null = ssh-keygen -y -P '""' -f $key 2>$null
+if ($LASTEXITCODE -ne 0) {
+    Write-Host '-> La clave tiene frase de contrasena. Para publicar sin escribir nada hay que quitarla:' -ForegroundColor Cyan
+    Write-Host '   escribi la frase actual y despues Enter dos veces (frase vacia). Ctrl+C para cancelar.' -ForegroundColor Cyan
+    ssh-keygen -p -f $key
+    if ($LASTEXITCODE -ne 0) { Write-Host 'No se pudo quitar la frase de contrasena.' -ForegroundColor Red; exit 1 }
+}
+
 Write-Host "-> Agregando la clave publica en $target. Escribi la contrasena del NUC cuando la pida." -ForegroundColor Cyan
 $publicKey = (Get-Content -LiteralPath "$key.pub" -Raw).Trim()
 $remote = "umask 077; mkdir -p ~/.ssh; touch ~/.ssh/authorized_keys; grep -qxF '$publicKey' ~/.ssh/authorized_keys || printf '%s\n' '$publicKey' >> ~/.ssh/authorized_keys"

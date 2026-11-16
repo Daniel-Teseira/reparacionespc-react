@@ -34,15 +34,19 @@ Para correr las pruebas en navegador (Playwright) directamente contra el sitio p
 $env:E2E_BASE_URL = 'http://192.168.1.250:3005'; npm run test:e2e
 ```
 
-## Acceso con clave SSH (recomendado)
+El script pide la contraseña del NUC dos veces: para copiar el paquete y para instalarlo. Si en tu PC hay una clave SSH con frase de contraseña, la omite, así que no pide la frase.
 
-Sin clave, SSH pide la contraseña dos veces (copia e instalación). Para no tener que escribirla, se configura una sola vez:
+Si la versión nueva no arranca bien, la instalación vuelve sola a la versión anterior, muestra los registros y el script termina con error.
+
+## Acceso con clave SSH (opcional)
+
+Para publicar sin escribir la contraseña se puede usar una clave SSH sin frase de contraseña. Se configura una sola vez:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File deploy/setup-ssh-key.ps1
 ```
 
-El script crea la clave `~/.ssh/id_ed25519` si no existe, la agrega en el NUC sin duplicarla (pide la contraseña del NUC una vez) y comprueba que el acceso funcione. Si ya estaba configurada, no hace nada.
+El script crea la clave `~/.ssh/id_ed25519` si no existe, le quita la frase de contraseña si la tiene, la agrega en el NUC sin duplicarla (pide la contraseña del NUC una vez) y comprueba que el acceso funcione. Si ya estaba configurada, no hace nada.
 
 ## Qué se publica
 

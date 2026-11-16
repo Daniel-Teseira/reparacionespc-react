@@ -15,7 +15,18 @@ if [ -f "$base/https.env" ]; then
 else
   set -- -f deploy/compose.yml
 fi
-docker compose -p reparacionespc "$@" up -d --force-recreate --remove-orphans --wait
+previous="$(cat "$base/current-release" 2>/dev/null || true)"
+if ! docker compose -p reparacionespc "$@" up -d --force-recreate --remove-orphans --wait; then
+  echo "Error: la versión nueva no arrancó bien. Últimos registros:" >&2
+  docker compose -p reparacionespc "$@" logs --tail=40 >&2 || true
+  # Volver a la versión anterior para que el sitio siga en línea.
+  if [ -n "$previous" ] && [ -f "$previous/deploy/compose.yml" ]; then
+    echo "Volviendo a la versión anterior: $previous" >&2
+    cd "$previous"
+    docker compose -p reparacionespc "$@" up -d --force-recreate --remove-orphans --wait
+  fi
+  exit 1
+fi
 docker compose -p reparacionespc "$@" ps
 printf '%s\n' "$release" > "$base/current-release"
 

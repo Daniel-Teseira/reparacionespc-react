@@ -9,7 +9,8 @@ param(
 )
 
 # Compila, empaqueta, copia e instala el sitio en el NUC y verifica la publicacion.
-# Con una clave SSH configurada (ver deploy/NUC.md) no pide contrasena.
+# Pide la contrasena del NUC dos veces (copia e instalacion). Con una clave SSH sin frase de
+# contrasena (deploy/setup-ssh-key.ps1) no pide nada.
 
 $ErrorActionPreference = 'Stop'
 Set-Location -LiteralPath $ProjectRoot
@@ -58,12 +59,20 @@ try {
             Invoke-Step 'Verificando la compilacion' { npm run check:build }
             Invoke-Step 'Pruebas en navegador' { npm run test:e2e }
         }
+        # Si no hay una clave que funcione sin frase de contrasena, se omiten las claves para que
+        # SSH no pida su frase y vaya directo a la contrasena del NUC.
+        $sshOptions = @('-o', 'ConnectTimeout=15')
+        ssh -o BatchMode=yes -o LogLevel=QUIET -o ConnectTimeout=10 $target 'true'
+        if ($LASTEXITCODE -ne 0) {
+            $sshOptions += @('-o', 'PubkeyAuthentication=no')
+            Write-Host "Se va a pedir la contrasena de $target dos veces: para copiar y para instalar." -ForegroundColor Yellow
+        }
         Invoke-Step 'Empaquetando' { tar -czf $package build deploy/compose.yml deploy/nginx.conf deploy/security-headers.conf deploy/install.sh deploy/https deploy/monitoring }
 
         Save-Result 'copying' "Copiando el paquete a $target."
-        Invoke-Step "Copiando a $target" { scp -o ConnectTimeout=15 $package "${target}:~/reparacionespc-nuc.tar.gz" }
+        Invoke-Step "Copiando a $target" { scp @sshOptions $package "${target}:~/reparacionespc-nuc.tar.gz" }
         Save-Result 'installing' 'Paquete copiado. Instalando en una carpeta de version limpia.'
-        Invoke-Step 'Instalando en el NUC' { ssh -o ConnectTimeout=15 $target 'tar -xOf ~/reparacionespc-nuc.tar.gz deploy/install.sh | sh' }
+        Invoke-Step 'Instalando en el NUC' { ssh @sshOptions $target 'tar -xOf ~/reparacionespc-nuc.tar.gz deploy/install.sh | sh' }
     }
 
     Save-Result 'verifying' 'Verificando paginas, redirecciones, recursos y respuesta 404.'
