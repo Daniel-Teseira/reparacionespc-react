@@ -3,6 +3,8 @@
 {$SITE_DOMAIN} {
 	encode zstd gzip
 	header Strict-Transport-Security "max-age=31536000"
+	# Solo tiene efecto con HTTPS: aísla la pestaña de ventanas abiertas por otros sitios.
+	header Cross-Origin-Opener-Policy "same-origin"
 	reverse_proxy web:8080
 }
 

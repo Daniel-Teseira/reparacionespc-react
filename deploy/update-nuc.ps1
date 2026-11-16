@@ -85,7 +85,11 @@ try {
     $homePage = Get-Http '/'
     $localHome = Get-Content -LiteralPath 'build/index.html' -Raw -Encoding UTF8
     if ($homePage.Body -ne $localHome) { throw 'El HTML publicado no coincide con la compilacion local.' }
-    foreach ($header in @('Content-Security-Policy', 'Cross-Origin-Opener-Policy', 'Cross-Origin-Resource-Policy')) {
+    # Sin HTTPS, Cross-Origin-Opener-Policy solo genera un error en la consola del navegador.
+    if (-not $homePage.Headers['Strict-Transport-Security'] -and $homePage.Headers['Cross-Origin-Opener-Policy']) {
+        throw 'Cross-Origin-Opener-Policy se envia sin HTTPS: el navegador la ignora y muestra un error.'
+    }
+    foreach ($header in @('Content-Security-Policy', 'Cross-Origin-Resource-Policy')) {
         if (-not $homePage.Headers[$header]) { throw "Falta la cabecera de seguridad $header." }
     }
     foreach ($redirect in @(@('/home', '/'), @('/contact/', '/contact'))) {

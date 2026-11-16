@@ -54,7 +54,7 @@ Docker sirve `build/` con Nginx (`deploy/nginx.conf`) y lo reinicia cuando se re
 
 - Compresión gzip para HTML, CSS, JS, SVG y JSON.
 - Caché: `/assets/` y `/images/optimized/` un año (los nombres llevan hash), la imagen para redes un mes y el HTML se revalida en cada visita.
-- Cabeceras de seguridad (`deploy/security-headers.conf`): CSP, `nosniff`, `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy`, `Cross-Origin-Opener-Policy` y `Cross-Origin-Resource-Policy`.
+- Cabeceras de seguridad (`deploy/security-headers.conf`): CSP, `nosniff`, `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy` y `Cross-Origin-Resource-Policy`. Con HTTPS, Caddy agrega `Strict-Transport-Security` y `Cross-Origin-Opener-Policy`, que el navegador solo acepta en sitios seguros.
 - Redirecciones 301: `/home` → `/` y barra final → sin barra (`/contact/` → `/contact`).
 - Las rutas desconocidas devuelven la página 404 del sitio con estado HTTP 404.
 
